@@ -31,7 +31,7 @@ class Product(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.title
 
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.pk])
