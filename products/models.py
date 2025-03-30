@@ -5,8 +5,7 @@ from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
-
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Category(models.Model):
@@ -18,10 +17,11 @@ class Category(models.Model):
         return self.title
 
 class Product(models.Model):
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
     slug = models.SlugField()
-    description = RichTextField()
+    description = CKEditor5Field(_('Product description'), config_name='extends')
+    short_description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     inventory = models.IntegerField(validators=[MinValueValidator(0)])
     image = models.ImageField(_('Product Image'), upload_to='product/product_cover/', blank=True, )
@@ -32,18 +32,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Product(models.Model):
-    title = models.CharField(max_length=100)
-    short_description = models.TextField(blank=True)
-    price = models.PositiveIntegerField(default=0)
-
-    datetime_created = models.DateTimeField(_('Date Time of Creation'), default=timezone.now)
-    datetime_modified = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.title
 
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.pk])
