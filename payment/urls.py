@@ -1,9 +1,12 @@
+from django.conf import settings
 from django.urls import path
 
-from .views import payment_process
+from . import views
 
 app_name='payment'
 
+
 urlpatterns = [
-    path('process/', payment_process, name='payment_process'),
+    path('process/', views.payment_process, name='payment_process'),
+    path('callback/', views.payment_callback_view, name='payment_callback'),
 ]
