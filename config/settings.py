@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rosetta',
     'jalali_date',
     'django_ckeditor_5',
+    'django_cleanup.apps.CleanupConfig',
 
     # local apps
     'accounts',
