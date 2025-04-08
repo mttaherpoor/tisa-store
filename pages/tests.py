@@ -30,7 +30,7 @@ class AboutUSPageTest(TestCase):
 
     def test_home_page_content(self):
         response = self.client.get(reverse('aboutus'))
-        self.assertContains(response, 'About US')
+        self.assertContains(response, 'About Us')
 
     def test_home_page_template_used(self):
         response = self.client.get(reverse('aboutus'))
