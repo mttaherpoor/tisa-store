@@ -1,115 +1,84 @@
 {% extends '_base.html' %}
 
-{% block content %}
+{% load humanize %}
+
+{% load persian_translation_tags %}
+
 {% load i18n %}
 
-<!-- Main Wrapper Start -->
-<div class="wrapper">
-    <!-- Main Content Wrapper Start -->
-    <div  class="main-content-wrapper container-fluid">
-        <div class="shop-page-wrapper shop-fullwidth">
-            <div class="container">
-                <div class="row mb--50">
-                    <div class="col-12">
-                        <div class="shop-toolbar">
-                            <div class="container row align-items-center">
-                                <div class="col-lg-12 mb-md--50 mb-xs--10">
-                                    <div class="shop-toolbar__left d-flex align-items-sm-center align-items-start flex-sm-row flex-column">
-                                        <p class="product-pages">نمایش ۱-۲۰ از ۴۹</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid shop-products">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="tab-content" id="product-tab-content">
-                            <div class="tab-pane fade show active" id="nav-all">
-                                <div class="row xxl-block-grid-6 grid-space-20">
-                                    {% for product in products %}
-                                        <div class="col-xl-3 col-md-4 col-sm-6 mb--50">
-                                        <div class="ShoppingYar-product">
-                                            <div class="product-inner">
-                                                <figure class="product-image">
-                                                    <a href="{{ product.get_absolute_url }}">
-                                                        {% if product.image %}
-                                                            <img src="{{ product.image.url }}" alt="Products">
-                                                        {% endif %}
-                                                    </a>
-                                                    <div class="ShoppingYar-product-action">
-                                                        <div class="product-action d-flex">
-                                                            <a href="wishlist.html" class="action-btn">
-                                                                <i class="flaticon flaticon-like"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <span class="product-badge">تخفیف ویژه</span>
-                                                </figure>
-                                                <div class="product-info">
-                                                    <h3 class="product-title mb--15">
-                                                        <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
-                                                    </h3>
-                                                    <div class="product-price-wrapper mb--30">
-                                                        <span class="money">{{ product.price }} {% translate '$' %}</span>
-                                                    </div>
-                                                    <form action="{% url 'cart:cart_add' product.id %}" method="POST">
-                                                        {% csrf_token %}
-                                                        <input type="hidden" class="quantity-input" name="quantity" id="qty" value="1" min="1" max="30">
-                                                        <div class="quantity-wrapper">
-                                                            <button type="submit" class="btn btn-small btn-bg-red btn-color-white btn-hover-2">
-                                                                {% trans 'Add to Cart' %}
-                                                            </button>
-                                                        </div>
-                                                    </form>
-{#                                                    <a href="cart.html" class="btn btn-small btn-bg-sand btn-color-dark px-3">اضافه کردن به سبد خرید</a>#}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                        <nav class="pagination-wrap mt--35 mt-md--25 pb-5">
-                            <ul class="pagination">
-                                <li><a href="#" class="next page-number"><i class="fa fa-angle-double-right"></i></a></li>
-                                <li><span class="current page-number">1</span></li>
-                                <li><a href="#" class="page-number">2</a></li>
-                                <li><a href="#" class="page-number">3</a></li>
-                                <li><a href="#" class="prev page-number"><i class="fa fa-angle-double-left"></i></a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
+{% block content %}
+
+  <!-- فیلتر محصولات -->
+  <section class="py-4 bg-light">
+    <div class="container text-center">
+      <h5 class="mb-3">{% trans "Categories products" %}</h5>
+      <div class="d-flex flex-wrap justify-content-center">
+        <button class="btn btn-outline-primary filter-btn" data-category="all">{% trans "all" %}</button>
+        {% for category in categories %}
+          <button class="btn btn-outline-primary filter-btn" data-category="{{ category.id }}">
+             {{ category.title }}
+          </button>
+        {% endfor %}
+      </div>
+
     </div>
-    <!-- Main Content Wrapper Start -->
+  </section>
 
+  <!-- گرید محصولات -->
+  <section class="py-5" id="products">
+    <div class="container">
+      <div class="row">
 
-    <!-- Search form Popup Start -->
-    <div class="searchform__popup" id="searchForm">
-        <a href="#" class="btn-close"><i class="flaticon flaticon-cross"></i></a>
-        <div class="searchform__body">
-            <p>در باکس زیر عبارت خود را وارد کنید</p>
-            <form class="searchform">
-                <input type="text" name="popup-search" id="popup-search" class="searchform__input" placeholder="جستجو در بین محصولات...">
-                <button type="submit" class="searchform__submit"><i class="flaticon flaticon-magnifying-glass-icon"></i></button>
-            </form>
-        </div>
+        <!-- پکیج‌ها -->
+        {% for product in products %}
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card product-card border-0 shadow-sm">
+              <a href="{{ product.get_absolute_url }}">
+                {% if product.image %}
+                  <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                
+                {% comment %} {% else %} {% endcomment %}
+                {% endif %}
+              </a>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-dark">
+                    {{ product.title }} <span class="product-icon">📍</span>
+                  </a>
+                </h5>
+                <p class="card-text">{{product.short_description}}</p>
+                <p class="card-text"><strong>{% trans "price" %}: {{product.price|intcomma:False|translate_number}} {% trans "$" %}</strong></p>
+                <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+                  {% csrf_token %}
+                  {% comment %} <input type="hidden" class="quantity-input" name="quantity" id="qty" value="1" min="1" max="30"> {% endcomment %}
+                  <div class="quantity-wrapper">
+                      <button type="submit" class="btn btn-small btn-bg-sand btn-color-dark px-3">
+                          {% trans 'Add to Cart' %}
+                      </button>
+                  </div>
+              </form>
+                {% comment %} <a href="#" class="btn btn-primary">{% trans "add to cart" %}</a> {% endcomment %}
+              </div>
+            </div>
+          </div>
+          
+        {% endfor %}
+      </div>
     </div>
-    <!-- Search form Popup End -->
-
-    {% include 'cart/cart_sidebar.html' %}
-
-    <!-- Global Overlay Start -->
-    <div class="ShoppingYar-global-overlay"></div>
-    <!-- Global Overlay End -->
-
-</div>
-<!-- Main Wrapper End -->
-
+  </section>
 {% endblock %}
+
+
+{% comment %} 
+        <!-- بنر تبلیغاتی منابع رایگان -->
+        <div class="col-lg-4 mb-4">
+          <div class="card promo-card shadow-sm">
+            <div class="card-body text-center">
+              <h4>منابع رایگان شهرسازی! 🗺️</h4>
+              <p>جزوات پایتون، QGIS و ArcGIS رو رایگان دانلود کن و یادگیری رو شروع کن!</p>
+              <a href="free-resources.html" class="btn btn-light">مشاهده منابع</a>
+            </div>
+          </div>
+        </div> {% endcomment %}
+
+
