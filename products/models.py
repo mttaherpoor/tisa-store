@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import slugify
 
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -43,7 +44,12 @@ class Product(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("product_detail", args=[self.pk])
+        return reverse("product_detail", args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title, allow_unicode=True)
+        super().save(*args, **kwargs)
 
 
 class ActiveCommentsManger(models.Manager):
