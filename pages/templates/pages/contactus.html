@@ -1,0 +1,78 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    Free resources
+{% endblock %}
+
+{% block content %}
+
+  <!-- فرم تماس و اطلاعات -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <!-- فرم تماس -->
+        <div class="col-lg-6 mb-4">
+          <div class="contact-form shadow-sm">
+            <h3 class="mb-4">فرم تماس</h3>
+            <form id="contactForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">نام</label>
+                <input type="text" class="form-control" id="name" placeholder="نام شما" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">ایمیل</label>
+                <input type="email" class="form-control" id="email" placeholder="ایمیل شما" required>
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">پیام</label>
+                <textarea class="form-control" id="message" rows="5" placeholder="پیامت رو اینجا بنویس..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">ارسال پیام</button>
+            </form>
+          </div>
+        </div>
+        <!-- اطلاعات تماس -->
+        <div class="col-lg-6 mb-4">
+          <div class="contact-info shadow-sm">
+            <h3 class="mb-4">اطلاعات تماس</h3>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <i class="bi bi-envelope"></i>
+                <strong>ایمیل:</strong> info@yourdomain.com
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-telephone"></i>
+                <strong>تلفن:</strong> ۱۲۳۴۵۶۷۸۹
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-telegram"></i>
+                <strong>تلگرام:</strong> <a href="#" class="text-primary">t.me/yourtelegram</a>
+              </li>
+              <li>
+                <i class="bi bi-instagram"></i>
+                <strong>اینستاگرام:</strong> <a href="#" class="text-primary">instagram.com/yourinstagram</a>
+              </li>
+            </ul>
+            <div class="mt-4">
+              <h5>ما رو دنبال کن!</h5>
+              <a href="#" class="text-dark me-2"><i class="bi bi-telegram fs-4"></i></a>
+              <a href="#" class="text-dark me-2"><i class="bi bi-instagram fs-4"></i></a>
+              <a href="#" class="text-dark"><i class="bi bi-twitter fs-4"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- نقشه -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h3 class="text-center mb-4">ما کجاییم؟</h3>
+      <div class="map-placeholder"></div>
+      <p class="text-center mt-3">تهران، ایران - آماده همکاری با شما از هر جای دنیا!</p>
+    </div>
+  </section>
+
+{% endblock %}

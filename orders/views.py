@@ -17,7 +17,7 @@ def order_create_view(request):
         return redirect('product_list')
 
     if request.method == 'POST':
-        order_form = OrderForm(request.POST, )
+        order_form = OrderForm(request.POST)
 
         if order_form.is_valid():
             order_obj = order_form.save(commit=False)

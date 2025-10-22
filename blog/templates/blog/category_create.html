@@ -1,0 +1,29 @@
+{% extends '_base.html' %}
+
+
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
+{% block page_title %}
+add Category
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-9">
+                <div class="card shadow my-3 p-5">
+                    <h3>Add new Category:</h3>
+                    <form method="POST">
+                        {% csrf_token %}<!-- add this for each form -->
+                        {{ form|crispy }}                                            
+                        
+                        <button type="submit" class="btn btn-primary">Submit</button> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

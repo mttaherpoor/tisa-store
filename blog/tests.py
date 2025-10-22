@@ -39,11 +39,11 @@ class BlogPostTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_post_list_url_by_name(self):
-        response = self.client.get(reverse("posts_list"))
+        response = self.client.get(reverse("post-list"))
         self.assertEqual(response.status_code, 200)
 
     def test_page_title_on_blog_list_page(self):
-        response = self.client.get(reverse("posts_list"))
+        response = self.client.get(reverse("post-list"))
         self.assertContains(response, self.post1.title)
 
     def test_post_detail_url(self):
@@ -63,8 +63,8 @@ class BlogPostTest(TestCase):
         response = self.client.get(reverse("post_detail", args=[999]))
         self.assertEqual(response.status_code, 404)
 
-    def test_draft_post_not_show_in_posts_list(self):
-        response = self.client.get(reverse("posts_list"))
+    def test_draft_post_not_show_in_post_list(self):
+        response = self.client.get(reverse("post-list"))
         self.assertContains(response, self.post1.title)
         self.assertNotContains(response, self.post2.title)
 
@@ -89,7 +89,7 @@ class BlogPostTest(TestCase):
                 "title": "Post 2 update",
                 "text": "This text is Updated",
                 "status": "pub",
-                "auther": self.post2.auther.id,
+                "auther": self.post2.author.id,
             },
         )
         self.assertEqual(response.status_code, 302)

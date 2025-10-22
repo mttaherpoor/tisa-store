@@ -1,29 +1,36 @@
 {% load static %}
+{% load i18n%}
 
-<!-- Footer Start-->
-<footer class="footer">
-    <div class="footer-top bg-color ptb--50" data-bg-color="#f6f6f6">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-9 text-center">
-                    <div class="footer-widget mb--50">
-                        <div class="textwidget">
-                            <img src="{% static 'img/codingyar_logo.png' %}" alt="Logo">
-                        </div>
-                    </div>
-                    <div class="footer-widget mb--50 pb--1">
-                        <ul class="footer-menu">
-                            <li><a href="">درباره ما</a></li>
-                            <li><a href="">قوانین و مقررات</a></li>
-                            <li><a href="">تماس با ما</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-widget">
-                        Codingyar.com © | all rights reserved
-                    </div>
-                </div>
-            </div>
+
+  <!-- فوتر -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>درباره ما</h5>
+          <p>ما تیمی هستیم که به آموزش باکیفیت و کاربردی در زمینه شهرسازی متعهدیم.</p>
         </div>
+        <div class="col-md-4">
+          <h5>لینک‌های سریع</h5>
+          <ul class="list-unstyled">
+            <li><a href="{% url 'home' %}" class="text-white">خانه</a></li>
+            <li><a href="{% url 'product_list' %}" class="text-white">فروشگاه</a></li>
+            <li><a href="{% url 'free_resources' %}" class="text-white">منابع رایگان</a></li>
+            <li><a href="{% url 'post-list' %}" class="text-white">بلاگ</a></li>
+            <li><a href="{% url 'aboutus' %}" class="text-white">درباره ما</a></li>
+            <li><a href="{% url 'contactus' %}" class="text-white">تماس با ما</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>تماس با ما</h5>
+          <p>ایمیل: info@yourdomain.com</p>
+          <p>تلفن: ۱۲۳۴۵۶۷۸۹</p>
+          <a href="#" class="text-white me-2">تلگرام</a>
+          <a href="#" class="text-white">اینستاگرام</a>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <p>© ۱۴۰۴ - تمام حقوق برای [نام سایت شما] محفوظ است.</p>
+      </div>
     </div>
-</footer>
-<!-- Footer End-->
+  </footer>

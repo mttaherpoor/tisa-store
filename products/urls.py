@@ -1,16 +1,18 @@
-from django.urls import path
-from django.urls import re_path
+from django.urls import path, re_path as rp
 
-from .views import ProductListView, ProductDetailView, CommentCreateView
+from . import views
 
 urlpatterns = [
-    path("", ProductListView.as_view(), name="product_list"),
-    re_path(
+    path("", views.ProductListView.as_view(), name="product_list"),
+    rp(
         r"^(?P<slug>[-\w\u0600-\u06FF]+)/$",
-        ProductDetailView.as_view(),
+        views.ProductDetailView.as_view(),
         name="product_detail",
     ),
-    path(
-        "comment/<int:product_id>/", CommentCreateView.as_view(), name="comment_create"
+    rp(
+    r"comment/(?P<slug>[-\w\u0600-\u06FF]+)/$",
+    views.CommentCreateView.as_view(),
+    name="comment_create",
     ),
+    # path("comment/<int:product_id>/", CommentCreateView.as_view(), name="comment_create"),
 ]

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card card-rounded p-3">
+    <h5 class="section-title">ویدیوهای محصول: {{ product.title }}</h5>
+    <ul class="list-group">
+        {% for file in video_files %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ file.filename|default:file.file.name }}
+                <a href="{% url 'download_video' file.id %}" class="btn btn-sm btn-outline-primary">دانلود</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item text-muted">هیچ ویدیویی موجود نیست.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

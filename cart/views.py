@@ -34,6 +34,7 @@ def add_to_cart_view(request, product_id):
         cart.add(product, quantity, replace_current_quantity=cleaned_data['inplace'])
 
     return redirect('cart:cart_detail')
+    return redirect('product:product_detail')
 
 def remove_from_cart(request, product_id):
     cart = Cart(request)

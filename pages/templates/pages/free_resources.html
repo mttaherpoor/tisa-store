@@ -1,0 +1,82 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    Free resources
+{% endblock %}
+
+{% block content %}
+
+<!-- فیلتر منابع -->
+  <section class="py-4 bg-light">
+    <div class="container text-center">
+      <h5 class="mb-3">دسته‌بندی منابع</h5>
+      <div class="d-flex flex-wrap justify-content-center">
+        <button class="btn btn-outline-primary filter-btn">همه</button>
+        <button class="btn btn-outline-primary filter-btn">پایتون 🐍</button>
+        <button class="btn btn-outline-primary filter-btn">QGIS 🗺️</button>
+        <button class="btn btn-outline-primary filter-btn">GIS 📍</button>
+        <button class="btn btn-outline-primary filter-btn">شهرهای پایدار 🌳</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- گرید منابع -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <!-- بنر تبلیغاتی -->
+        <div class="col-lg-4 mb-4">
+          <div class="card promo-card shadow-sm">
+            <div class="card-body text-center">
+              <h4>با پایتون، شهرهای آینده رو تحلیل کن! 🐍</h4>
+              <p>تو این دوره‌ی ویدیویی، قدم‌به‌قدم یاد می‌گیرید چطور با پایتون داده‌های شهری رو تحلیل کنید و نقشه‌های هوشمند بسازید.</p>
+              <a href="#" class="btn btn-light">همین حالا ببین!</a>
+            </div>
+          </div>
+        </div>
+        <!-- منابع -->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card resource-card border-0 shadow-sm">
+            <div class="card-body text-center">
+              <div class="resource-icon">🐍</div>
+              <h5 class="card-title">جزوه مقدماتی پایتون</h5>
+              <p class="card-text">با این جزوه رایگان، اصول برنامه‌نویسی پایتون رو برای تحلیل داده‌های شهری یاد بگیر!</p>
+              <a href="#" class="btn btn-primary">دانلود رایگان</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card resource-card border-0 shadow-sm">
+            <div class="card-body text-center">
+              <div class="resource-icon">🗺️</div>
+              <h5 class="card-title">آموزش مقدماتی QGIS</h5>
+              <p class="card-text">نقشه‌کشی و تحلیل داده‌های جغرافیایی رو با این آموزش رایگان QGIS شروع کن!</p>
+              <a href="#" class="btn btn-primary">دانلود رایگان</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card resource-card border-0 shadow-sm">
+            <div class="card-body text-center">
+              <div class="resource-icon">📍</div>
+              <h5 class="card-title">کتابخانه‌های GIS</h5>
+              <p class="card-text">مجموعه‌ای از کتابخانه‌های رایگان GIS برای پروژه‌های شهرسازی.</p>
+              <a href="#" class="btn btn-primary">دانلود رایگان</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card resource-card border-0 shadow-sm">
+            <div class="card-body text-center">
+              <div class="resource-icon">🌳</div>
+              <h5 class="card-title">چک‌لیست طراحی شهر سبز</h5>
+              <p class="card-text">یه چک‌لیست رایگان برای طراحی شهرهای پایدار و اکوشهرها.</p>
+              <a href="#" class="btn btn-primary">دانلود رایگان</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

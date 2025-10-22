@@ -5,6 +5,13 @@
   <header class="bg-white shadow-sm py-3 sticky-top">
     <nav class="container navbar navbar-expand-lg">
       <a class="navbar-brand" href="#">لوگو</a>
+      <div class="d-flex align-items-center ms-auto">
+        {% if user.is_authenticated %}
+          <span class="navbar-text me-3">
+            {% trans "Welcome" %}، <strong>{{ user.username }}</strong>
+          </span>
+        {% endif %}
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,7 +20,7 @@
           <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">{% trans "home" %}</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">{% trans "store" %}</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'free_resources' %}">{% trans "free resources" %}</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'posts_list' %}">{% trans "blog" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'post-list' %}">{% trans "blog" %}</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'startup' %}">{% trans "startup ideas" %}</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'aboutus' %}">{% trans "About us" %}</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'contactus' %}">{% trans "contact with us" %}</a></li>

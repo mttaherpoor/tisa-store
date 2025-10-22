@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from django.contrib.messages import constants as messages
+from django.core.files.storage import FileSystemStorage
 from pathlib import Path
 from environs import Env
 import os
@@ -32,7 +33,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".herokuapp.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".herokuapp.com","87.248.130.21"]
 
 
 # Application definition
@@ -53,7 +54,7 @@ INSTALLED_APPS = [
     "rosetta",
     "jalali_date",
     "django_ckeditor_5",
-    "django_cleanup.apps.CleanupConfig",
+    # "django_cleanup.apps.CleanupConfig",
     # local apps
     "accounts",
     "pages",
@@ -95,6 +96,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 # Custom Context Processors
                 "cart.context_processors.cart",
+                'blog.context_processors.free_resources_url',
             ],
         },
     },
@@ -135,6 +137,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+    #local validators
+        {
+        'NAME': 'accounts.validators.PasswordCharValidator',
+    },
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -142,7 +148,6 @@ AUTHENTICATION_BACKENDS = [
     # django allauth
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -170,11 +175,14 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Media
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+PROTECTED_VIDEO_ROOT = '/var/protected_videos'
+PROTECTED_VIDEO_STORAGE = FileSystemStorage(location=PROTECTED_VIDEO_ROOT)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -187,11 +195,12 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 # all auth settings
-ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_SESSION_REMEMBER = False
 # ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_UNIQUE_EMAIL = True
 
 # crispy from setting
@@ -199,7 +208,14 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # config email
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env('DJANGO_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('DJANGO_EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # for messages framework
 MESSAGE_TAGS = {
@@ -215,8 +231,10 @@ customColorPalette = [
     {"color": "hsl(231, 48%, 48%)", "label": "Indigo"},
     {"color": "hsl(207, 90%, 54%)", "label": "Blue"},
 ]
-
-
+CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+CKEDITOR_5_UPLOAD_PATH = "uploads/"
+CKEDITOR_5_ALLOW_FILE_TYPES = True
+CKEDITOR_5_UPLOAD_FILE_TYPES = ['jpeg', 'pdf', 'png']
 CKEDITOR_5_CONFIGS = {
     "default": {
         "language": "fa",
@@ -274,7 +292,7 @@ CKEDITOR_5_CONFIGS = {
                 "todoList",
                 "|",
                 "blockQuote",
-                "imageUpload",
+                "uploadFile",  # ✅ این خط را اضافه کنید
                 "|",
                 "fontSize",
                 "fontFamily",
@@ -283,9 +301,11 @@ CKEDITOR_5_CONFIGS = {
                 "mediaEmbed",
                 "removeFormat",
                 "insertTable",
+                "mediaEmbed",
             ],
             "shouldNotGroupWhenFull": True,
         },
+
         "image": {
             "toolbar": [
                 "imageTextAlternative",

@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render,get_object_or_404,redirect,reverse
 
@@ -8,11 +9,11 @@ import json
 from orders.models import Order
 
 
-methods = ['sandbox', 'payment']
+METHOD = ['sandbox', 'payment']
 
 def payment_process(request:HttpRequest):
     
-    method = methods[0] if settings.DEBUG else methods[1]
+    method = METHOD[0] if settings.DEBUG else METHOD[1]
     
     # Get order id from session
     order_id = request.session.get('order_id')
@@ -54,7 +55,7 @@ def payment_process(request:HttpRequest):
     
 def payment_callback_view(request:HttpRequest):
     
-    method = methods[0] if settings.DEBUG else methods[1]
+    method = METHOD[0] if settings.DEBUG else METHOD[1]
 
     payment_authority = request.GET.get('Authority')
     payment_status = request.GET.get('Status')
@@ -90,15 +91,19 @@ def payment_callback_view(request:HttpRequest):
                 order.zarinpal_ref_id = data['ref_id']
                 order.zarinpal_data = data
                 order.save()
-
-                return HttpResponse('پرداخت شما با موفقیت انجام شد.')
+                messages.success(request, 'پرداخت شما با موفقیت انجام شد.')
+                return redirect('home')
             
             elif payment_code == 101:
-                return HttpResponse(' پرداخت شما با موفقیت انجام شد.البته این تراکنش قبلا ثبت شده است.')
+                messages.warning(request, 'پرداخت شما با موفقیت انجام شد. تراکنش قبلا ثبت شده است.')
+                return redirect('home')
 
             else:
                 error_code = res.json()['errors']['code']
                 error_message =res.json()['errors']['message']
-                return HttpResponse(f'{error_code}{error_message} تراکتش ناموفق بود.')
+                messages.error(request, f'{error_code} {error_message} تراکنش ناموفق بود.')
+                return redirect('home')
     else:
-        return HttpResponse(' تراکتش ناموفق بود!.')
+        messages.error(request, 'تراکنش ناموفق بود!')
+        return redirect('home')
+

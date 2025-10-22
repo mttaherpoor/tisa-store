@@ -1,61 +1,41 @@
 {% extends '_base.html' %}
 
+
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
 {% block page_title %}
 add Post
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-9">
-                <div class="card shadow my-3 p-5">
-                    <h3>Add new Post:</h3>
-                    <form method="POST">
-                        {% csrf_token %}<!-- add this for each form -->
-                       {# {{form}} #}
-
-                       
-                        {% comment %} <div class="form-group py-2">
-                            <label class="py-1">Enter post title</label>
-                            <input type="text" class="form-control" placeholder="e.g. Some Title" name="title">
-                        </div>
-                        <div class="form-group py-2">
-                            <label class="py-1">Enter post text:</label>
-                            <textarea class="form-control" name="text" rows="8" placeholder="Enter your post text here..."></textarea>
-                        </div>{% endcomment %}
-
-
-                        {# as p#}
-                        {# {{form.as_p}} #}
-
-                        {# as table add tag table #}
-                        <table>
-                            {{form.as_table}}
-
-                        </table>
-                        
-
-
-                        <button type="submit" class="btn btn-primary">Submit</button> 
-                    </form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <div class="card shadow-sm border-0 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="mb-0">{% trans "Add New Post" %}</h3>
+                    <a href="{% url 'category-create' %}" class="btn btn-outline-primary btn-sm">
+                        {% trans "Add Category" %}
+                    </a>
                 </div>
-            </div>
-            <div class="col-3">
 
-                    <div class="card my-4">
-                        <h5 class="card-header">About</h5>
-                        <div class="card-body">
-                            <p class="card-text">We love python and django. So we created a blog site to share our
-                                thoughts</p>
-                            <a href="#"
-                            class="btn btn-sm btn-danger">
-                                More...
-                            </a>
-                        </div>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+
+                    <div class="text-end mt-3">
+                        <button type="submit" class="btn btn-primary">
+                            {% trans "Submit" %}
+                        </button>
                     </div>
-
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+    {{form.media}}
 {% endblock %}
 

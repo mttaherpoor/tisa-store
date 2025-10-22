@@ -5,3 +5,5 @@ staticfiles/
 .env
 *.pyc
 .vscode
+htmls/
+Lvenv/

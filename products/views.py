@@ -11,7 +11,6 @@ from .forms import CommentForm
 
 class ProductListView(generic.ListView):
     # model = Product
-    queryset = Product.objects.filter(active=True)
     template_name = "products/product_list.html"
     context_object_name = "products"
 
@@ -20,9 +19,14 @@ class ProductListView(generic.ListView):
         context["categories"] = Category.objects.all()
         return context
 
-    # def get_queryset(self):
-    #
+    def get_queryset(self):
+        queryset = Product.objects.filter(active=True)
+        category_title = self.request.GET.get("category")
 
+        if category_title:
+            queryset = queryset.select_related('category').filter(category__title=category_title)
+
+        return queryset
 
 class ProductDetailView(generic.DetailView):
     model = Product
@@ -48,8 +52,8 @@ class CommentCreateView(generic.CreateView):
         obj = form.save(commit=False)
         obj.author = self.request.user
 
-        product_id = int(self.kwargs["product_id"])
-        product = get_object_or_404(Product, id=product_id)
+        product_slug = self.kwargs["slug"]
+        product = get_object_or_404(Product, slug=product_slug)
         obj.product = product
 
         messages.success(self.request, _("Comment successfully created"))

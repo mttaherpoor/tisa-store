@@ -10,7 +10,7 @@ class Order(models.Model):
     first_name = models.CharField(_('First Name'), max_length=100)
     last_name = models.CharField(_('Last Name'), max_length=100)
     phone_number = models.CharField(_('Phone Number'), max_length=15)
-    address = models.CharField(_('Address'), max_length=700)
+    address = models.CharField(_('Address'), max_length=700,blank=True)
 
     order_notes = models.CharField(_('Order Notes'), max_length=700, blank=True)
 
