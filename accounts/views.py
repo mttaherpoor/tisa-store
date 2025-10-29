@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, Http404,HttpResponseForbidden
 from django.views.generic import TemplateView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,render
+from django.db.models import Prefetch
 
 import os
 
@@ -38,23 +39,39 @@ class ProfileDetailView(LoginRequiredMixin, TemplateView):
             form.save()
         return self.get(request, *args, **kwargs)
 
+
 @login_required
 def video_files_list(request, order_item_id):
-    # پیدا کردن آیتم سفارش
-    order_item = get_object_or_404(OrderItem, id=order_item_id, order__user=request.user, order__is_paid=True)
+    try:
+        order_item = OrderItem.objects.get(
+            id=order_item_id,
+            order__user=request.user,
+            order__is_paid=True
+        )
+    except OrderItem.DoesNotExist:
+        return HttpResponseForbidden("دسترسی ندارید.")
 
-    # پیدا کردن ویدیوهای مربوط به محصول
-    videos = Video.objects.filter(product=order_item.product)
+    # پیدا کردن ویدیوهای محصول خریداری‌شده
+    videos = Video.objects.filter(product=order_item.product).prefetch_related("files")
 
     if not videos.exists():
         raise Http404("ویدیویی برای این محصول یافت نشد.")
 
-    # فقط یکی از ویدیوها را تستی دانلود کنیم (یا می‌توانی لیست کامل بسازی)
-    video = videos.first()
-    file_path = video.video.path  # مسیر فیزیکی فایل (مثلاً /var/protected_videos/slug/1.mp4)
+    # پیدا کردن فایل‌های تمام ویدیوها
+    video_files = VideoFile.objects.filter(video__in=videos)
 
-    if not os.path.exists(file_path):
-        raise Http404("فایل یافت نشد.")
+    if not video_files.exists():
+        raise Http404("فایلی برای این ویدیو یافت نشد.")
+    
+    # بازگرداندن به قالب
+    return render(
+        request,
+        "accounts/video_files_list.html",
+        {
+            "product": order_item.product,
+            "video_files": video_files,
+        }
+    )
 
    
 @login_required

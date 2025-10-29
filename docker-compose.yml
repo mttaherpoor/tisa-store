@@ -3,7 +3,8 @@ services:
     build:
       context: .
     container_name: django-app
-    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    # command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    command: python /code/manage.py runserver 0.0.0.0:8000
     volumes:
       - static:/code/staticfiles
       - ./media:/var/www/media
@@ -21,7 +22,6 @@ services:
       - DJANGO_EMAIL_HOST_PASSWORD=${DOCKER_COMPOSE_DJANGO_EMAIL_HOST_PASSWORD}
     depends_on:
       - db
-      - redis
     expose:
       - 8000
     networks:
@@ -53,30 +53,6 @@ services:
       - protected_videos:/var/protected_videos:ro
     depends_on:
       - web
-    networks:
-      - tisa_bridge
-
-  redis:
-    image: redis:7
-    container_name: redis
-    restart: always
-    networks:
-      - tisa_bridge
-
-  celery:
-    build:
-      context: .
-    container_name: celery-worker
-    command: celery -A config worker -l info
-    volumes:
-      - static:/code/staticfiles
-      - ./media:/var/www/media
-      - protected_videos:/var/protected_videos
-    env_file:
-      - .env
-    depends_on:
-      - web
-      - redis
     networks:
       - tisa_bridge
 

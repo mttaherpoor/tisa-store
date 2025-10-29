@@ -23,3 +23,6 @@ RUN mkdir -p /var/www/media /var/protected_videos
 
 # تغییر دسترسی (اختیاری، برای جلوگیری از Permission denied)
 RUN chmod -R 777 /var/www/media /var/protected_videos
+
+# دستور پیش‌فرض
+#CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
