@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   web:
     build:
@@ -5,10 +7,10 @@ services:
     container_name: django-app
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - static:/usr/src/app/static
-      - media:/usr/src/app/media
-      - protected_videos:/var/protected_videos  # ✅ مسیر هماهنگ با Nginx
-    env_file: 
+      - static:/var/www/static       # هماهنگ با STATIC_ROOT
+      - media:/var/www/media         # هماهنگ با MEDIA_ROOT
+      - protected_videos:/var/protected_videos
+    env_file:
       - .env
     environment:
       - DJANGO_SECRET_KEY=${DOCKER_COMPOSE_DJANGO_SECRET_KEY}
@@ -45,12 +47,11 @@ services:
     restart: always
     ports:
       - "80:80"
-      # بعداً می‌توانی SSL را هم اضافه کنی: - "443:443"
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - static:/var/www/static
-      - media:/var/www/media
-      - protected_videos:/var/protected_videos:ro  # 🔒 فقط خواندنی برای Nginx
+      - static:/var/www/static       # هماهنگ با STATIC_ROOT
+      - media:/var/www/media         # هماهنگ با MEDIA_ROOT
+      - protected_videos:/var/protected_videos:ro
     depends_on:
       - web
     networks:
