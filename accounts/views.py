@@ -61,22 +61,25 @@ def video_files_list(request, order_item_id):
 def download_video_xaccel(request, file_id):
     vf = get_object_or_404(VideoFile, id=file_id)
 
-    # چک مجوز دسترسی کاربر
-    order_item = OrderItem.objects.filter(
+    # ✅ بررسی اینکه کاربر واقعاً محصول را خریده باشد
+    has_access = OrderItem.objects.filter(
         product=vf.video.product,
         order__user=request.user,
         order__is_paid=True
-    ).first()
-    if not order_item:
+    ).exists()
+
+    if not has_access:
         return HttpResponseForbidden("دسترسی ندارید.")
 
     real_path = vf.file.path
     if not os.path.exists(real_path):
         raise Http404("فایل پیدا نشد.")
 
+    # ✅ مسیر داخلی برای Nginx
     internal_path = f"/protected_videos_internal/{vf.file.name}"
 
     response = HttpResponse()
     response["X-Accel-Redirect"] = internal_path
     response["Content-Disposition"] = f'attachment; filename="{os.path.basename(real_path)}"'
+    response["Content-Type"] = "application/octet-stream"
     return response

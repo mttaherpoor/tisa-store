@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-29 12:31+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: .\models.py:25
+msgid "Post description"
+msgstr ""
+
+#: .\models.py:57
+msgid "Very Bad"
+msgstr ""
+
+#: .\models.py:58
+msgid "Bad"
+msgstr ""
+
+#: .\models.py:59
+msgid "Normal"
+msgstr ""
+
+#: .\models.py:60
+msgid "Good"
+msgstr ""
+
+#: .\models.py:61
+msgid "Perfect"
+msgstr ""
+
+#: .\models.py:66
+msgid "Comment Text"
+msgstr ""
+
+#: .\models.py:67
+msgid "What is your score?"
+msgstr ""
+
+#: .\templates\blog\post_create.html:18
+msgid "Add New Post"
+msgstr ""
+
+#: .\templates\blog\post_create.html:20
+msgid "Add Category"
+msgstr ""
+
+#: .\templates\blog\post_create.html:30 .\templates\blog\post_detail.html:79
+msgid "Submit"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:84
+msgid "To write your comment please "
+msgstr ""
+
+#: .\templates\blog\post_detail.html:85
+msgid "Login"
+msgstr ""
+
+#: .\templates\blog\post_list.html:16
+msgid "Create New Post"
+msgstr ""
+
+#: .\templates\blog\post_list.html:24
+msgid "Categories posts"
+msgstr ""
+
+#: .\templates\blog\post_list.html:33
+msgid "All"
+msgstr ""
+
+#: .\templates\blog\post_list.html:54
+msgid "Read More"
+msgstr ""
+
+#: .\templates\blog\post_list.html:63
+msgid "No posts available yet."
+msgstr ""
+
+#: .\views.py:132
+msgid "Comment successfully created"
+msgstr ""

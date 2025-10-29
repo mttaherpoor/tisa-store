@@ -1,31 +1,65 @@
 services:
   web:
-    build: .
-    command: python /code/manage.py runserver 0.0.0.0:8000
+    build:
+      context: .
+    container_name: django-app
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    restart: always
     volumes:
-      - .:/code
-    ports:
-      - 8000:8000
-    depends_on:
-      - db
-    env_file:
+      - static:/usr/src/app/static
+      - media:/usr/src/app/media
+      - protected_videos:/var/protected_videos  # ✅ مسیر هماهنگ با Nginx
+    env_file: 
       - .env
     environment:
       - DJANGO_SECRET_KEY=${DOCKER_COMPOSE_DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=${DOCKER_COMPOSE_DJANGO_DEBUG}
-      - DJANGO_ZARINPAL_MERCHANT_ID=${DOCKER_COMPOSE_DJANGO_ZARINPAL_MERCHANT_ID}
       - DJANGO_POSTGRES_USER=${DOCKER_COMPOSE_DJANGO_POSTGRES_USER}
       - DJANGO_POSTGRES_NAME=${DOCKER_COMPOSE_DJANGO_POSTGRES_NAME}
       - DJANGO_POSTGRES_PASSWORD=${DOCKER_COMPOSE_DJANGO_POSTGRES_PASSWORD}
-      - DJANGO_EMAIL_HOST_USER=${DOCKER_COMPOSE_DJANGO_DJANGO_EMAIL_HOST_USER}
-      - DJANGO_EMAIL_HOST_PASSWORD=${DOCKER_COMPOSE_DJANGO_EMAIL_HOST_PASSWORD}
+    depends_on:
+      - db
+    expose:
+      - 8000
+    networks:
+      - tisa_bridge
 
   db:
     image: postgres:16
+    container_name: postgres-db
+    restart: always
     environment:
-      - "POSTGRES_HOST_AUTH_METHOD=trust"
+      POSTGRES_USER: ${DOCKER_COMPOSE_DJANGO_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${DOCKER_COMPOSE_DJANGO_POSTGRES_PASSWORD}
+      POSTGRES_DB: ${DOCKER_COMPOSE_DJANGO_POSTGRES_NAME}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - tisa_bridge
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      # بعداً می‌توانی SSL را هم اضافه کنی: - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static:/var/www/static
+      - media:/var/www/media
+      - protected_videos:/var/protected_videos:ro  # 🔒 فقط خواندنی برای Nginx
+    depends_on:
+      - web
+    networks:
+      - tisa_bridge
 
 volumes:
   postgres_data:
+  static:
+  media:
+  protected_videos:
+
+networks:
+  tisa_bridge:
+    driver: bridge
