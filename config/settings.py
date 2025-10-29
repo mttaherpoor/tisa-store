@@ -33,8 +33,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".herokuapp.com","87.248.130.21"]
-
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "87.248.130.21", "0.0.0.0"]
 
 # Application definition
 
