@@ -81,7 +81,7 @@ class Comment(models.Model):
 
 
 def video_upload_path(instance, filename):
-    return f"{instance.video.product.slug}/{instance.video.id}/{filename}"
+    return f"{instance.video.product.slug}/{filename}"
 
 
 class Video(models.Model):
