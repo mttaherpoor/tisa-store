@@ -179,7 +179,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Media
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_ROOT = '/var/www/media'
 PROTECTED_VIDEO_ROOT = '/var/protected_videos'
 PROTECTED_VIDEO_STORAGE = FileSystemStorage(location=PROTECTED_VIDEO_ROOT)
 
