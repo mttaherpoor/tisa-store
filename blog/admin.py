@@ -18,7 +18,7 @@ class CommentsInline(admin.TabularInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     form = PostForm
-    list_display = ("title", "author", "status", "datetime_created","category","slug")
+    list_display = ("title", "author", "status", "datetime_created","category","slug","is_free_resource")
     ordering = ("status",)
     prepopulated_fields = {"slug": ("title",)}
     # readonly_fields = [

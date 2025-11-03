@@ -15,7 +15,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ["title", "slug", "category", "text", "status","pdf"]
+        fields = ["title", "slug", "category", "text", "status","pdf",'is_free_resource']
         widgets = {
             "title": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter post title"}),
             "category": forms.Select(attrs={"class": "form-select"}),

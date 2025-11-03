@@ -13,6 +13,8 @@ class PostListView(generic.ListView):
     model = Post
     template_name = "blog/post_list.html"
     context_object_name = "post_list"
+    paginate_by = 9
+
 
     # def get_queryset(self):
     #     return Post.objects.filter(status="pub").order_by(

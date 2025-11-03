@@ -1,36 +1,52 @@
 {% load static %}
-{% load i18n%}
+{% load i18n %}
 
-
-  <!-- فوتر -->
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h5>درباره ما</h5>
-          <p>ما تیمی هستیم که به آموزش باکیفیت و کاربردی در زمینه شهرسازی متعهدیم.</p>
-        </div>
-        <div class="col-md-4">
-          <h5>لینک‌های سریع</h5>
-          <ul class="list-unstyled">
-            <li><a href="{% url 'home' %}" class="text-white">خانه</a></li>
-            <li><a href="{% url 'product_list' %}" class="text-white">فروشگاه</a></li>
-            <li><a href="{% url 'free_resources' %}" class="text-white">منابع رایگان</a></li>
-            <li><a href="{% url 'post-list' %}" class="text-white">بلاگ</a></li>
-            <li><a href="{% url 'aboutus' %}" class="text-white">درباره ما</a></li>
-            <li><a href="{% url 'contactus' %}" class="text-white">تماس با ما</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h5>تماس با ما</h5>
-          <p>ایمیل: info@yourdomain.com</p>
-          <p>تلفن: ۱۲۳۴۵۶۷۸۹</p>
-          <a href="#" class="text-white me-2">تلگرام</a>
-          <a href="#" class="text-white">اینستاگرام</a>
-        </div>
+<footer class="footer bg-dark text-white pt-5 pb-3 mt-5">
+  <div class="container">
+    <div class="row g-4">
+      <!-- درباره ما -->
+      <div class="col-md-4">
+        <h5 class="fw-bold mb-3">درباره ما</h5>
+        <p class="small lh-lg text-light opacity-75">
+          ما تیمی متعهد به آموزش‌های باکیفیت و کاربردی در حوزه شهرسازی و فناوری‌های نوین شهری هستیم.
+        </p>
       </div>
-      <div class="text-center mt-4">
-        <p>© ۱۴۰۴ - تمام حقوق برای [نام سایت شما] محفوظ است.</p>
+
+      <!-- لینک‌های سریع -->
+      <div class="col-md-4">
+        <h5 class="fw-bold mb-3">لینک‌های سریع</h5>
+        <ul class="list-unstyled footer-links">
+          <li><a href="{% url 'home' %}" class="text-white text-decoration-none d-block py-1"><i class="bi bi-house-door me-2"></i>خانه</a></li>
+          <li><a href="{% url 'product_list' %}" class="text-white text-decoration-none d-block py-1"><i class="bi bi-bag me-2"></i>فروشگاه</a></li>
+          <li><a href="{% url 'free_resources' %}" class="text-white text-decoration-none d-block py-1"><i class="bi bi-gift me-2"></i>منابع رایگان</a></li>
+          <li><a href="{% url 'post-list' %}" class="text-white text-decoration-none d-block py-1"><i class="bi bi-journal-text me-2"></i>بلاگ</a></li>
+          <li><a href="{% url 'aboutus' %}" class="text-white text-decoration-none d-block py-1"><i class="bi bi-people me-2"></i>درباره ما</a></li>
+          <li><a href="{% url 'contactus' %}" class="text-white text-decoration-none d-block py-1"><i class="bi bi-envelope me-2"></i>تماس با ما</a></li>
+        </ul>
+      </div>
+
+      <!-- تماس با ما -->
+      <div class="col-md-4">
+        <h5 class="fw-bold mb-3">تماس با ما</h5>
+        <ul class="list-unstyled small mb-3">
+          <li><i class="bi bi-envelope me-2"></i>ایمیل: <a href="mailto:info@yourdomain.com" class="text-white text-decoration-none">info@yourdomain.com</a></li>
+          <li><i class="bi bi-telephone me-2"></i>تلفن: <span dir="ltr">۰۱۲۳۴۵۶۷۸۹</span></li>
+        </ul>
+        <div class="social-links mt-3">
+          <a href="#" class="text-white me-3" aria-label="تلگرام"><i class="bi bi-telegram fs-5"></i></a>
+          <a href="#" class="text-white me-3" aria-label="اینستاگرام"><i class="bi bi-instagram fs-5"></i></a>
+          <a href="#" class="text-white" aria-label="توییتر"><i class="bi bi-twitter-x fs-5"></i></a>
+        </div>
       </div>
     </div>
-  </footer>
+
+    <!-- جداکننده -->
+    <hr class="border-light opacity-25 my-4">
+
+    <!-- حق کپی‌رایت -->
+    <div class="text-center small text-light opacity-75">
+      <p class="mb-0">© ۱۴۰۴ - تمام حقوق برای <strong>شهرهای آینده</strong> محفوظ است.</p>
+      <p class="mb-0">طراحی و توسعه با ❤️ توسط تیم <span class="fw-semibold">Tisa & Taher</span></p>
+    </div>
+  </div>
+</footer>
