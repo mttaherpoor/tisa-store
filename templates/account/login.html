@@ -1,6 +1,6 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
-{% load i18n%}
+{% load i18n %}
 
 {% block page_title %}
     Login
@@ -22,6 +22,15 @@
                             <button type="submit" class="btn btn-success">{% trans "Login" %}</button>
                         </div>
                     </form>
+
+                    <div class="text-center mt-3">
+                        <p>
+                            {% trans "Don't have an account yet?" %}
+                            <a href="{{ signup_url }}" class="text-success fw-bold">
+                                {% trans "Sign up here" %}
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

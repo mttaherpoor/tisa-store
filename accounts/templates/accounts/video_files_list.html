@@ -1,17 +1,40 @@
 {% extends "_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}{{ product.title }} - {% trans "Videos" %}{% endblock %}
 
 {% block content %}
-<div class="card card-rounded p-3">
-    <h5 class="section-title">ویدیوهای محصول: {{ product.title }}</h5>
-    <ul class="list-group">
-        {% for file in video_files %}
+<section class="py-4">
+  <div class="container">
+    <div class="card card-rounded shadow-sm p-4">
+      <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+        <h5 class="section-title mb-2">🎬 {% trans "Product Videos" %}: <span class="fw-bold">{{ product.title }}</span></h5>
+        <a href="{% url 'product_detail' product.slug %}" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-arrow-right"></i> {% trans "Back to Product" %}
+        </a>
+      </div>
+
+      {% if video_files %}
+        <ul class="list-group list-group-flush">
+          {% for file in video_files %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ file.filename|default:file.file.name }}
-                <a href="{% url 'download_video' file.id %}" class="btn btn-sm btn-outline-primary">دانلود</a>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-play-circle text-primary fs-5 me-2"></i>
+                <span>{{ file.filename|default:file.file.name }}</span>
+              </div>
+              <a href="{% url 'download_video' file.id %}" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-download"></i> {% trans "Download" %}
+              </a>
             </li>
-        {% empty %}
-            <li class="list-group-item text-muted">هیچ ویدیویی موجود نیست.</li>
-        {% endfor %}
-    </ul>
-</div>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="alert alert-warning mt-3 mb-0 text-center">
+          <i class="bi bi-info-circle me-1"></i> {% trans "No videos are available for this product." %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
 {% endblock %}

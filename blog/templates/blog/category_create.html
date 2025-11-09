@@ -1,29 +1,37 @@
-{% extends '_base.html' %}
-
-
+{% extends "_base.html" %}
 {% load crispy_forms_tags %}
-
 {% load i18n %}
 
-{% block page_title %}
-add Category
-{% endblock %}
+{% block page_title %}{% trans "Add New Category" %}{% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-9">
-                <div class="card shadow my-3 p-5">
-                    <h3>Add new Category:</h3>
-                    <form method="POST">
-                        {% csrf_token %}<!-- add this for each form -->
-                        {{ form|crispy }}                                            
-                        
-                        <button type="submit" class="btn btn-primary">Submit</button> 
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card card-rounded shadow-sm p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="h5 fw-bold mb-0">
+              <i class="bi bi-folder-plus me-2"></i> {% trans "Add New Category" %}
+            </h3>
+            {% comment %} <a href="{% url 'category_list' %}" class="btn btn-outline-secondary btn-sm">
+              <i class="bi bi-arrow-right"></i> {% trans "Back to Category List" %}
+            </a> {% endcomment %}
+          </div>
 
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <div class="d-flex justify-content-end mt-3">
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-circle me-1"></i> {% trans "Save Category" %}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

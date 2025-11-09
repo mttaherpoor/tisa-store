@@ -1,134 +1,130 @@
-
 {% extends '_base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load jalali_tags %}
 {% load humanize %}
 {% load i18n %}
-{% load blog_comment_tags %} 
+{% load blog_comment_tags %}
 {% load persian_translation_tags %}
 
 {% block page_title %}
 {{ post.title }}
 {% endblock page_title %}
 
-
 {% block content %}
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-9">
 
-                <div class="card shadow my-3 p-5">
-                    <h1>{{post.title}}</h1>
-                    <div>
-                        <a href="{% url 'post_update' post.id %}" class="btn btn-lg btn-warning">Edit</a>
-                        <a href="{% url 'post_delete' post.id %}" class="btn btn-lg btn-danger">Delete</a>
+{% comment %} <!-- بنر بالای صفحه -->
+<section class="py-4 bg-light">
+    <div class="container text-center">
+    <h5 class="mb-3">{% trans "Post Details" %}</h5>
+    <a href="{% url 'post-list' %}" class="btn btn-secondary">
+        {% trans "Back to All Posts" %}
+    </a>
+    </div>
+</section>
+{% endcomment %}
+<!-- کارت پست -->
+<section class="py-5" id="post-detail">
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 mb-4">
+        <div class="card product-card border-0 shadow-sm p-4">
 
-                    </div>
-                    <p class="small text-muted mt-2">By: {{post.author}}</p>
-                    <p class="mt-2">{{post.text | safe}}</p>
-                    {% if post.pdf %}
-                        <p class="mt-3">
-                            <a href="{{ post.pdf.url }}" target="_blank" class="btn btn-outline-primary">
-                                {{ post.pdf_filename }}
-                            </a>
-                        </p>
-                    {% endif %}
-                </div>
-
-            <!-- Comments Section -->
-            <div class="comments mb-5">
-                <h4>کامنت‌ها</h4>
-                {% if post.comments.all|only_active_comments %}
-                    <ul class="list-unstyled">
-                        {% for comment in post.comments.all|only_active_comments|dictsortreversed:"datetime_created" %}
-                            <li class="border rounded p-3 mb-3 shadow-sm">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <strong>{{ comment.author }}</strong>
-                                    <small class="text-muted">{{ comment.datetime_created|to_jalali:"%Y %B %d"|translate_number }}</small>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="mt-2">{{ comment.body }}</p>
-                                    {% if comment.stars %}
-                                        <div class="rating">
-                                            {% for i in "12345" %}
-                                                {% if forloop.counter <= comment.stars|add:"0" %}
-                                                    <span style="color:#FFD700;">★</span>
-                                                {% else %}
-                                                    <span style="color:#ccc;">★</span>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p class="text-muted">هنوز کامنتی ثبت نشده است.</p>
-                {% endif %}
-            </div>
-
-            <!-- Comment Form -->
-            {% if user.is_authenticated %}
-                <div class="comment-form mb-5">
-                    <h5>ثبت نظر شما</h5>
-                    <form method="POST" action="{% url 'blog-comment-create' post.slug %}">
-                        {% csrf_token %}
-                        {{ comment_form|crispy }}
-                        <button type="submit" class="btn btn-primary mt-2">{% trans "Submit" %}</button>
-                    </form>
-                </div>
-            {% else %}
-                <p class="text-muted">
-                    {% trans 'To write your comment please ' %}
-                    <a href="{% url 'account_login' %}">{% trans 'Login' %}</a>
-                </p>
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top img-fluid rounded mb-4" alt="{{ post.title }}">
             {% endif %}
 
-                {% comment %} <div class="card shadow my-3 p-5">
-                    <h3>Comments:</h3>
-                        No comments yet! Be the first one.
-                </div> {% endcomment %}
+            <div class="card-body">
+                <h3 class="card-title mb-3 text-center">{{ post.title }}</h3>
             
-                {% comment %} <div class="card shadow my-3 p-5">
-                    <h3>Add new comment:</h3>
-                    <form method="POST">
-                        <div class="form-group py-2">
-                            <label class="py-1" for="author_name">Enter your name:</label>
-                            <input type="text" class="form-control" placeholder="e.g. John Doe" name="author_name">
-                        </div>
-                        <div class="form-group py-2">
-                            <label class="py-1" for="email">Your Email:</label>
-                            <input type="email" class="form-control" placeholder="example@gmail.com" name="email">
-                        </div>
-                        <div class="form-group py-2">
-                            <label class="py-1" for="comment_text">Comment text:</label>
-                            <textarea class="form-control" name="text" rows="3" placeholder="Enter your comment text here..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div> {% endcomment %}
-            </div>
-            {% comment %} <div class="col-3">
-
-                    <div class="card my-4">
-                        <h5 class="card-header">About</h5>
-                        <div class="card-body">
-                            <p class="card-text">We love python and django. So we created a blog site to share our
-                                thoughts</p>
-                            <a href="#"
-                            class="btn btn-sm btn-danger">
-                                More...
-                            </a>
-                        </div>
+                <p class="small text-muted text-center">
+                    {% trans "By" %}: {{ post.author }} | {{ post.datetime_created|to_jalali:"%Y %B %d"|translate_number }}
+                </p>
+            
+                {% if user.is_staff %}
+                    <div class="text-center mb-3">
+                        <a href="{% url 'post_update' post.id %}" class="btn btn-lg btn-warning me-2">Edit</a>
+                        <a href="{% url 'post_delete' post.id %}" class="btn btn-lg btn-danger">Delete</a>
                     </div>
-
-            </div> {% endcomment %}
+                {% endif %}
+            
+                <div class="card-text mt-4">
+                    {{ post.text|safe }}
+                </div>
+            
+                {% if post.pdf %}
+                    <div class="text-center mt-4">
+                        <a href="{{ post.pdf.url }}" target="_blank" class="btn btn-outline-primary">
+                            {{ post.pdf_filename }}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>            
+        </div>
         </div>
     </div>
 
+    <!-- بخش کامنت‌ها -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8 col-md-10">
+        <div class="card border-0 shadow-sm p-4">
+            <h4 class="mb-4">{% trans "Comments" %}</h4>
 
+            {% if post.comments.all|only_active_comments %}
+            <ul class="list-unstyled">
+                {% for comment in post.comments.all|only_active_comments|dictsortreversed:"datetime_created" %}
+                <li class="border rounded p-3 mb-3 shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                    <strong>{{ comment.author }}</strong>
+                    <small class="text-muted">
+                        {{ comment.datetime_created|to_jalali:"%Y %B %d"|translate_number }}
+                    </small>
+                    </div>
 
+                    <p class="mb-2">{{ comment.body }}</p>
+
+                    {% if comment.stars %}
+                    <div class="rating">
+                        {% for i in "12345" %}
+                        {% if forloop.counter <= comment.stars|add:"0" %}
+                            <span style="color:#FFD700;">★</span>
+                        {% else %}
+                            <span style="color:#ccc;">★</span>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-muted">{% trans "No comments yet." %}</p>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+
+    <!-- فرم ارسال کامنت -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-8 col-md-10">
+        <div class="card border-0 shadow-sm p-4">
+            {% if user.is_authenticated %}
+            <h5 class="mb-3">{% trans "Leave a Comment" %}</h5>
+            <form method="POST" action="{% url 'blog-comment-create' post.slug %}">
+                {% csrf_token %}
+                {{ comment_form|crispy }}
+                <button type="submit" class="btn btn-success mt-2">{% trans "Submit" %}</button>
+            </form>
+            {% else %}
+            <p class="text-muted">
+                {% trans 'To write your comment please ' %}
+                <a href="{% url 'account_login' %}">{% trans 'Login' %}</a>
+            </p>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+
+    </div>
+</section>
 {% endblock %}
-
