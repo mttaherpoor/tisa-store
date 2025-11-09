@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 
+{% load wishlist_tags %}
 {% load static %} 
 {% load i18n %} 
 {% load crispy_forms_tags %} 
@@ -42,6 +43,17 @@
                         {% trans "Add to Cart" %}
                     </button>
                 </form>
+                
+                <!-- Wishlist button -->
+                {% if user.is_authenticated %}
+                {% if product|in_wishlist:user %}
+                    <a href="{% url 'remove_from_wishlist' product.id %}" class="btn btn-outline-danger btn-sm mt-2">❤️ حذف از علاقه‌مندی‌ها</a>
+                {% else %}
+                    <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-primary btn-sm mt-2">🤍 افزودن به علاقه‌مندی‌ها</a>
+                {% endif %}
+                {% else %}
+                    <a href="{% url 'account_login' %}" class="btn btn-outline-secondary btn-sm mt-2">ورود برای افزودن</a>
+                {% endif %}
             </div>
         </div>
     </div>

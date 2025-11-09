@@ -1,5 +1,6 @@
 {% extends "_base.html" %}
 
+{% load wishlist_tags %}
 {% load static %}
 {% load i18n %}
 {% load persian_translation_tags %}
@@ -206,19 +207,42 @@
               <div class="card card-rounded p-3">
                 <h5 class="section-title">علاقه‌مندی‌ها</h5>
                 <div class="row g-3">
-                  <div class="col-md-4">
-                    <div class="card h-100 border-0">
-                      <img src="https://via.placeholder.com/300x180?text=ArcGIS+Pro" class="card-img-top" alt="پکیج ArcGIS Pro">
-                      <div class="card-body">
-                        <h6>پکیج ArcGIS Pro</h6>
-                        <p class="small-muted">۳۵۰,۰۰۰ تومان</p>
-                        <div class="d-flex gap-2">
-                          <button class="btn btn-primary btn-sm">افزودن به سبد</button>
-                          <button class="btn btn-outline-danger btn-sm">حذف</button>
+
+                  {% if user.is_authenticated %}
+                    {% for item in user.wishlist.all %}
+                      <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                          {% if item.product.image %}
+                            <img src="{{ item.product.image.url }}" class="card-img-top" alt="{{ item.product.title }}">
+                          {% else %}
+                            <img src="https://via.placeholder.com/300x180?text=No+Image" class="card-img-top" alt="No image">
+                          {% endif %}
+                          <div class="card-body">
+                            <h6>{{ item.product.title }}</h6>
+                            <p class="small-muted">{{ item.product.price|intcomma:False|translate_number }} تومان</p>
+                            <div class="d-flex gap-2">
+                              <!-- Add to cart button -->
+                              <form action="{% url 'cart:cart_add' item.product.id %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-primary btn-sm">افزودن به سبد</button>
+                              </form>
+                              <!-- Remove from wishlist button -->
+                              <a href="{% url 'remove_from_wishlist' item.product.id %}" class="btn btn-outline-danger btn-sm">حذف</a>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    {% empty %}
+                      <p class="text-muted text-center">هیچ موردی در علاقه‌مندی‌ها وجود ندارد.</p>
+                    {% endfor %}
+                  {% else %}
+                    <p class="text-muted text-center">
+                      برای مشاهده علاقه‌مندی‌ها لطفاً
+                      <a href="{% url 'account_login' %}">وارد شوید</a>.
+                    </p>
+                  {% endif %}
+
                 </div>
               </div>
             </div>
