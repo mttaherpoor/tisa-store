@@ -29,7 +29,8 @@ class Post(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True)
     status = models.CharField(choices=STATUS_CHOICES, max_length=3)
     pdf = models.FileField(upload_to='blog/pdfs/', blank=True, null=True)
-
+    is_free_resource  =models.BooleanField(default=True)
+    
     def __str__(self) -> str:
         return self.title
 
