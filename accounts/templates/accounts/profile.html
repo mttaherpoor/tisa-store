@@ -6,6 +6,7 @@
 {% load persian_translation_tags %}
 {% load jalali_tags %}
 {% load humanize %} 
+{% load crispy_forms_tags %}
 
 
 {% block page_title %} user profile{% endblock %}
@@ -247,43 +248,31 @@
               </div>
             </div>
 
+
             <!-- امنیت -->
             <div class="tab-pane fade" id="security">
               <div class="card card-rounded p-4">
                 <h5 class="section-title">تنظیمات امنیتی</h5>
-                <div class="mb-3">
-                  <label class="form-label">تغییر رمز عبور</label>
-                  <form class="row g-2" id="passwordForm" novalidate>
-                    <div class="col-md-4">
-                      <input type="password" class="form-control" id="current_password" placeholder="رمز فعلی" required>
-                      <div class="invalid-feedback">رمز فعلی الزامی است.</div>
-                    </div>
-                    <div class="col-md-4">
-                      <input type="password" class="form-control" id="new_password" placeholder="رمز جدید" required>
-                      <div class="invalid-feedback">رمز جدید الزامی است.</div>
-                    </div>
-                    <div class="col-md-4">
-                      <button class="btn btn-primary">ثبت رمز جدید</button>
-                    </div>
-                  </form>
-                </div>
-                <div class="mb-3">
-                  <h6>ورود دو مرحله‌ای (2FA)</h6>
-                  <p class="small-muted">برای امنیت بیشتر فعال کنید.</p>
-                  <button class="btn btn-outline-primary">فعالسازی 2FA</button>
-                </div>
-                <div>
-                  <h6>نشست‌های فعال</h6>
-                  <ul class="list-unstyled">
-                    <li class="d-flex justify-content-between py-2 border-bottom">
-                      <div>مرورگر کروم — دسکتاپ</div>
-                      <div class="small-muted">۲:۱۵ پیش — <button class="btn btn-sm btn-outline-danger">خارج کردن</button></div>
-                    </li>
-                  </ul>
-                  <button class="btn btn-outline-danger btn-sm mt-3">خروج از همه دستگاه‌ها</button>
-                </div>
+
+                <form method="post" novalidate>
+                  {% csrf_token %}
+                  <input type="hidden" name="form_type" value="password">
+                  {{ password_form|crispy }}
+                  <button type="submit" class="btn btn-primary mt-2">ثبت رمز جدید</button>
+                </form>
+
+                {% if messages %}
+                  <div class="mt-3">
+                    {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }} fade show mt-2" role="alert">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
               </div>
             </div>
+
 
             <!-- اعلان‌ها -->
             <div class="tab-pane fade" id="notifications">
@@ -349,4 +338,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 </script>
+
+
 {% endblock %}

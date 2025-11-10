@@ -1,10 +1,13 @@
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, Http404,HttpResponseForbidden
-from django.views.generic import TemplateView
-from django.shortcuts import get_object_or_404,render
 from django.db.models import Prefetch
+from django.http import HttpResponse, Http404,HttpResponseForbidden
+from django.shortcuts import get_object_or_404,render
+from django.views.generic import TemplateView
 
 import os
 
@@ -19,6 +22,7 @@ class ProfileDetailView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["form"] = ProfileForm(instance=self.request.user)
 
+        context["password_form"] = PasswordChangeForm(user=self.request.user)
         # ✅ Add all user orders (with their items and products)
         user = self.request.user
         context["orders"] = (
@@ -34,9 +38,21 @@ class ProfileDetailView(LoginRequiredMixin, TemplateView):
         return context
 
     def post(self, request, *args, **kwargs):
+        if "new_password1" in request.POST:
+            # 🔹 Handle password change
+            password_form = PasswordChangeForm(user=request.user, data=request.POST)
+            if password_form.is_valid():
+                user = password_form.save()
+                update_session_auth_hash(request, user)  # Prevent logout
+                messages.success(request, "رمز عبور شما با موفقیت تغییر یافت.")
+            else:
+                messages.error(request, "خطا در تغییر رمز عبور. لطفاً مجدداً تلاش کنید.")
+            return self.get(request, *args, **kwargs)
+        
         form = ProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
+            messages.success(request, "پروفایل شما با موفقیت به‌روزرسانی شد.")
         return self.get(request, *args, **kwargs)
 
 
