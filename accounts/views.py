@@ -11,48 +11,68 @@ from django.views.generic import TemplateView
 
 import os
 
-from .forms import ProfileForm
+from .forms import ProfileForm,TicketForm
 from orders.models import Order,OrderItem
 from products.models import Video, VideoFile
+from .models import Ticket
 
 class ProfileDetailView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/profile.html"
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["form"] = ProfileForm(instance=self.request.user)
-
-        context["password_form"] = PasswordChangeForm(user=self.request.user)
-        # ✅ Add all user orders (with their items and products)
         user = self.request.user
+        context = super().get_context_data(**kwargs)
+
+        # فرم‌ها
+        context["form"] = ProfileForm(instance=user)
+        context["ticket_form"] = TicketForm()
+        context["password_form"] = PasswordChangeForm(user=user)
+
+        # سفارش‌ها با prefetch برای آیتم‌ها و محصولاتشان
         context["orders"] = (
             Order.objects.filter(user=user, is_paid=True)
-            .prefetch_related("items__product")
+            .prefetch_related("items__product")  # prefetch همه آیتم‌ها و محصولاتشان
             .order_by("-datetime_created")
         )
 
-        # Optional future stats
-        # context["active_orders"] = context["orders"].filter(status="processing").count()
-        # context["wallet_balance"] = user.wallet.balance if hasattr(user, "wallet") else 0
+        # تیکت‌ها با select_related برای کاربر
+        context["tickets"] = Ticket.objects.filter(user=user).select_related("user").order_by("-datetime_created")
 
         return context
 
     def post(self, request, *args, **kwargs):
+
+        # 1️⃣ تغییر رمز عبور
         if "new_password1" in request.POST:
-            # 🔹 Handle password change
             password_form = PasswordChangeForm(user=request.user, data=request.POST)
             if password_form.is_valid():
                 user = password_form.save()
-                update_session_auth_hash(request, user)  # Prevent logout
+                update_session_auth_hash(request, user)
                 messages.success(request, "رمز عبور شما با موفقیت تغییر یافت.")
             else:
-                messages.error(request, "خطا در تغییر رمز عبور. لطفاً مجدداً تلاش کنید.")
+                messages.error(request, "خطا در تغییر رمز عبور.")
             return self.get(request, *args, **kwargs)
-        
+
+        # 2️⃣ ارسال تیکت
+        if "subject" in request.POST:
+            ticket_form = TicketForm(request.POST)
+            if ticket_form.is_valid():
+                ticket = ticket_form.save(commit=False)
+                ticket.user = request.user
+                ticket.save()
+                messages.success(request, "تیکت شما با موفقیت ثبت شد. پشتیبانی به زودی پاسخ می‌دهد.")
+            else:
+                messages.error(request, "خطایی رخ داد. لطفاً فرم تیکت را بررسی کنید.")
+            return self.get(request, *args, **kwargs)
+
+        # 3️⃣ فرم پروفایل
         form = ProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "پروفایل شما با موفقیت به‌روزرسانی شد.")
+        else:
+            messages.error(request, "خطا! اطلاعات پروفایل معتبر نیست.")
+
         return self.get(request, *args, **kwargs)
 
 

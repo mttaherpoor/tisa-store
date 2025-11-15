@@ -1,33 +1,44 @@
-{% extends '_base.html' %}
+{% extends "_base.html" %}
 {% load crispy_forms_tags %}
-{% load i18n%}
+{% load i18n %}
 
-{% block page_title %}
-    Sign Up
-{% endblock %}
+{% block page_title %}{% trans "Sign Up" %}{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+<section class="py-5">
+  <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm rounded">
-                <div class="card-header bg-success text-white text-center">
-                    <h4>{% trans "Sign Up" %}</h4>
-                </div>
-                <div class="card-body">
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        <div class="d-grid gap-2 mt-3">
-                            <button type="submit" class="btn btn-success">{% trans "Create Account" %}</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer text-center">
-                    <small>{% trans "Already have an account?" %} <a href="{% url 'account_login' %}">{% trans "Sign in" %}</a></small>
-                </div>
-            </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm rounded border-0">
+          <div class="card-header bg-success text-white text-center">
+            <h4 class="mb-0 fw-bold">
+              <i class="bi bi-person-plus me-1"></i> {% trans "Create an Account" %}
+            </h4>
+          </div>
+
+          <div class="card-body">
+            <form method="post" novalidate>
+              {% csrf_token %}
+              {{ form|crispy }}
+              <div class="d-grid mt-3">
+                <button type="submit" class="btn btn-success">
+                  <i class="bi bi-check-circle me-1"></i> {% trans "Sign Up" %}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card-footer text-center bg-light">
+            <small>
+              {% trans "Already have an account?" %}
+              <a href="{% url 'account_login' %}" class="text-success fw-bold text-decoration-none">
+                {% trans "Sign in here" %}
+              </a>
+            </small>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</section>
 {% endblock %}

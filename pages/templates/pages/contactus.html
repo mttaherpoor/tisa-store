@@ -1,78 +1,99 @@
-{% extends '_base.html' %}
+{% extends "_base.html" %}
 {% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
 
-{% block page_title %}
-    Free resources
-{% endblock %}
+{% block page_title %}{% trans "Contact Us" %}{% endblock %}
 
 {% block content %}
+{% translate "Contact Us" as header_name %}
+{% include 'topheader.html' with header_name=header_name %}
 
-  <!-- فرم تماس و اطلاعات -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row">
-        <!-- فرم تماس -->
-        <div class="col-lg-6 mb-4">
-          <div class="contact-form shadow-sm">
-            <h3 class="mb-4">فرم تماس</h3>
-            <form id="contactForm">
-              <div class="mb-3">
-                <label for="name" class="form-label">نام</label>
-                <input type="text" class="form-control" id="name" placeholder="نام شما" required>
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4 align-items-start">
+      <!-- Contact form -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm p-4">
+          <h3 class="h5 fw-bold mb-3">{% trans "Contact Form" %}</h3>
+
+            {% if form %}
+            <form method="post" novalidate>
+              {% csrf_token %}
+              {{ form|crispy }}
+              <div class="d-grid mt-3">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-envelope-paper me-1"></i> {% trans "Send Message" %}
+                </button>
               </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">ایمیل</label>
-                <input type="email" class="form-control" id="email" placeholder="ایمیل شما" required>
-              </div>
-              <div class="mb-3">
-                <label for="message" class="form-label">پیام</label>
-                <textarea class="form-control" id="message" rows="5" placeholder="پیامت رو اینجا بنویس..." required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">ارسال پیام</button>
             </form>
-          </div>
+            {% else %}
+            <!-- optional manual HTML form fallback if no form object -->
+            {% endif %}
         </div>
-        <!-- اطلاعات تماس -->
-        <div class="col-lg-6 mb-4">
-          <div class="contact-info shadow-sm">
-            <h3 class="mb-4">اطلاعات تماس</h3>
-            <ul class="list-unstyled">
-              <li class="mb-3">
-                <i class="bi bi-envelope"></i>
-                <strong>ایمیل:</strong> info@yourdomain.com
-              </li>
-              <li class="mb-3">
-                <i class="bi bi-telephone"></i>
-                <strong>تلفن:</strong> ۱۲۳۴۵۶۷۸۹
-              </li>
-              <li class="mb-3">
-                <i class="bi bi-telegram"></i>
-                <strong>تلگرام:</strong> <a href="#" class="text-primary">t.me/yourtelegram</a>
-              </li>
-              <li>
-                <i class="bi bi-instagram"></i>
-                <strong>اینستاگرام:</strong> <a href="#" class="text-primary">instagram.com/yourinstagram</a>
-              </li>
-            </ul>
-            <div class="mt-4">
-              <h5>ما رو دنبال کن!</h5>
-              <a href="#" class="text-dark me-2"><i class="bi bi-telegram fs-4"></i></a>
-              <a href="#" class="text-dark me-2"><i class="bi bi-instagram fs-4"></i></a>
-              <a href="#" class="text-dark"><i class="bi bi-twitter fs-4"></i></a>
-            </div>
-          </div>
+      </div>
+
+      <!-- Contact info -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm p-4">
+          <h3 class="h5 fw-bold mb-3">{% trans "Contact Information" %}</h3>
+
+          <ul class="list-unstyled mb-0">
+            <li class="d-flex align-items-start mb-3">
+              <i class="bi bi-envelope fs-4 me-3"></i>
+              <div>
+                <div class="small text-muted">{% trans "Email" %}</div>
+                <a href="mailto:tisavista@gmail.com">tisavista@gmail.com</a>
+              </div>
+            </li>
+
+            <li class="d-flex align-items-start mb-3">
+              <i class="bi bi-geo-alt fs-4 me-3"></i>
+              <div>
+                <div class="small text-muted">{% trans "Address" %}</div>
+                <span>{% trans "Tehran, Iran" %}</span>
+              </div>
+            </li>
+
+            <li class="d-flex align-items-start">
+              <i class="bi bi-share fs-4 me-3"></i>
+              <div>
+                <div class="small text-muted">{% trans "Social" %}</div>
+                <div class="mt-1">
+                  <a href="https://t.me/tisavista" class="me-2" aria-label="Telegram"><i class="bi bi-telegram fs-4"></i></a>
+                  <a href="https://www.instagram.com/tisavista" class="me-2" aria-label="Instagram"><i class="bi bi-instagram fs-4"></i></a>
+                  <a href="https://x.com/tisavista" aria-label="Twitter"><i class="bi bi-twitter fs-4"></i></a>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          {% comment %} <div class="mt-4">
+            <a href="{% url 'faq' %}" class="btn btn-outline-secondary btn-sm">{% trans "FAQ" %}</a>
+            <a href="{% url 'contactus' %}#map" class="btn btn-outline-secondary btn-sm ms-2">{% trans "Find us on map" %}</a> 
+          </div>{% endcomment %}
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- نقشه -->
-  <section class="py-5 bg-light">
-    <div class="container">
-      <h3 class="text-center mb-4">ما کجاییم؟</h3>
-      <div class="map-placeholder"></div>
-      <p class="text-center mt-3">تهران، ایران - آماده همکاری با شما از هر جای دنیا!</p>
+{% comment %} <!-- Map -->
+<section id="map" class="py-5 bg-light">
+  <div class="container">
+    <h3 class="h5 text-center mb-3">{% trans "Where we are" %}</h3>
+
+    <div class="ratio ratio-16x9 rounded shadow-sm mb-3">
+      <!-- If you have coordinates / Google Maps iframe replace the src below -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!2m..."
+        title="{% trans 'Location map' %}"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"></iframe>
     </div>
-  </section>
 
+    <p class="text-center text-muted">{% trans "Tehran, Iran — ready to collaborate with you from anywhere." %}</p>
+  </div>
+</section> {% endcomment %}
 {% endblock %}

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import CustomUser
+from .models import CustomUser,Ticket
 
 
 @admin.register(CustomUser)
@@ -31,3 +31,6 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('email',)
 
 # admin.site.register(CustomUser, CustomUserAdmin)
+@admin.register(Ticket)
+class TicketAdmin(admin.ModelAdmin):
+    list_display = ['user','subject','status']

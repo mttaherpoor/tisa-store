@@ -1,0 +1,182 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-16 02:39+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: .\forms.py:10
+msgid "Your name"
+msgstr ""
+
+#: .\forms.py:12
+msgid "Name"
+msgstr ""
+
+#: .\forms.py:17
+msgid "Your email"
+msgstr ""
+
+#: .\forms.py:19 .\templates\pages\contactus.html:45
+msgid "Email"
+msgstr ""
+
+#: .\forms.py:25
+msgid "Write your message here..."
+msgstr ""
+
+#: .\forms.py:27
+msgid "Message"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:5 .\templates\pages\aboutus.html:8
+msgid "About Us"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:16
+msgid "Our Story"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:18
+msgid ""
+"We are Tisa and Taher — two companions in the world of urban planning who "
+"met in an enthusiastic group called GIS Talk. A question about machine "
+"learning turned into a collaboration full of ideas. We combine urban "
+"planning with technology to create not only beautiful cities but smart, "
+"green and meaningful places."
+msgstr ""
+
+#: .\templates\pages\aboutus.html:21
+msgid ""
+"With notes, practical videos and step-by-step courses, we help learners "
+"around the world draw the map of the cities of the future."
+msgstr ""
+
+#: .\templates\pages\aboutus.html:25
+msgid "See Free Resources"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:26
+msgid "Get in Touch"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:32
+msgid ""
+"“We started our dreams in Tehran, and this is only the beginning — we want "
+"to bring practical urban education to more cities.”"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:33
+msgid "Tisa & Taher"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:44
+msgid "Meet Our Team"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:45
+msgid "A small team with a big passion for smart and sustainable cities."
+msgstr ""
+
+#: .\templates\pages\aboutus.html:59
+msgid "Geography & Urban Planning Specialist | Lover of Smart Cities"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:61
+msgid ""
+"Tisa taught at university for eight years and educated over 2,500 students. "
+"She creates video lessons and practical content on GIS, Python and machine "
+"learning."
+msgstr ""
+
+#: .\templates\pages\aboutus.html:79
+msgid "Urban Management Specialist | Data & Technology Wizard"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:81
+msgid ""
+"Taher focuses on data analysis, platform development and educational content "
+"production. He supports the technical backend and data workflows."
+msgstr ""
+
+#: .\templates\pages\aboutus.html:93
+msgid "Would you like to join us? Click here!"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:96
+msgid "Message us on Telegram"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:107
+msgid "Our Vision"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:109
+msgid ""
+"We started our dreams in Tehran but this is just the beginning. We want to "
+"expand our teaching to other cities and the world so anyone passionate about "
+"urban planning can design a smart, green city."
+msgstr ""
+
+#: .\templates\pages\aboutus.html:114
+msgid "Why Us?"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:116
+msgid ""
+"We don't just teach — we practice what we teach. With Tisa's teaching "
+"experience and Taher's data-driven approach, our materials are practical, up-"
+"to-date and built to help you succeed."
+msgstr ""
+
+#: .\templates\pages\aboutus.html:119
+msgid "Practical, hands-on lessons"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:120
+msgid "Clear explanations and examples"
+msgstr ""
+
+#: .\templates\pages\aboutus.html:121
+msgid "Support & community"
+msgstr ""
+
+#: .\templates\pages\contactus.html:6 .\templates\pages\contactus.html:9
+msgid "Contact Us"
+msgstr ""
+
+#: .\templates\pages\contactus.html:18
+msgid "Contact Form"
+msgstr ""
+
+#: .\templates\pages\contactus.html:26
+msgid "Send Message"
+msgstr ""
+
+#: .\templates\pages\contactus.html:39
+msgid "Contact Information"
+msgstr ""
+
+#: .\templates\pages\contactus.html:53
+msgid "Address"
+msgstr ""
+
+#: .\templates\pages\contactus.html:54
+msgid "Tehran, Iran"
+msgstr ""
+
+#: .\templates\pages\contactus.html:61
+msgid "Social"
+msgstr ""

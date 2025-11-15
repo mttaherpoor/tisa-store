@@ -1,5 +1,128 @@
-{% extends '_base.html' %}
+{% extends "_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}{% trans "About Us" %}{% endblock %}
 
 {% block content %}
-    <h1>About Us</h1>
+{% translate "About Us" as header_name %}
+{% include 'topheader.html' with header_name=header_name %}
+
+<!-- Our Story -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <h2 class="fw-bold">{% trans "Our Story" %}</h2>
+        <p class="text-muted">
+          {% trans "We are Tisa and Taher — two companions in the world of urban planning who met in an enthusiastic group called GIS Talk. A question about machine learning turned into a collaboration full of ideas. We combine urban planning with technology to create not only beautiful cities but smart, green and meaningful places." %}
+        </p>
+        <p class="text-muted">
+          {% trans "With notes, practical videos and step-by-step courses, we help learners around the world draw the map of the cities of the future." %}
+        </p>
+
+        <div class="mt-3">
+          <a href="{{ free_resources_url }}" class="btn btn-outline-primary me-2">{% trans "See Free Resources" %}</a>
+          <a href="{% url 'contactus' %}" class="btn btn-outline-secondary">{% trans "Get in Touch" %}</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <blockquote class="blockquote p-4 rounded shadow-sm bg-white">
+          <p class="mb-2 fst-italic">{% trans "“We started our dreams in Tehran, and this is only the beginning — we want to bring practical urban education to more cities.”" %}</p>
+          <footer class="blockquote-footer">{% trans "Tisa & Taher" %}</footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">{% trans "Meet Our Team" %}</h2>
+      <p class="text-muted">{% trans "A small team with a big passion for smart and sustainable cities." %}</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Tisa -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="row g-0 align-items-center">
+            <div class="col-4 text-center p-3">
+              <img src="{% static 'images/team/tisa.webp' %}" alt="Tisa" class="rounded-circle shadow-sm" style="width:110px; height:110px; object-fit:cover;">
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title mb-1">Tisa</h5>
+                <p class="small text-muted mb-2">{% trans "Geography & Urban Planning Specialist | Lover of Smart Cities" %}</p>
+                <p class="mb-0 text-muted">
+                  {% trans "Tisa taught at university for eight years and educated over 2,500 students. She creates video lessons and practical content on GIS, Python and machine learning." %}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Taher -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="row g-0 align-items-center">
+            <div class="col-4 text-center p-3">
+              <img src="{% static 'images/team/taher.webp' %}" alt="Taher" class="rounded-circle shadow-sm" style="width:110px; height:110px; object-fit:cover;">
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title mb-1">Taher</h5>
+                <p class="small text-muted mb-2">{% trans "Urban Management Specialist | Data & Technology Wizard" %}</p>
+                <p class="mb-0 text-muted">
+                  {% trans "Taher focuses on data analysis, platform development and educational content production. He supports the technical backend and data workflows." %}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA below team -->
+    <div class="text-center mt-4">
+      <a href="{% url 'product_list' %}" class="btn btn-lg btn-success me-2">
+        {% trans "Would you like to join us? Click here!" %}
+      </a>
+      <a href="https://t.me/tisavista" target="_blank" class="btn btn-outline-primary">
+        <i class="bi bi-telegram me-1"></i> {% trans "Message us on Telegram" %}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Vision & Why Us -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <h3 class="fw-bold">{% trans "Our Vision" %}</h3>
+        <p class="text-muted">
+          {% trans "We started our dreams in Tehran but this is just the beginning. We want to expand our teaching to other cities and the world so anyone passionate about urban planning can design a smart, green city." %}
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <h3 class="fw-bold">{% trans "Why Us?" %}</h3>
+        <p class="text-muted">
+          {% trans "We don't just teach — we practice what we teach. With Tisa's teaching experience and Taher's data-driven approach, our materials are practical, up-to-date and built to help you succeed." %}
+        </p>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>{% trans "Practical, hands-on lessons" %}</li>
+          <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>{% trans "Clear explanations and examples" %}</li>
+          <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>{% trans "Support & community" %}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

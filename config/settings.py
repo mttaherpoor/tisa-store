@@ -33,7 +33,13 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "87.248.130.21", "django-app"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "django-app","tisavista.ir","www.tisavista.ir","https://tisavista.ir"]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://tisavista.ir",
+    "https://www.tisavista.ir",
+    # "https://87.248.130.21",  # اگر از IP مستقیم استفاده می‌کنید
+]
 
 # Application definition
 
@@ -93,6 +99,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'django.template.context_processors.i18n',
                 # Custom Context Processors
                 "cart.context_processors.cart",
                 'blog.context_processors.free_resources_url',
@@ -233,7 +240,8 @@ customColorPalette = [
 CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
 CKEDITOR_5_UPLOAD_PATH = "uploads/"
 CKEDITOR_5_ALLOW_FILE_TYPES = True
-CKEDITOR_5_UPLOAD_FILE_TYPES = ['jpeg', 'pdf', 'png']
+CKEDITOR_5_UPLOAD_FILE_TYPES = ['jpeg', 'pdf', 'png', 'webp']
+
 CKEDITOR_5_CONFIGS = {
     "default": {
         "language": "fa",

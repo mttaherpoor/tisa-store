@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-15 17:23+0430\n"
+"POT-Creation-Date: 2025-11-16 02:38+0330\n"
 "PO-Revision-Date: 2022-06-15 17:24+0430\n"
 "Last-Translator: bbbb cccc <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -46,33 +47,73 @@ msgstr "آدرس کامل"
 msgid "Order Notes"
 msgstr "یادداشت سفارش"
 
-#: .\models.py:17
+#: .\models.py:21
 msgid "Created"
 msgstr "تاریخ ایجاد"
 
-#: .\models.py:18
+#: .\models.py:22
 msgid "Modified"
 msgstr "تاریخ تغییر"
 
-#: .\templates\orders\order_create.html:12
-msgid "Order"
+#: .\templates\orders\order_create.html:8
+msgid "Checkout"
+msgstr ""
+
+#: .\templates\orders\order_create.html:14
+msgid "Order Summary"
+msgstr ""
+
+#: .\templates\orders\order_create.html:22
+#, fuzzy
+#| msgid "Order Notes"
+msgid "Order Details"
+msgstr "یادداشت سفارش"
+
+#: .\templates\orders\order_create.html:35
+#, fuzzy
+#| msgid "Order"
+msgid "Place Order"
 msgstr "ثبت سفارش"
 
-#: .\templates\orders\order_create.html:79
-msgid "Submit"
-msgstr "ارسال"
+#: .\templates\orders\order_create.html:44
+#, fuzzy
+#| msgid "Order"
+msgid "Your Order"
+msgstr "ثبت سفارش"
 
-#: .\templates\orders\order_create.html:103
-#: .\templates\orders\order_create.html:111
+#: .\templates\orders\order_create.html:50
+msgid "Product"
+msgstr ""
+
+#: .\templates\orders\order_create.html:51
+msgid "Price"
+msgstr ""
+
+#: .\templates\orders\order_create.html:62
+#: .\templates\orders\order_create.html:71
 msgid "$"
 msgstr "تومان"
+
+#: .\templates\orders\order_create.html:69
+msgid "Total"
+msgstr ""
+
+#: .\templates\orders\order_create.html:80
+msgid "Payment Method"
+msgstr ""
+
+#: .\templates\orders\order_create.html:84
+msgid "Online Gateway (Zarinpal)"
+msgstr ""
 
 #: .\views.py:16
 msgid "You can not proceed to checkout page because your cart is empty."
 msgstr ""
-"شما نمی‌توانید به صفحه سفارش بروید چون سبد خرید شما خالی است. ابتدا محصولی "
-"را به سبد خرید اضافه کنید."
+"شما نمی‌توانید به صفحه سفارش بروید چون سبد خرید شما خالی است. ابتدا محصولی را "
+"به سبد خرید اضافه کنید."
 
-#: .\views.py:42
-msgid "Your order has successfully placed."
-msgstr "سفارش شما با موفقیت ثبت شد."
+#~ msgid "Submit"
+#~ msgstr "ارسال"
+
+#~ msgid "Your order has successfully placed."
+#~ msgstr "سفارش شما با موفقیت ثبت شد."

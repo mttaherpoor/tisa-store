@@ -13,16 +13,12 @@
 
 {% block content %}
 
-{% comment %} <!-- بنر بالای صفحه -->
-<section class="py-4 bg-light">
-    <div class="container text-center">
-    <h5 class="mb-3">{% trans "Post Details" %}</h5>
-    <a href="{% url 'post-list' %}" class="btn btn-secondary">
-        {% trans "Back to All Posts" %}
-    </a>
-    </div>
-</section>
-{% endcomment %}
+<!-- بنر بالای صفحه -->
+<a href="{% url 'post-list' %}" class="btn btn-secondary">
+    <i class="fa fa-arrow-left me-2"></i>
+    {% trans "Back to All Posts" %}
+  </a>
+  
 <!-- کارت پست -->
 <section class="py-5" id="post-detail">
     <div class="container">

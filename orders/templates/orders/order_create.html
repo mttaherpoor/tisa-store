@@ -1,102 +1,94 @@
-{% extends '_base.html' %}
+{% extends "_base.html" %}
 
+{% load persian_translation_tags %}
 {% load i18n %}
 {% load crispy_forms_tags %}
-{% load persian_translation_tags %}
 {% load humanize %}
 
-{% block content %}
-<div class="main-content-wrapper">
+{% block page_title %}{% trans "Checkout" %}{% endblock %}
 
-    {% translate 'Order' as header_name %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+
+    {% translate 'Order Summary' as header_name %}
     {% include 'topheader.html' with header_name=header_name %}
 
-    <div class="page-content-inner pb-5">
-        <div class="container">
-            <div class="row pt--50 pt-md--40 pt-sm--20"></div>
+    <div class="row g-5 mt-4">
 
-            <div class="row">
-                <!-- Checkout Form Start -->
-                <div class="col-lg-6">
-                    <div class="checkout-title mt--10">
-                        <h2>جزئیات سفارش</h2>
-                    </div>
+      <!-- Checkout Form -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm border-0 p-4">
+          <h4 class="fw-bold mb-4">{% trans "Order Details" %}</h4>
 
-                    <div class="checkout-form">
-                        <form method="POST" class="form form--checkout">
-                            {% csrf_token %}
-                            {% if form.errors %}
-                                <div class="alert alert-danger">
-                                    {{ form.errors }}
-                                </div>
-                            {% endif %}
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% if form.errors %}
+              <div class="alert alert-danger">
+                {{ form.errors }}
+              </div>
+            {% endif %}
 
-                            {# Crispy Forms will handle fields nicely #}
-                            {{ form|crispy }}
+            {{ form|crispy }}
 
-                            <button type="submit" class="btn btn-primary mt-3">
-                                {% translate 'Submit' %}
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Order Summary Start -->
-                <div class="col-xl-5 offset-xl-1 col-lg-6 mt-md--40">
-                    <div class="order-details">
-                        <div class="checkout-title mt--10">
-                            <h2>سفارش شما</h2>
-                        </div>
-
-                        <div class="table-content table-responsive mb--30">
-                            <table class="table order-table order-table-2">
-                                <thead>
-                                    <tr>
-                                        <th>محصول</th>
-                                        <th class="text-right">قیمت نهایی</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for item in cart %}
-                                    <tr>
-                                        <th>
-                                            {{ item.product_obj.title }}
-                                            <strong><span>&#10005;</span> {{ item.quantity|translate_number }}</strong>
-                                        </th>
-                                        <td class="text-right">
-                                            {{ item.product_obj.price|intcomma:False|translate_number }} {% translate '$' %}
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                                <tfoot>
-                                    <tr class="cart-subtotal">
-                                        <th>مجموع</th>
-                                        <td class="text-right">
-                                            {{ cart.get_total_price|intcomma:False|translate_number }} {% translate '$' %}
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-
-                        <div class="checkout-payment">
-                            <h2 class="py-3">روش پرداخت</h2>
-                            <div class="payment-group mb--10">
-                                <div class="payment-radio">
-                                    <input type="radio" value="bank" name="payment-method" id="bank" checked>
-                                    <label class="payment-label" for="bank">درگاه آنلاین زرین پال</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Order Summary End -->
-
-            </div>
+            <button type="submit" class="btn btn-primary mt-3 w-100">
+              <i class="bi bi-check-circle me-1"></i> {% trans "Place Order" %}
+            </button>
+          </form>
         </div>
-    </div>
-</div>
+      </div>
 
-{% comment %} {% include 'cart/cart_sidebar.html' %} {% endcomment %}
+      <!-- Order Summary -->
+      <div class="col-lg-6 col-xl-5 offset-xl-1">
+        <div class="card shadow-sm border-0 p-4">
+          <h4 class="fw-bold mb-4">{% trans "Your Order" %}</h4>
+
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>{% trans "Product" %}</th>
+                  <th class="text-end">{% trans "Price" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in cart %}
+                  <tr>
+                    <td>
+                      {{ item.product_obj.title }}
+                      <strong class="text-muted"> × {{ item.quantity |translate_number }}</strong>
+                    </td>
+                    <td class="text-end">
+                      {{ item.product_obj.price|intcomma:False|translate_number }} {% trans "$" %}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+              <tfoot>
+                <tr class="fw-bold border-top">
+                  <td>{% trans "Total" %}</td>
+                  <td class="text-end">
+                    {{ cart.get_total_price|intcomma:False|translate_number }} {% trans "$" %}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="mt-4">
+            <h5 class="fw-bold mb-3">{% trans "Payment Method" %}</h5>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="zarinpal" name="payment-method" value="zarinpal" checked>
+              <label class="form-check-label" for="zarinpal">
+                {% trans "Online Gateway (Zarinpal)" %}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 {% endblock %}

@@ -1,121 +1,133 @@
-{% extends '_base.html' %}
-
+{% extends "_base.html" %}
 {% load static %}
 {% load i18n %}
-{% load persian_translation_tags %}
 {% load humanize %}
+{% load persian_translation_tags %}
+
+{% block page_title %}{% trans "Cart" %}{% endblock %}
 
 {% block content %}
-
-{% translate 'Cart' as header_name %}
+{% translate "Cart" as header_name %}
 {% include 'topheader.html' with header_name=header_name %}
 
 <div class="main-content-wrapper py-5">
-    <div class="container">
-        <div class="row">
+  <div class="container">
+    <div class="row">
 
-            <!-- Cart Items -->
-            <div class="col-lg-8 mb-4 mb-lg-0">
-                {% if cart %}
-                <div class="card shadow-sm border-0">
-                    <div class="card-header bg-light">
-                        <h4 class="mb-0">سبد خرید شما</h4>
-                    </div>
-                    <div class="card-body p-0">
-                        <table class="table table-hover text-center mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>&nbsp;</th>
-                                    <th>عکس</th>
-                                    <th>نام محصول</th>
-                                    <th>قیمت</th>
-                                    <th>تعداد</th>
-                                    <th>مجموع</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in cart %}
-                                <tr>
-                                    <!-- Remove button -->
-                                    <td class="align-middle">
-                                        <a href="{% url 'cart:cart_remove' item.product_obj.id %}" class="text-danger">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
+      <!-- Cart Items -->
+      <div class="col-lg-8 mb-4 mb-lg-0">
+        {% if cart %}
+          <div class="card shadow-sm border-0">
+            <div class="card-header bg-light">
+              <h4 class="mb-0">{% trans "Your Cart" %}</h4>
+            </div>
 
-                                    <!-- Product image -->
-                                    <td class="align-middle">
-                                        <img src="{{ item.product_obj.image.url }}" class="img-fluid rounded" style="width:80px; height:80px;" alt="{{ item.product_obj.title }}">
-                                    </td>
-
-                                    <!-- Product title -->
-                                    <td class="align-middle">
-                                        <a href="{{ item.product_obj.get_absolute_url }}" class="text-decoration-none">
-                                            {{ item.product_obj.title }}
-                                        </a>
-                                    </td>
-
-                                    <!-- Price -->
-                                    <td class="align-middle">
-                                        {{ item.product_obj.price|intcomma:False|translate_number }} {% trans '$' %}
-                                    </td>
-
-                                    <!-- Fixed quantity = 1 -->
-                                    <td class="align-middle">
-                                        <span class="d-inline-block px-2 py-1 border rounded text-center" style="width:50px;">
-                                            1
-                                        </span>
-                                    </td>
-
-                                    <!-- Total price -->
-                                    <td class="align-middle">
-                                        {{ item.total_price|intcomma:False|translate_number }} {% trans '$' %}
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Clear cart button -->
-                    {% if not cart.is_empty %}
-                    <div class="card-footer text-end bg-white">
-                        <form action="{% url 'cart:cart_clear' %}" method="POST" class="d-inline">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover text-center mb-0 align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th scope="col">&nbsp;</th>
+                      <th scope="col">{% trans "Image" %}</th>
+                      <th scope="col">{% trans "Product" %}</th>
+                      <th scope="col">{% trans "Price" %}</th>
+                      <th scope="col">{% trans "Qty" %}</th>
+                      <th scope="col">{% trans "Total" %}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in cart %}
+                      <tr>
+                        <!-- Remove button -->
+                        <td class="align-middle">
+                          <form action="{% url 'cart:cart_remove' item.product_obj.id %}" method="post" class="d-inline">
                             {% csrf_token %}
-                            <button class="btn btn-outline-danger btn-sm">خالی کردن سبد</button>
-                        </form>
-                    </div>
-                    {% endif %}
-                </div>
-                {% else %}
-                <div class="text-center py-5">
-                    <h5>سبد خرید خالی است!</h5>
-                    <p>لطفاً محصولی به سبد خرید اضافه کنید.</p>
-                    <a href="{% url 'product_list' %}" class="btn btn-primary btn-sm">خرید محصولات</a>
-                </div>
-                {% endif %}
+                            <button type="submit" class="btn btn-link text-danger p-0" aria-label="{% trans 'Remove item' %}">
+                              <i class="bi bi-x-lg"></i>
+                            </button>
+                          </form>
+                        </td>
+
+                        <!-- Product image -->
+                        <td class="align-middle">
+                          {% if item.product_obj.image %}
+                            <img src="{{ item.product_obj.image.url }}" class="img-fluid rounded" style="width:80px; height:80px; object-fit:cover;" alt="{{ item.product_obj.title }}">
+                          {% else %}
+                            <img src="{% static 'images/placeholder-80.png' %}" class="img-fluid rounded" style="width:80px; height:80px; object-fit:cover;" alt="{% trans 'No image' %}">
+                          {% endif %}
+                        </td>
+
+                        <!-- Product title -->
+                        <td class="align-middle text-start">
+                          <a href="{{ item.product_obj.get_absolute_url }}" class="text-decoration-none">
+                            {{ item.product_obj.title }}
+                          </a>
+                        </td>
+
+                        <!-- Price -->
+                        <td class="align-middle">
+                          {{ item.product_obj.price|intcomma:False|translate_number | default:"0" }} {% trans "$" %}
+                        </td>
+
+                        <!-- Quantity (fixed = 1) -->
+                        <td class="align-middle">
+                          <span class="d-inline-block px-2 py-1 border rounded text-center" style="width:50px;">
+                            1
+                          </span>
+                        </td>
+
+                        <!-- Total price -->
+                        <td class="align-middle">
+                          {{ item.total_price|intcomma:False| translate_number| default:"0" }} {% trans "$" %}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            <!-- Cart Summary -->
-            <div class="col-lg-4">
-                <div class="card shadow-sm border-0">
-                    <div class="card-header bg-light">
-                        <h5 class="mb-0">جمع کل</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-3">
-                            <span>جمع کل:</span>
-                            <span>{{ cart.get_total_price|intcomma:False|translate_number }} {% trans '$' %}</span>
-                        </div>
-                        <a href="{% url 'order_create' %}" class="btn btn-danger w-100">
-                            نهایی کردن خرید
-                        </a>
-                    </div>
-                </div>
+            <!-- Clear cart button -->
+            {% if not cart.is_empty %}
+              <div class="card-footer text-end bg-white">
+                <form action="{% url 'cart:cart_clear' %}" method="post" class="d-inline">
+                  {% csrf_token %}
+                  <button class="btn btn-outline-danger btn-sm">{% trans "Clear Cart" %}</button>
+                </form>
+              </div>
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="text-center py-5">
+            <h5 class="mb-2">{% trans "Your cart is empty" %}</h5>
+            <p class="text-muted mb-3">{% trans "Please add products to your cart." %}</p>
+            <a href="{% url 'product_list' %}" class="btn btn-primary btn-sm">{% trans "Browse Products" %}</a>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-light">
+            <h5 class="mb-0">{% trans "Summary" %}</h5>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+              <span>{% trans "Subtotal" %}:</span>
+              <span>{{ cart.get_total_price|intcomma:False|translate_number| default:"0" }} {% trans "$" %}</span>
             </div>
 
+            <div class="d-grid">
+              <a href="{% url 'order_create' %}" class="btn btn-danger w-100">
+                {% trans "Proceed to Checkout" %}
+              </a>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
+    </div>
+  </div>
+</div>
 {% endblock %}

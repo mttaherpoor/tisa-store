@@ -1,29 +1,38 @@
-{% extends '_base.html' %}
-{% load i18n%}
+{% extends "_base.html" %}
+{% load i18n %}
 
-{% block page_title %}
-    Logout
-{% endblock %}
+{% block page_title %}{% trans "Logout" %}{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
+<section class="py-5">
+  <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm rounded text-center">
-                <div class="card-header bg-warning text-dark">
-                    <h4>{% trans "Logout" %}</h4>
-                </div>
-                <div class="card-body">
-                    <p class="lead">{% trans "Are you sure you want to log out?" %}</p>
-                    <form method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">{% trans "Yes, log out" %}</button>
-                    </form>
-                </div>
-                <div class="card-footer text-muted">
-                    <a href="{% url 'home' %}" class="text-decoration-none">{% trans "Return to home" %}</a>
-                </div>
-            </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm rounded text-center border-0">
+          <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0 fw-bold">
+              <i class="bi bi-box-arrow-right me-1"></i> {% trans "Logout" %}
+            </h4>
+          </div>
+
+          <div class="card-body">
+            <p class="lead mb-4">{% trans "Are you sure you want to log out?" %}</p>
+            <form method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger px-4">
+                <i class="bi bi-check-circle me-1"></i> {% trans "Yes, log out" %}
+              </button>
+            </form>
+          </div>
+
+          <div class="card-footer bg-light text-muted">
+            <a href="{% url 'home' %}" class="text-decoration-none">
+              <i class="bi bi-house-door me-1"></i> {% trans "Return to Home" %}
+            </a>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</section>
 {% endblock %}

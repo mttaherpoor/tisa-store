@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-29 12:32+0330\n"
+"POT-Creation-Date: 2025-11-16 02:39+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,33 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\_base.html:29
+msgid "Skip to content"
+msgstr ""
+
+#: .\_base.html:44
+msgid "Build the Cities of the Future with Us! 🌍"
+msgstr ""
+
+#: .\_base.html:45
+msgid ""
+"Practical GIS, AutoCAD Map, urban planning, and modern city technologies for "
+"designing smart and sustainable cities."
+msgstr ""
+
+#: .\_base.html:46
+msgid "See Free Resources! 🚀"
+msgstr ""
+
+#: .\_base.html:57
+msgid "Stay Updated with the Latest Urban Planning Tutorials!"
+msgstr ""
+
+#: .\_base.html:75
+msgid "Follow us!"
+msgstr ""
+
 #: .\account\email\email_confirmation_message.txt:5
 #, python-format
 msgid ""
@@ -33,104 +60,328 @@ msgstr ""
 msgid "Please confirm email"
 msgstr ""
 
-#: .\account\email_confirm.html:6 .\account\email_confirm.html:9
+#: .\account\email_confirm.html:4 .\account\email_confirm.html:12
 msgid "Confirm E-mail Address"
 msgstr ""
 
-#: .\account\email_confirm.html:15
+#: .\account\email_confirm.html:17
 #, python-format
 msgid ""
-"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
-"address for user %(user_display)s."
-msgstr ""
-
-#: .\account\email_confirm.html:19
-msgid "Confirm"
+"\n"
+"                Please confirm that <a href=\"mailto:%(email)s\">%(email)s</"
+"a> is an e-mail address for user %(user)s.\n"
+"              "
 msgstr ""
 
 #: .\account\email_confirm.html:26
+msgid "Confirm"
+msgstr ""
+
+#: .\account\email_confirm.html:29
+msgid "Manage e-mail addresses"
+msgstr ""
+
+#: .\account\email_confirm.html:37
 #, python-format
 msgid ""
-"This e-mail confirmation link expired or is invalid. Please <a "
-"href=\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+"\n"
+"                This e-mail confirmation link expired or is invalid. Please "
+"<a href=\"%(email_url)s\">issue a new e-mail confirmation request</a>.\n"
+"              "
 msgstr ""
 
-#: .\account\login.html:15
-msgid "Login to account"
-msgstr ""
-
-#: .\account\login.html:22 .\header.html:41
+#: .\account\login.html:5 .\account\login.html:24 .\header.html:117
+#: .\header.html:119
 msgid "Login"
 msgstr ""
 
-#: .\account\logout.html:13 .\header.html:30
+#: .\account\login.html:14
+msgid "Login to your account"
+msgstr ""
+
+#: .\account\login.html:32
+msgid "Don't have an account?"
+msgstr ""
+
+#: .\account\login.html:33 .\header.html:121 .\header.html:123
+msgid "Sign up"
+msgstr ""
+
+#: .\account\logout.html:4 .\account\logout.html:14 .\header.html:110
 msgid "Logout"
 msgstr ""
 
-#: .\account\logout.html:16
+#: .\account\logout.html:19
 msgid "Are you sure you want to log out?"
 msgstr ""
 
-#: .\account\logout.html:19
+#: .\account\logout.html:23
 msgid "Yes, log out"
 msgstr ""
 
-#: .\account\logout.html:23
-msgid "Return to home"
+#: .\account\logout.html:30
+msgid "Return to Home"
 msgstr ""
 
-#: .\account\signup.html:15
+#: .\account\password_reset.html:7 .\account\password_reset.html:12
+msgid "Password Reset"
+msgstr ""
+
+#: .\account\password_reset.html:20
+msgid ""
+"If you forgot your password, enter your email address. Instructions to reset "
+"your password will be sent to you via email."
+msgstr ""
+
+#: .\account\password_reset.html:36 .\account\password_reset_done.html:25
+msgid "Back to Login"
+msgstr ""
+
+#: .\account\password_reset.html:38
+msgid "Send Reset Email"
+msgstr ""
+
+#: .\account\password_reset.html:44
+msgid ""
+"If you encounter any issues resetting your password, please contact support."
+msgstr ""
+
+#: .\account\password_reset_done.html:5
+msgid "Reset Email Sent"
+msgstr ""
+
+#: .\account\password_reset_done.html:10
+msgid "Password Reset Email Sent"
+msgstr ""
+
+#: .\account\password_reset_done.html:18
+msgid ""
+"\n"
+"      We have sent an email containing instructions to reset your password. "
+"Please also check your spam folder. \n"
+"      If you did not receive the email, check again after a few minutes or "
+"contact support.\n"
+"    "
+msgstr ""
+
+#: .\account\signup.html:5 .\account\signup.html:25
 msgid "Sign Up"
 msgstr ""
 
-#: .\account\signup.html:22
-msgid "Create Account"
+#: .\account\signup.html:15
+msgid "Create an Account"
 msgstr ""
 
-#: .\account\signup.html:27
+#: .\account\signup.html:33
 msgid "Already have an account?"
 msgstr ""
 
-#: .\account\signup.html:27
-msgid "Sign in"
+#: .\account\signup.html:35
+msgid "Sign in here"
 msgstr ""
 
-#: .\header.html:11
-msgid "Welcome"
+#: .\footer.html:9 .\footer.html:23 .\header.html:54
+msgid "About Us"
 msgstr ""
 
-#: .\header.html:20
-msgid "home"
+#: .\footer.html:11
+msgid ""
+"We are a team committed to providing high-quality and practical education in "
+"urban planning and modern city technologies."
 msgstr ""
 
-#: .\header.html:21
-msgid "store"
+#: .\footer.html:17
+msgid "Quick Links"
 msgstr ""
 
-#: .\header.html:22
-msgid "free resources"
+#: .\footer.html:19 .\header.html:25 .\home.html:8 .\topheader.html:13
+msgid "Home"
 msgstr ""
 
-#: .\header.html:23
-msgid "blog"
+#: .\footer.html:20 .\header.html:33
+msgid "Shop"
 msgstr ""
 
-#: .\header.html:24
-msgid "startup ideas"
+#: .\footer.html:21 .\header.html:40
+msgid "Free Resources"
 msgstr ""
 
-#: .\header.html:25
-msgid "About us"
+#: .\footer.html:22 .\header.html:47
+msgid "Blog"
 msgstr ""
 
-#: .\header.html:26
-msgid "contact with us"
+#: .\footer.html:24 .\footer.html:30 .\header.html:61 .\home.html:218
+msgid "Contact Us"
 msgstr ""
 
-#: .\header.html:35
+#: .\footer.html:32
+msgid "Email"
+msgstr ""
+
+#: .\footer.html:55
+msgid "All rights reserved for"
+msgstr ""
+
+#: .\footer.html:55
+msgid "Future Cities"
+msgstr ""
+
+#: .\footer.html:56
+msgid "Designed and developed with ❤️ by the"
+msgstr ""
+
+#: .\footer.html:56
+msgid "Tisa & Taher team"
+msgstr ""
+
+#: .\header.html:5
+msgid "Main navigation"
+msgstr ""
+
+#: .\header.html:14
+msgid "Toggle navigation"
+msgstr ""
+
+#: .\header.html:71
+msgid "Search in shop"
+msgstr ""
+
+#: .\header.html:73
+msgid "Search products..."
+msgstr ""
+
+#: .\header.html:73 .\header.html:75
+msgid "Search"
+msgstr ""
+
+#: .\header.html:82
+msgid "Shopping Cart"
+msgstr ""
+
+#: .\header.html:105
 msgid "Profile"
 msgstr ""
 
-#: .\header.html:46
-msgid "Signup"
+#: .\header.html:106
+msgid "Orders"
+msgstr ""
+
+#: .\home.html:86
+msgid "Hero: building smart cities"
+msgstr ""
+
+#: .\home.html:89
+msgid "Learn, Create, and Build Smart Cities Together!"
+msgstr ""
+
+#: .\home.html:92
+msgid ""
+"Practical training in GIS, Python, Machine Learning, and Smart Urban "
+"Planning — designed for city makers of the future."
+msgstr ""
+
+#: .\home.html:97
+msgid "Start Learning"
+msgstr ""
+
+#: .\home.html:100
+msgid "Get Free Resources"
+msgstr ""
+
+#: .\home.html:106
+msgid ""
+"Join our community — hands-on courses, project-based learning and real urban "
+"datasets."
+msgstr ""
+
+#: .\home.html:114
+msgid "What We Offer"
+msgstr ""
+
+#: .\home.html:119
+msgid "GIS & Urban Analytics"
+msgstr ""
+
+#: .\home.html:120
+msgid ""
+"Learn spatial analysis, mapping, and data visualization with QGIS, ArcGIS, "
+"and Python."
+msgstr ""
+
+#: .\home.html:126
+msgid "Machine Learning for Cities"
+msgstr ""
+
+#: .\home.html:127
+msgid ""
+"Use AI and ML to predict urban heat, optimize transport, and design smarter "
+"infrastructure."
+msgstr ""
+
+#: .\home.html:133
+msgid "Smart & Sustainable Cities"
+msgstr ""
+
+#: .\home.html:134
+msgid ""
+"Explore digital twins and eco-city models — create data-driven, greener "
+"futures."
+msgstr ""
+
+#: .\home.html:145
+msgid "Popular Courses"
+msgstr ""
+
+#: .\home.html:146
+msgid "See all"
+msgstr ""
+
+#: .\home.html:157
+msgid "No image"
+msgstr ""
+
+#: .\home.html:164
+msgid "$"
+msgstr ""
+
+#: .\home.html:165
+msgid "View"
+msgstr ""
+
+#: .\home.html:172
+msgid "No courses available yet — stay tuned!"
+msgstr ""
+
+#: .\home.html:183
+msgid "Latest from the Blog"
+msgstr ""
+
+#: .\home.html:184
+msgid "Read all posts"
+msgstr ""
+
+#: .\home.html:198
+msgid "Read more"
+msgstr ""
+
+#: .\home.html:204
+msgid "No blog posts yet."
+msgstr ""
+
+#: .\home.html:214
+msgid "Ready to Build the Future?"
+msgstr ""
+
+#: .\home.html:215
+msgid ""
+"Join thousands of learners shaping smart and sustainable cities with "
+"practical projects."
+msgstr ""
+
+#: .\home.html:217
+msgid "Meet the Team"
+msgstr ""
+
+#: .\home.html:226
+msgid "Frequently Asked Questions"
 msgstr ""

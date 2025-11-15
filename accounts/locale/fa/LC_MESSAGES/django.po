@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-29 12:32+0330\n"
+"POT-Creation-Date: 2025-11-16 02:37+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,16 +17,194 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: .\models.py:10
+
+#: .\models.py:11
 msgid "Profile Image"
 msgstr ""
 
-#: .\templates\accounts\profile.html:30 .\templates\accounts\profile.html:55
-msgid "exit"
+#: .\templates\accounts\profile.html:25
+msgid "Welcome,"
 msgstr ""
 
-#: .\templates\accounts\profile.html:185
+#: .\templates\accounts\profile.html:26
+msgid "Manage orders, profile, notifications and more."
+msgstr ""
+
+#: .\templates\accounts\profile.html:29 .\templates\accounts\profile.html:54
+msgid "Logout"
+msgstr ""
+
+#: .\templates\accounts\profile.html:47
+msgid "Dashboard"
+msgstr ""
+
+#: .\templates\accounts\profile.html:48
+msgid "Profile Info"
+msgstr ""
+
+#: .\templates\accounts\profile.html:49
+msgid "Orders"
+msgstr ""
+
+#: .\templates\accounts\profile.html:50 .\templates\accounts\profile.html:160
+msgid "Wishlist"
+msgstr ""
+
+#: .\templates\accounts\profile.html:51
+msgid "Security"
+msgstr ""
+
+#: .\templates\accounts\profile.html:52
+msgid "Notifications"
+msgstr ""
+
+#: .\templates\accounts\profile.html:53
+msgid "Support"
+msgstr ""
+
+#: .\templates\accounts\profile.html:68
+msgid "Recent Orders"
+msgstr ""
+
+#: .\templates\accounts\profile.html:77 .\templates\accounts\profile.html:142
+msgid "Paid"
+msgstr ""
+
+#: .\templates\accounts\profile.html:81 .\templates\accounts\profile.html:149
+msgid "No orders found."
+msgstr ""
+
+#: .\templates\accounts\profile.html:84
+msgid "View All Orders"
+msgstr ""
+
+#: .\templates\accounts\profile.html:106
+msgid "Personal Information"
+msgstr ""
+
+#: .\templates\accounts\profile.html:111
+msgid "Save Changes"
+msgstr ""
+
+#: .\templates\accounts\profile.html:112
+msgid "Reset"
+msgstr ""
+
+#: .\templates\accounts\profile.html:121
+msgid "Order History"
+msgstr ""
+
+#: .\templates\accounts\profile.html:126
+msgid "ID"
+msgstr ""
+
+#: .\templates\accounts\profile.html:127
+msgid "Product"
+msgstr ""
+
+#: .\templates\accounts\profile.html:128
+msgid "Date"
+msgstr ""
+
+#: .\templates\accounts\profile.html:129
+msgid "Price"
+msgstr ""
+
+#: .\templates\accounts\profile.html:130
+msgid "Status"
+msgstr ""
+
+#: .\templates\accounts\profile.html:131 .\templates\accounts\profile.html:144
+#: .\templates\accounts\video_files_list.html:27
+msgid "Download"
+msgstr ""
+
+#: .\templates\accounts\profile.html:141 .\templates\accounts\profile.html:173
 msgid "$"
+msgstr ""
+
+#: .\templates\accounts\profile.html:177
+msgid "Add to Cart"
+msgstr ""
+
+#: .\templates\accounts\profile.html:179
+msgid "Remove"
+msgstr ""
+
+#: .\templates\accounts\profile.html:184
+msgid "Your wishlist is empty."
+msgstr ""
+
+#: .\templates\accounts\profile.html:188
+msgid "Please"
+msgstr ""
+
+#: .\templates\accounts\profile.html:188
+msgid "log in"
+msgstr ""
+
+#: .\templates\accounts\profile.html:188
+msgid "to view your wishlist."
+msgstr ""
+
+#: .\templates\accounts\profile.html:198
+msgid "Security Settings"
+msgstr ""
+
+#: .\templates\accounts\profile.html:203
+msgid "Update Password"
+msgstr ""
+
+#: .\templates\accounts\profile.html:235
+msgid "Support & Tickets"
+msgstr ""
+
+#: .\templates\accounts\profile.html:239
+msgid "Create New Ticket"
+msgstr ""
+
+#: .\templates\accounts\profile.html:244
+msgid "Submit"
+msgstr ""
+
+#: .\templates\accounts\profile.html:249
+msgid "Recent Tickets"
+msgstr ""
+
+#: .\templates\accounts\profile.html:264
+msgid "View"
+msgstr ""
+
+#: .\templates\accounts\profile.html:271
+msgid "Your Message:"
+msgstr ""
+
+#: .\templates\accounts\profile.html:274
+msgid "Admin Response:"
+msgstr ""
+
+#: .\templates\accounts\profile.html:276
+msgid "No response yet."
+msgstr ""
+
+#: .\templates\accounts\profile.html:283
+msgid "No tickets submitted yet."
+msgstr ""
+
+#: .\templates\accounts\video_files_list.html:5
+msgid "Videos"
+msgstr ""
+
+#: .\templates\accounts\video_files_list.html:12
+msgid "Product Videos"
+msgstr ""
+
+#: .\templates\accounts\video_files_list.html:14
+msgid "Back to Product"
+msgstr ""
+
+#: .\templates\accounts\video_files_list.html:34
+msgid "No videos are available for this product."
 msgstr ""
 
 #: .\validators.py:19 .\validators.py:24

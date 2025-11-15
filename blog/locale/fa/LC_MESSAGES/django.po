@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-29 12:31+0330\n"
+"POT-Creation-Date: 2025-11-16 02:37+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,78 +17,141 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: .\models.py:25
 msgid "Post description"
 msgstr ""
 
-#: .\models.py:57
+#: .\models.py:58
 msgid "Very Bad"
 msgstr ""
 
-#: .\models.py:58
+#: .\models.py:59
 msgid "Bad"
 msgstr ""
 
-#: .\models.py:59
+#: .\models.py:60
 msgid "Normal"
 msgstr ""
 
-#: .\models.py:60
+#: .\models.py:61
 msgid "Good"
 msgstr ""
 
-#: .\models.py:61
+#: .\models.py:62
 msgid "Perfect"
 msgstr ""
 
-#: .\models.py:66
+#: .\models.py:67
 msgid "Comment Text"
 msgstr ""
 
-#: .\models.py:67
+#: .\models.py:68
 msgid "What is your score?"
 msgstr ""
 
-#: .\templates\blog\post_create.html:18
+#: .\templates\blog\category_create.html:5
+#: .\templates\blog\category_create.html:15
+msgid "Add New Category"
+msgstr ""
+
+#: .\templates\blog\category_create.html:29
+msgid "Save Category"
+msgstr ""
+
+#: .\templates\blog\post_create.html:5 .\templates\blog\post_create.html:15
 msgid "Add New Post"
 msgstr ""
 
-#: .\templates\blog\post_create.html:20
+#: .\templates\blog\post_create.html:18
 msgid "Add Category"
 msgstr ""
 
-#: .\templates\blog\post_create.html:30 .\templates\blog\post_detail.html:79
+#: .\templates\blog\post_create.html:28
+msgid "Publish Post"
+msgstr ""
+
+#: .\templates\blog\post_delete.html:4 .\templates\blog\post_delete.html:13
+msgid "Delete Post"
+msgstr ""
+
+#: .\templates\blog\post_delete.html:16
+#, python-format
+msgid "Are you sure you want to permanently delete the post \"%(title)s\"?"
+msgstr ""
+
+#: .\templates\blog\post_delete.html:22
+msgid "Yes, Delete"
+msgstr ""
+
+#: .\templates\blog\post_delete.html:25
+msgid "Cancel"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:19
+msgid "Back to All Posts"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:37
+msgid "By"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:67
+msgid "Comments"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:97
+msgid "No comments yet."
+msgstr ""
+
+#: .\templates\blog\post_detail.html:108
+msgid "Leave a Comment"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:112
 msgid "Submit"
 msgstr ""
 
-#: .\templates\blog\post_detail.html:84
+#: .\templates\blog\post_detail.html:116
 msgid "To write your comment please "
 msgstr ""
 
-#: .\templates\blog\post_detail.html:85
+#: .\templates\blog\post_detail.html:117
 msgid "Login"
+msgstr ""
+
+#: .\templates\blog\post_list.html:7
+msgid "Post List"
 msgstr ""
 
 #: .\templates\blog\post_list.html:16
 msgid "Create New Post"
 msgstr ""
 
-#: .\templates\blog\post_list.html:24
-msgid "Categories posts"
+#: .\templates\blog\post_list.html:23
+msgid "Categories"
 msgstr ""
 
-#: .\templates\blog\post_list.html:33
+#: .\templates\blog\post_list.html:31
 msgid "All"
 msgstr ""
 
-#: .\templates\blog\post_list.html:54
+#: .\templates\blog\post_list.html:53
 msgid "Read More"
 msgstr ""
 
-#: .\templates\blog\post_list.html:63
+#: .\templates\blog\post_list.html:62
 msgid "No posts available yet."
 msgstr ""
 
-#: .\views.py:132
+#: .\templates\blog\post_list.html:74 .\templates\blog\post_list.html:75
+msgid "Previous"
+msgstr ""
+
+#: .\templates\blog\post_list.html:86 .\templates\blog\post_list.html:87
+msgid "Next"
+msgstr ""
+
+#: .\views.py:134
 msgid "Comment successfully created"
 msgstr ""
