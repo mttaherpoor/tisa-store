@@ -5,339 +5,307 @@
 {% load i18n %}
 {% load persian_translation_tags %}
 {% load jalali_tags %}
-{% load humanize %} 
+{% load humanize %}
 {% load crispy_forms_tags %}
 
-
-{% block page_title %} user profile{% endblock %}
-
+{% block page_title %}User Profile{% endblock %}
 
 {% block content %}
 
-<!-- بنر پروفایل -->
-<section class="hero-gradient profile-hero">
-  <div class="container d-flex align-items-center">
+<!-- Profile Header -->
+<section class="hero-gradient profile-hero py-4">
+  <div class="container d-flex align-items-center flex-wrap">
     {% if user.profile_image %}
-      <img src="{{ user.profile_image.url }}" alt="{{ user.username }}" class="avatar">
+      <img src="{{ user.profile_image.url }}" alt="{{ user.username }}" class="avatar me-3 rounded-circle shadow-sm" width="80" height="80">
     {% else %}
-      <img src="{% static 'images/default-avatar.png' %}" alt="{{ user.username }}" class="avatar">
+      <img src="{% static 'images/default-avatar.png' %}" alt="{{ user.username }}" class="avatar me-3 rounded-circle shadow-sm" width="80" height="80">
     {% endif %}
-
-    <div>
-      <h2 class="mb-1">سلام، {{ user.first_name|default:user.username }} 👋</h2>
-      <p class="small-muted mb-0">مدیریت سفارش‌ها، آدرس‌ها، امنیت و دسترسی به ایده‌ها و بلاگ</p>
-    </div>
-    <div class="ms-auto text-end">
-      <a href="#profile-info" data-bs-toggle="pill" class="btn btn-light btn-sm me-2">ویرایش پروفایل</a>
-      <a href="{% url 'account_logout' %}"  class="btn btn-danger btn-sm text-white fw-bold">{% trans "exit" %}</a>
+    <div class="d-flex align-items-center flex-wrap justify-content-between" style="gap: 2rem;">
+      <div>
+        <h2 class="mb-1">{% trans "Welcome," %} {{ user.first_name|default:user.username }}</h2>
+        <p class="text-muted small mb-0">{% trans "Manage orders, profile, notifications and more." %}</p>
+      </div>
+      <div class="mt-3 mt-md-0">
+        <a href="{% url 'account_logout' %}" class="btn btn-danger btn-sm">{% trans "Logout" %}</a>
+      </div>
     </div>
   </div>
 </section>
 
-  <!-- بدنه اصلی -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row g-4">
-        <!-- سایدبار -->
-        <aside class="col-lg-3 sidebar">
-          <div class="card card-rounded p-3">
-            <div class="d-flex align-items-center mb-3">
-                <h6 class="small-muted mb-0">{{user.email}}</h6>
-            </div>
-            <hr>
-            <nav class="nav flex-column">
-              <a class="nav-link active py-2" data-bs-toggle="pill" href="#dashboard">داشبورد</a>
-              <a class="nav-link py-2" data-bs-toggle="pill" href="#profile-info">اطلاعات شخصی</a>
-              <a class="nav-link py-2" data-bs-toggle="pill" href="#orders">سفارش‌ها</a>
-              <a class="nav-link py-2" data-bs-toggle="pill" href="#wishlist">علاقه‌مندی‌ها</a>
-              <a class="nav-link py-2" data-bs-toggle="pill" href="#security">امنیت</a>
-              <a class="nav-link py-2" data-bs-toggle="pill" href="#notifications">اعلان‌ها</a>
-              <a class="nav-link py-2" data-bs-toggle="pill" href="#support">پشتیبانی</a>
-              <a class="nav-link py-2" href="startup-ideas.html"><span class="idea-icon">🚀</span>ایده‌های استارتاپی</a>
-              <a class="nav-link py-2 text-danger" href="{% url 'account_logout' %}">{% trans "exit" %}</a>
-            </nav>
+<!-- Main Content -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Sidebar -->
+      <aside class="col-lg-3">
+        <div class="card p-3 shadow-sm">
+          <div class="mb-3">
+            <h6 class="text-muted small mb-0">{{ user.email }}</h6>
           </div>
-          <div class="card card-rounded p-3 mt-3">
-            <h6 class="section-title">وضعیت حساب</h6>
-            <p class="small-muted mb-1">سفارش‌های فعال: <strong>۲</strong></p>
-            <p class="small-muted mb-1">موجودی کیف‌پول: <strong>۱۲۰,۰۰۰ تومان</strong></p>
-            <p class="small-muted mb-0">امتیاز وفاداری: <strong>۳۵۰</strong></p>
-          </div>
-          <div class="card promo-card p-3 mt-3 text-center">
-            <h6>مقاله‌های تازه</h6>
-            <p class="small-muted">مطالب جدید درباره دوقلوهای دیجیتال و شهرهای پایدار</p>
-            <a href="blog.html" class="btn btn-light btn-sm">مشاهده بلاگ</a>
-          </div>
-        </aside>
+          <hr>
+          <nav class="nav flex-column">
+            <a class="nav-link active py-2" data-bs-toggle="pill" href="#dashboard">{% trans "Dashboard" %}</a>
+            <a class="nav-link py-2" data-bs-toggle="pill" href="#profile-info">{% trans "Profile Info" %}</a>
+            <a class="nav-link py-2" data-bs-toggle="pill" href="#orders">{% trans "Orders" %}</a>
+            <a class="nav-link py-2" data-bs-toggle="pill" href="#wishlist">{% trans "Wishlist" %}</a>
+            <a class="nav-link py-2" data-bs-toggle="pill" href="#security">{% trans "Security" %}</a>
+            <a class="nav-link py-2" data-bs-toggle="pill" href="#notifications">{% trans "Notifications" %}</a>
+            <a class="nav-link py-2" data-bs-toggle="pill" href="#support">{% trans "Support" %}</a>
+            <a class="nav-link py-2 text-danger" href="{% url 'account_logout' %}">{% trans "Logout" %}</a>
+          </nav>
+        </div>
+      </aside>
 
-        <!-- محتوای اصلی -->
-        <main class="col-lg-9 profile-main">
-          <div class="tab-content">
-            <!-- داشبورد -->
-            <div class="tab-pane fade show active" id="dashboard">
-              <div class="row g-4">
-                <div class="col-md-6">
-                  <div class="card card-rounded p-3">
-                    <h6 class="section-title">آخرین سفارش‌ها</h6>
-                    <ul class="list-unstyled mb-0">
-                      {% for order in orders|slice:":2" %}
-                        {% for item in order.items.all %}
-                          <li class="d-flex justify-content-between py-2 border-bottom">
-                            <div>
-                              <strong>#{{ order.id }}</strong> — {{ item.product.title }}
-                              <div class="small text-muted">{{ order.datetime_created|to_jalali:"%Y %B %d"|translate_number }}</div>
-                            </div>
-                              <span class="badge bg-success">پرداخت‌ شده</span>
-                          </li>
-                        {% endfor %}
-                      {% empty %}
-                        <li class="text-muted py-3">سفارشی ثبت نشده است.</li>
-                      {% endfor %}
-                    </ul>
-                    <a href="#orders" class="btn btn-outline-primary btn-sm mt-3" id="view-all-orders">
-                      مشاهده همه سفارش‌ها
-                    </a>            
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card card-rounded p-3">
-                    <h6 class="section-title">اعلان‌ها</h6>
-                    <ul class="list-unstyled mb-0">
-                      <li class="py-2 border-bottom">
-                        <div class="small-muted">شماره پیگیری سفارش #5241 اضافه شد.</div>
-                      </li>
-                      <li class="py-2 border-bottom">
-                        <div class="small-muted">تخفیف ۲۰٪ پکیج AutoCAD Map — تا ۵ روز.</div>
-                      </li>
-                    </ul>
-                    <a href="#notifications" data-bs-toggle="pill" class="btn btn-outline-primary btn-sm mt-3">مدیریت اعلان‌ها</a>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="card card-rounded p-3">
-                    <h6 class="section-title">فعالیت‌های اخیر</h6>
-                    <div class="small-muted">ورود اخیر: ۲ ساعت قبل — دانلود: چک‌لیست طراحی شهر سبز — نظر: ۳ روز قبل</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <!-- Main Tabs -->
+      <main class="col-lg-9">
+        <div class="tab-content">
 
-            <!-- اطلاعات شخصی -->
-            <div class="tab-pane fade" id="profile-info">
-              <div class="card card-rounded p-4">
-                <h5 class="section-title">اطلاعات شخصی</h5>
-                <form id="profileForm" novalidate>
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label class="form-label" for="first_name">نام</label>
-                      <input type="text" class="form-control" id="first_name" name="first_name" value="تیسا" required>
-                      <div class="invalid-feedback">نام الزامی است.</div>
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label" for="last_name">نام خانوادگی</label>
-                      <input type="text" class="form-control" id="last_name" name="last_name">
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label" for="email">ایمیل</label>
-                      <input type="email" class="form-control" id="email" name="email" value="tisa@example.com" disabled>
-                      <div class="small-muted mt-1">برای تغییر ایمیل، تأیید از طریق ایمیل لازم است.</div>
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label" for="phone">شماره موبایل</label>
-                      <input type="tel" class="form-control" id="phone" name="phone" value="+98 912 123 4567" disabled>
-                      <div class="small-muted mt-1">تغییر شماره با تأیید پیامکی.</div>
-                    </div>
-                    <div class="col-12">
-                      <label class="form-label" for="bio">بیو</label>
-                      <textarea class="form-control" id="bio" name="bio" rows="3" placeholder="مثلاً: دانشجوی شهرسازی، علاقه‌مند به GIS"></textarea>
-                    </div>
-                    <div class="col-12">
-                      <button type="submit" class="btn btn-primary me-2">ثبت تغییرات</button>
-                      <button type="reset" class="btn btn-ghost">بازنشانی</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <!-- سفارش‌ها -->
-            <div class="tab-pane fade" id="orders">
-              <div class="card card-rounded p-3">
-                <h5 class="section-title">تاریخچه سفارش‌ها</h5>
-                <div class="table-responsive">
-                  <table class="table table-orders">
-                    <thead>
-                      <tr>
-                        <th>شماره</th>
-                        <th>محصول</th>
-                        <th>تاریخ</th>
-                        <th>قیمت</th>
-                        <th>وضعیت</th>
-                        <th class="text-end">دانلود</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for order in orders|slice:":2" %}
-                        {% for item in order.items.all %}
-                          <tr>
-                            <td>#{{ order.id }}</td>
-                            <td>{{item.product.title}}</td>
-                            <td> {{order.datetime_created|to_jalali:"%Y %B %d"|translate_number}}</td>
-                            <td>
-                              {{ item.product.price|intcomma:False|translate_number }} {% trans "$" %}
-                            </td>
-                            <td><span class="badge bg-info"></span>پرداخت‌ شده</td>
-                            <td class="text-end">
-                              <a href="{% url 'video_files_list' item.id %}" class="btn btn-outline-primary btn-sm me-2">
-                                دانلود
-                              </a>
-                            </td>
-                          </tr>
-                        {% endfor %}
-                      {% empty %}
-                        <li class="text-muted py-3">سفارشی ثبت نشده است.</li>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-            <!-- علاقه‌مندی‌ها -->
-            <div class="tab-pane fade" id="wishlist">
-              <div class="card card-rounded p-3">
-                <h5 class="section-title">علاقه‌مندی‌ها</h5>
-                <div class="row g-3">
-
-                  {% if user.is_authenticated %}
-                    {% for item in user.wishlist.all %}
-                      <div class="col-md-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                          {% if item.product.image %}
-                            <img src="{{ item.product.image.url }}" class="card-img-top" alt="{{ item.product.title }}">
-                          {% else %}
-                            <img src="https://via.placeholder.com/300x180?text=No+Image" class="card-img-top" alt="No image">
-                          {% endif %}
-                          <div class="card-body">
-                            <h6>{{ item.product.title }}</h6>
-                            <p class="small-muted">{{ item.product.price|intcomma:False|translate_number }} تومان</p>
-                            <div class="d-flex gap-2">
-                              <!-- Add to cart button -->
-                              <form action="{% url 'cart:cart_add' item.product.id %}" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn btn-primary btn-sm">افزودن به سبد</button>
-                              </form>
-                              <!-- Remove from wishlist button -->
-                              <a href="{% url 'remove_from_wishlist' item.product.id %}" class="btn btn-outline-danger btn-sm">حذف</a>
-                            </div>
+          <!-- Dashboard -->
+          <div class="tab-pane fade show active" id="dashboard">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="card p-3 shadow-sm">
+                  <h6 class="fw-bold mb-3">{% trans "Recent Orders" %}</h6>
+                  <ul class="list-unstyled mb-0">
+                    {% for order in orders|slice:":2" %}
+                      {% for item in order.items.all %}
+                        <li class="d-flex justify-content-between py-2 border-bottom">
+                          <div>
+                            <strong>#{{ order.id }}</strong> — {{ item.product.title }}
+                            <div class="small text-muted">{{ order.datetime_created|to_jalali:"%Y %B %d"|translate_number }}</div>
                           </div>
+                          <span class="badge bg-success">{% trans "Paid" %}</span>
+                        </li>
+                      {% endfor %}
+                    {% empty %}
+                      <li class="text-muted py-3">{% trans "No orders found." %}</li>
+                    {% endfor %}
+                  </ul>
+                  <a href="#orders" class="btn btn-outline-primary btn-sm mt-3" id="view-all-orders">{% trans "View All Orders" %}</a>
+                </div>
+              </div>
+
+              {% comment %} <div class="col-md-6">
+                <div class="card p-3 shadow-sm">
+                  <h6 class="fw-bold mb-3">{% trans "Notifications" %}</h6>
+                  <ul class="list-unstyled small mb-0">
+                    <li class="border-bottom py-2">{% trans "Order #5241 tracking number added." %}</li>
+                    <li class="border-bottom py-2">{% trans "20% discount on AutoCAD Map package - 5 days left." %}</li>
+                  </ul>
+                  <a href="#notifications" data-bs-toggle="pill" class="btn btn-outline-primary btn-sm mt-3">{% trans "Manage Notifications" %}</a>
+                </div>
+              </div> {% endcomment %}
+
+            </div>
+          </div>
+
+            <!-- Profile Info -->
+            <div class="tab-pane fade" id="profile-info">
+            <div class="card p-4 shadow-sm">
+                <h5 class="fw-bold mb-4">{% trans "Personal Information" %}</h5>
+                <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn btn-primary">{% trans "Save Changes" %}</button>
+                    <button type="reset" class="btn btn-outline-secondary">{% trans "Reset" %}</button>
+                </div>
+                </form>
+            </div>
+            </div>
+
+          <!-- Orders -->
+          <div class="tab-pane fade" id="orders">
+            <div class="card p-3 shadow-sm">
+              <h5 class="fw-bold mb-4">{% trans "Order History" %}</h5>
+              <div class="table-responsive">
+                <table class="table align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th>{% trans "ID" %}</th>
+                      <th>{% trans "Product" %}</th>
+                      <th>{% trans "Date" %}</th>
+                      <th>{% trans "Price" %}</th>
+                      <th>{% trans "Status" %}</th>
+                      <th class="text-end">{% trans "Download" %}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for order in orders %}
+                      {% for item in order.items.all %}
+                        <tr>
+                          <td>#{{ order.id }}</td>
+                          <td>{{ item.product.title }}</td>
+                          <td>{{ order.datetime_created|to_jalali:"%Y %B %d"|translate_number }}</td>
+                          <td>{{ item.product.price|intcomma:False|translate_number }} {% trans "$" %}</td>
+                          <td><span class="badge bg-success">{% trans "Paid" %}</span></td>
+                          <td class="text-end">
+                            <a href="{% url 'video_files_list' item.id %}" class="btn btn-outline-primary btn-sm">{% trans "Download" %}</a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    {% empty %}
+                      <tr><td colspan="6" class="text-center text-muted py-3">{% trans "No orders found." %}</td></tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wishlist -->
+          <div class="tab-pane fade" id="wishlist">
+            <div class="card p-3 shadow-sm">
+              <h5 class="fw-bold mb-4">{% trans "Wishlist" %}</h5>
+              <div class="row g-3">
+                {% if user.is_authenticated %}
+                  {% for item in user.wishlist.all %}
+                    <div class="col-md-4">
+                      <div class="card border-0 shadow-sm h-100">
+                        {% if item.product.image %}
+                          <img src="{{ item.product.image.url }}" class="card-img-top" alt="{{ item.product.title }}">
+                        {% else %}
+                          <img src="https://via.placeholder.com/300x180?text=No+Image" class="card-img-top" alt="No image">
+                        {% endif %}
+                        <div class="card-body">
+                          <h6>{{ item.product.title }}</h6>
+                          <p class="text-muted small">{{ item.product.price|intcomma:False|translate_number }} {% trans "$" %}</p>
+                          <form action="{% url 'cart:cart_add' item.product.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-primary btn-sm">{% trans "Add to Cart" %}</button>
+                          </form>
+                          <a href="{% url 'remove_from_wishlist' item.product.id %}" class="btn btn-outline-danger btn-sm">{% trans "Remove" %}</a>
                         </div>
                       </div>
-                    {% empty %}
-                      <p class="text-muted text-center">هیچ موردی در علاقه‌مندی‌ها وجود ندارد.</p>
-                    {% endfor %}
-                  {% else %}
-                    <p class="text-muted text-center">
-                      برای مشاهده علاقه‌مندی‌ها لطفاً
-                      <a href="{% url 'account_login' %}">وارد شوید</a>.
-                    </p>
-                  {% endif %}
-
-                </div>
-              </div>
-            </div>
-
-
-            <!-- امنیت -->
-            <div class="tab-pane fade" id="security">
-              <div class="card card-rounded p-4">
-                <h5 class="section-title">تنظیمات امنیتی</h5>
-
-                <form method="post" novalidate>
-                  {% csrf_token %}
-                  <input type="hidden" name="form_type" value="password">
-                  {{ password_form|crispy }}
-                  <button type="submit" class="btn btn-primary mt-2">ثبت رمز جدید</button>
-                </form>
-
-                {% if messages %}
-                  <div class="mt-3">
-                    {% for message in messages %}
-                      <div class="alert alert-{{ message.tags }} fade show mt-2" role="alert">
-                        {{ message }}
-                      </div>
-                    {% endfor %}
-                  </div>
+                    </div>
+                  {% empty %}
+                    <p class="text-center text-muted">{% trans "Your wishlist is empty." %}</p>
+                  {% endfor %}
+                {% else %}
+                  <p class="text-center text-muted">
+                    {% trans "Please" %} <a href="{% url 'account_login' %}">{% trans "log in" %}</a> {% trans "to view your wishlist." %}
+                  </p>
                 {% endif %}
               </div>
             </div>
+          </div>
 
-
-            <!-- اعلان‌ها -->
-            <div class="tab-pane fade" id="notifications">
-              <div class="card card-rounded p-4">
-                <h5 class="section-title">اعلان‌ها</h5>
-                <form id="notificationsForm">
-                  <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" id="notif-orders" checked>
-                    <label class="form-check-label" for="notif-orders">اعلان وضعیت سفارش‌ها</label>
-                  </div>
-                  <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" id="notif-promos" checked>
-                    <label class="form-check-label" for="notif-promos">پیام‌های تخفیف و پروموشن</label>
-                  </div>
-                  <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" id="notif-news">
-                    <label class="form-check-label" for="notif-news">خبرنامه هفتگی</label>
-                  </div>
-                  <button class="btn btn-primary btn-sm mt-3">ذخیره تنظیمات اعلان</button>
-                </form>
-              </div>
-            </div>
-
-            <!-- پشتیبانی -->
-            <div class="tab-pane fade" id="support">
-              <div class="card card-rounded p-4">
-                <h5 class="section-title">پشتیبانی و تیکت‌ها</h5>
-                <a class="btn btn-outline-primary btn-sm mb-3" href="contact.html">ارسال تیکت جدید</a>
-                <h6>تیکت‌های اخیر</h6>
-                <ul class="list-unstyled">
-                  <li class="py-2 border-bottom d-flex justify-content-between">
-                    <div>
-                      <strong>تیکت #102</strong>
-                      <div class="small-muted">درخواست بازپرداخت - در انتظار پاسخ</div>
-                    </div>
-                    <a class="btn btn-outline-primary btn-sm">مشاهده</a>
-                  </li>
-                </ul>
-              </div>
+          <!-- Security -->
+          <div class="tab-pane fade" id="security">
+            <div class="card p-4 shadow-sm">
+              <h5 class="fw-bold mb-4">{% trans "Security Settings" %}</h5>
+              <form method="post" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="password">
+                {{ password_form|crispy }}
+                <button type="submit" class="btn btn-primary mt-2">{% trans "Update Password" %}</button>
+              </form>
             </div>
           </div>
-        </main>
-      </div>
-    </div>
-  </section>
-{% endblock %}
 
+{% comment %} 
+          <!-- Notifications -->
+          <div class="tab-pane fade" id="notifications">
+            <div class="card p-4 shadow-sm">
+              <h5 class="fw-bold mb-4">{% trans "Notifications" %}</h5>
+              <form>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="notif-orders" checked>
+                  <label class="form-check-label" for="notif-orders">{% trans "Order status updates" %}</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="notif-promos" checked>
+                  <label class="form-check-label" for="notif-promos">{% trans "Promotions and discounts" %}</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="notif-news">
+                  <label class="form-check-label" for="notif-news">{% trans "Weekly newsletter" %}</label>
+                </div>
+                <button class="btn btn-primary btn-sm mt-3">{% trans "Save Preferences" %}</button>
+              </form>
+            </div>
+          </div> {% endcomment %}
+
+            <!-- Ticket-->
+          <div class="tab-pane fade" id="support">
+            <div class="card card-rounded p-4">
+                <h5 class="section-title mb-3">{% trans "Support & Tickets" %}</h5>
+
+                <!-- فرم ارسال تیکت جدید -->
+                <div class="mb-4">
+                <h6>{% trans "Create New Ticket" %}</h6>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ ticket_form|crispy }}
+                    <div class="d-grid mt-2">
+                    <button type="submit" class="btn btn-primary btn-sm">{% trans "Submit" %}</button>
+                    </div>
+                </form>
+                </div>
+
+                <h6>{% trans "Recent Tickets" %}</h6>
+              <ul class="list-unstyled">
+                {% for ticket in tickets %}
+                <li class="py-2 border-bottom">
+                    <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <strong>{{ ticket.get_subject_display }}</strong>
+                        <span class="badge
+                        {% if ticket.status == 'o' %} bg-success
+                        {% elif ticket.status == 'p' %} bg-warning text-dark
+                        {% else %} bg-secondary
+                        {% endif %}
+                        ">{{ ticket.get_status_display }}</span>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#ticket-{{ ticket.id }}">
+                        {% trans "View" %}
+                    </button>
+                    </div>
+
+                    <!-- محتوای تیکت و پاسخ ادمین -->
+                    <div class="collapse mt-2" id="ticket-{{ ticket.id }}">
+                    <div class="card card-body">
+                        <p><strong>{% trans "Your Message:" %}</strong> {{ ticket.message }}</p>
+                        {% if ticket.admin_reply %}
+                        <hr>
+                        <p><strong>{% trans "Admin Response:" %}</strong> {{ ticket.admin_reply }}</p>
+                        {% else %}
+                        <p class="text-muted"><em>{% trans "No response yet." %}</em></p>
+                        {% endif %}
+                        <div class="text-end small text-muted">{{ ticket.datetime_created|date:"Y-m-d H:i" }}</div>
+                    </div>
+                    </div>
+                </li>
+                {% empty %}
+                <li class="text-muted">{% trans "No tickets submitted yet." %}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+{% endblock %}
 
 {% block extra_js %}
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const btn = document.getElementById('view-all-orders');
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("view-all-orders");
   if (btn) {
-    btn.addEventListener('click', function (e) {
+    btn.addEventListener("click", function (e) {
       e.preventDefault();
       const trigger = document.querySelector('a[href="#orders"][data-bs-toggle="pill"]');
       if (trigger) {
         const tab = new bootstrap.Tab(trigger);
         tab.show();
-        document.querySelector('#orders').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelector("#orders").scrollIntoView({ behavior: "smooth", block: "start" });
       }
     });
   }
 });
 </script>
-
-
 {% endblock %}

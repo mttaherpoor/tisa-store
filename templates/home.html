@@ -1,9 +1,277 @@
-{% extends '_base.html' %}
+{% extends "_base.html" %}
+{% load static %}
+{% load i18n %}
+{% load humanize %}
+{% load persian_translation_tags %}
+{% load jalali_tags %}
 
-{% block page_title %}
-Home Page
+{% block page_title %}{% trans "Home" %}{% endblock %}
+
+{% block extra_css %}
+<style>
+  :root{
+    --primary: #4CAF50;
+    --accent: #FFC107;
+    --bg: #F6F7F9;
+    --text: #212529;
+  }
+
+  /* HERO with background image + overlay */
+  .hero-image {
+    position: relative;   static/images/home.jpg
+    background-image: url("{% static 'images/home.jpg' %}"); /* put your image at static/images/home-hero.jpg */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 64vh;
+    display: flex;
+    align-items: center;
+    color: #fff;
+  }
+  .hero-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* dark overlay for text contrast */
+    background: linear-gradient(180deg, rgba(4,20,10,0.55), rgba(4,20,10,0.65));
+    z-index: 0;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 4rem 1rem;
+  }
+  .hero-inner .display-5 { font-weight: 700; }
+  .hero-sub { opacity: 0.95; }
+
+  .hero-cta .btn-primary {
+    background: #ffffff;
+    color: var(--text);
+    border: none;
+  }
+  .hero-cta .btn-accent {
+    background: var(--accent);
+    color: #111;
+    border: none;
+  }
+
+  /* Soft background sections */
+  section.bg-soft { background: var(--bg); }
+
+  /* Product card */
+  .card.product-card img { object-fit: cover; height: 200px; }
+
+  /* Blog card */
+  .card.blog-card img { object-fit: cover; height: 160px; }
+
+  /* CTA section */
+  .cta-section { background: var(--primary); color: #fff; }
+
+  /* FAQ / accordion tweaks (if used later) */
+  .accordion-button { background: #fff; }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .hero-image { min-height: 48vh; background-position: center 30%; }
+    .hero-inner { padding: 2.5rem 1rem; }
+    .hero-inner .display-5 { font-size: 1.6rem; }
+  }
+</style>
 {% endblock %}
 
 {% block content %}
-<h1>Home Page</h1>
+
+<!-- HERO: image background with overlay, title and CTAs on top -->
+<section class="hero-image" role="img" aria-label="{% trans 'Hero: building smart cities' %}">
+  <div class="container hero-inner text-center">
+    <h1 class="display-5 fw-bold mb-3">
+      {% trans "Learn, Create, and Build Smart Cities Together!" %}
+    </h1>
+    <p class="lead hero-sub mb-4">
+      {% trans "Practical training in GIS, Python, Machine Learning, and Smart Urban Planning — designed for city makers of the future." %}
+    </p>
+
+    <div class="d-flex justify-content-center gap-2 hero-cta flex-wrap">
+      <a href="{% url 'product_list' %}" class="btn btn-light btn-lg me-2 mb-2">
+        {% trans "Start Learning" %}
+      </a>
+      <a href="{{ free_resources_url }}" class="btn btn-accent btn-lg mb-2">
+        {% trans "Get Free Resources" %}
+      </a>
+    </div>
+
+    <!-- optional small note under CTAs -->
+    <div class="mt-3 text-white-50 small">
+      {% trans "Join our community — hands-on courses, project-based learning and real urban datasets." %}
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="py-5 bg-soft text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-4">{% trans "What We Offer" %}</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 p-4">
+          <i class="bi bi-map feature-icon fs-1 mb-3" style="color:var(--primary)"></i>
+          <h5>{% trans "GIS & Urban Analytics" %}</h5>
+          <p class="text-muted">{% trans "Learn spatial analysis, mapping, and data visualization with QGIS, ArcGIS, and Python." %}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 p-4">
+          <i class="bi bi-cpu feature-icon fs-1 mb-3" style="color:var(--primary)"></i>
+          <h5>{% trans "Machine Learning for Cities" %}</h5>
+          <p class="text-muted">{% trans "Use AI and ML to predict urban heat, optimize transport, and design smarter infrastructure." %}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 p-4">
+          <i class="bi bi-globe2 feature-icon fs-1 mb-3" style="color:var(--primary)"></i>
+          <h5>{% trans "Smart & Sustainable Cities" %}</h5>
+          <p class="text-muted">{% trans "Explore digital twins and eco-city models — create data-driven, greener futures." %}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Popular Courses (show first 3 products if available) -->
+<section class="py-5">
+  <div class="container text-center">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold mb-0">{% trans "Popular Courses" %}</h2>
+      <a href="{% url 'product_list' %}" class="btn btn-link">{% trans "See all" %}</a>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      {% for product in products|slice:":3" %}
+      <div class="col-md-4">
+        <div class="card product-card shadow-sm border-0 h-100">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="card-img-top">
+          {% else %}
+            <div class="bg-light d-flex align-items-center justify-content-center" style="height:200px;">
+              <span class="text-muted">{% trans "No image" %}</span>
+            </div>
+          {% endif %}
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="text-muted small mb-3 flex-grow-1">{{ product.short_description|default_if_none:'' }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="fw-bold">{{ product.price|intcomma:False|translate_number }} {% trans "$" %}</div>
+              <a href="{{ product.get_absolute_url }}" class="btn btn-outline-secondary btn-sm">{% trans "View" %}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12">
+        <div class="alert alert-info">{% trans "No courses available yet — stay tuned!" %}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Blog preview (recent 3 posts) -->
+<section class="py-5 bg-soft">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold mb-0">{% trans "Latest from the Blog" %}</h2>
+      <a href="{% url 'post-list' %}" class="btn btn-link">{% trans "Read all posts" %}</a>
+    </div>
+
+    <div class="row g-4">
+      {% for post in posts|slice:":3" %}
+      <div class="col-md-4">
+        <div class="card blog-card shadow-sm border-0 h-100">
+          {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="card-img-top">
+          {% endif %}
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <div class="small text-muted mb-2">{{ post.datetime_created|to_jalali:"%Y %B %d"|translate_number }}</div>
+            <p class="text-muted mb-3 flex-grow-1">{{ post.text|striptags|truncatechars:120 }}</p>
+            <a href="{{ post.get_absolute_url }}" class="btn btn-outline-secondary btn-sm mt-auto">{% trans "Read more" %}</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12">
+        <div class="alert alert-info">{% trans "No blog posts yet." %}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5 cta-section text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-3">{% trans "Ready to Build the Future?" %}</h2>
+    <p class="mb-4">{% trans "Join thousands of learners shaping smart and sustainable cities with practical projects." %}</p>
+    <div class="d-flex justify-content-center gap-2 flex-wrap">
+      <a href="{% url 'aboutus' %}" class="btn btn-light btn-lg me-2">{% trans "Meet the Team" %}</a>
+      <a href="{% url 'contactus' %}" class="btn btn-outline-light btn-lg">{% trans "Contact Us" %}</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-5" style="background-color: #F8F9FA;">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-5">{% trans "Frequently Asked Questions" %}</h2>
+    <div class="accordion" id="faqAccordion">
+      {% for faq in faqs %}
+      <div class="accordion-item mb-3 shadow-sm border-0">
+        <h2 class="accordion-header" id="faq{{ forloop.counter }}">
+          <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#collapse{{ forloop.counter }}" 
+                  aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" 
+                  aria-controls="collapse{{ forloop.counter }}"
+                  style="background-color: #F8F9FA; color: {% if forloop.first %}#2F55D4{% else %}#212529{% endif %}; font-weight: 600;">
+            {{ faq.question }}
+          </button>
+        </h2>
+        <div id="collapse{{ forloop.counter }}" 
+             class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" 
+             aria-labelledby="faq{{ forloop.counter }}" 
+             data-bs-parent="#faqAccordion">
+          <div class="accordion-body" style="color: #8492A6;">
+            {{ faq.answer }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script>
+  // Change colors dynamically when accordion items open/close
+  document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.accordion-button');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', function () {
+        // Reset all to default color
+        buttons.forEach(b => b.style.color = '#212529');
+        // Set active one
+        if (!btn.classList.contains('collapsed')) {
+          btn.style.color = '#2F55D4';
+        } else {
+          btn.style.color = '#212529';
+        }
+      });
+    });
+  });
+</script>
 {% endblock %}

@@ -81,12 +81,12 @@
           <a class="btn btn-outline-primary btn-sm d-flex align-items-center me-2" href="{% url 'cart:cart_detail' %}"
              aria-label="{% trans 'Shopping Cart' %}">
             <i class="bi bi-cart-fill me-1" aria-hidden="true"></i>
-            <span class="d-none d-lg-inline me-1">{% trans "Cart" %}</span>
+            <span class="d-none d-lg-inline me-1"></span>
             {% comment %} safe check for cart length {% endcomment %}
             {% if cart %}
               {% with cart_count=cart|length %}
                 {% if cart_count > 0 %}
-                  <span class="badge bg-success ms-1" aria-live="polite">{{ cart_count }}</span>
+                  <span class="badge bg-primary ms-1" aria-live="polite">{{ cart_count }}</span>
                 {% endif %}
               {% endwith %}
             {% endif %}

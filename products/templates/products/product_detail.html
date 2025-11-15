@@ -1,120 +1,139 @@
-{% extends '_base.html' %}
+{% extends "_base.html" %}
 
+{% load static %}
 {% load wishlist_tags %}
-{% load static %} 
-{% load i18n %} 
-{% load crispy_forms_tags %} 
-{% load comment_tags %} 
-{% load jalali_tags %} 
-{% load humanize %} 
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load comment_tags %}
+{% load jalali_tags %}
+{% load humanize %}
 {% load persian_translation_tags %}
 
-{% block page_title %}{{product.title}}{% endblock %}
-
+{% block page_title %}{{ product.title }}{% endblock %}
 
 {% block content %}
-<div class="container text-right my-5">
+<div class="container my-5">
 
-    <!-- Product Title -->
-    <h1 class="mb-4">{{ product.title }}</h1>
+  <!-- بنر بالای صفحه -->
+  <a href="{% url 'product_list' %}" class="btn btn-secondary">
+    <i class="fa fa-arrow-left me-2"></i>
+    {% trans "Back to All Products" %}
+  </a>
+  
+ <br></br>
+  <!-- Product Title -->
 
-    <!-- Product Image & Short Description -->
-    <div class="row align-items-center mb-5">
-        <div class="col-md-6 mb-3 mb-md-0 text-center">
-            {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid rounded shadow-sm" style="max-height:400px;">
-            {% else %}
-                <div class="bg-light border rounded p-5">تصویر موجود نیست</div>
-            {% endif %}
-        </div>
-        <div class="col-md-6">
-            <h4>توضیحات مختصر</h4>
-            <p class="lead">{{ product.short_description }}</p>
-            <div class="mt-4">
-                <p class="h5">
-                    <strong>{% trans "Price" %}:</strong> 
-                    {{ product.price|intcomma:False|translate_number }} {% trans "$" %}
-                </p>
-                {# <p>موجودی: {{ product.inventory|translate_number }} عدد</p> #}
-                <form action="{% url 'cart:cart_add' product.id %}" method="POST" class="mt-3">
-                    {% csrf_token %}
-                    <input type="hidden" name="quantity" value="1">
-                    <button type="submit" class="btn btn-success btn-lg">
-                        {% trans "Add to Cart" %}
-                    </button>
-                </form>
-                
-                <!-- Wishlist button -->
-                {% if user.is_authenticated %}
-                {% if product|in_wishlist:user %}
-                    <a href="{% url 'remove_from_wishlist' product.id %}" class="btn btn-outline-danger btn-sm mt-2">❤️ حذف از علاقه‌مندی‌ها</a>
-                {% else %}
-                    <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-primary btn-sm mt-2">🤍 افزودن به علاقه‌مندی‌ها</a>
-                {% endif %}
-                {% else %}
-                    <a href="{% url 'account_login' %}" class="btn btn-outline-secondary btn-sm mt-2">ورود برای افزودن</a>
-                {% endif %}
-            </div>
-        </div>
+  {% with header_name=product.title %}
+      {% include 'topheader.html' with header_name=header_name %}
+  {% endwith %}
+
+  {% comment %} <h1 class="mb-4">{{ product.title }}</h1> {% endcomment %}
+
+  <!-- Product Image & Short Description -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 mb-3 mb-md-0 text-center">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid rounded shadow-sm" style="max-height:400px; object-fit:cover;">
+      {% else %}
+      <img src="{% static 'images/default picture.webp' %}" class="img-fluid rounded shadow-sm" style="max-height:400px;">
+      {% endif %}
     </div>
 
-    <hr>
+    <div class="col-md-6">
+      <h4 class="mb-2">{% trans "Short description" %}</h4>
+      <p class="lead">{{ product.short_description }}</p>
 
-    <!-- Detailed Description -->
-    <div class="product-description mb-5">
-        <h4>توضیحات تفصیلی</h4>
-        <div class="border p-4 rounded shadow-sm bg-white">
-            {{ product.description|safe }}
-        </div>
-    </div>
-
-    <!-- Comments Section -->
-    <div class="comments mb-5">
-        <h4>کامنت‌ها</h4>
-        {% if product.comments.all|only_active_comments %}
-            <ul class="list-unstyled">
-                {% for comment in product.comments.all|only_active_comments|dictsortreversed:"datetime_created" %}
-                    <li class="border rounded p-3 mb-3 shadow-sm">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <strong>{{ comment.author.username }}</strong>
-                            <small class="text-muted">{{ comment.datetime_created|to_jalali:"%Y %B %d"|translate_number }}</small>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p class="mt-2">{{ comment.body }}</p>
-                            <div class="rating">
-                                {% for i in "12345" %}
-                                    {% if forloop.counter <= comment.stars|add:"0" %}
-                                        <span style="color:#FFD700;">★</span>
-                                    {% else %}
-                                        <span style="color:#ccc;">★</span>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="text-muted">هنوز کامنتی ثبت نشده است.</p>
-        {% endif %}
-    </div>
-
-    <!-- Comment Form -->
-    {% if user.is_authenticated %}
-        <div class="comment-form mb-5">
-            <h5>ثبت نظر شما</h5>
-            <form action="{% url 'comment_create' product.slug %}" method="POST">
-                {% csrf_token %}
-                {{ comment_form|crispy }}
-                <button type="submit" class="btn btn-primary mt-2">{% trans "Submit" %}</button>
-            </form>
-        </div>
-    {% else %}
-        <p class="text-muted">
-            {% trans 'To write your comment please ' %}
-            <a href="{% url 'account_login' %}">{% trans 'Login' %}</a>
+      <div class="mt-4">
+        <p class="h5 mb-3">
+          <strong>{% trans "Price" %}:</strong>
+          {{ product.price|intcomma:False|translate_number | default:"0" }} {% trans "$" %}
         </p>
+
+        <form action="{% url 'cart:cart_add' product.id %}" method="post" class="mt-3" aria-label="{% trans 'Add to cart form' %}">
+          {% csrf_token %}
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="btn btn-success btn-lg">
+            <i class="bi bi-cart-plus me-1"></i> {% trans "Add to Cart" %}
+          </button>
+        </form>
+
+        <!-- Wishlist button -->
+        <div class="mt-2">
+          {% if user.is_authenticated %}
+            {% if product|in_wishlist:user %}
+              <a href="{% url 'remove_from_wishlist' product.id %}" class="btn btn-outline-danger btn-sm" aria-label="{% trans 'Remove from wishlist' %}">❤️ {% trans "Remove from wishlist" %}</a>
+            {% else %}
+              <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-primary btn-sm" aria-label="{% trans 'Add to wishlist' %}">🤍 {% trans "Add to wishlist" %}</a>
+            {% endif %}
+          {% else %}
+            <a href="{% url 'account_login' %}" class="btn btn-outline-secondary btn-sm">{% trans "Login to add" %}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Detailed Description -->
+  <div class="product-description mb-5">
+    <h4 class="mb-3">{% trans "Detailed description" %}</h4>
+    <div class="border p-4 rounded shadow-sm bg-white">
+      {{ product.description|safe }}
+    </div>
+  </div>
+
+  <!-- Comments Section -->
+  <div class="comments mb-5">
+    <h4 class="mb-3">{% trans "Comments" %}</h4>
+
+    {% if product.comments.all|only_active_comments %}
+      <ul class="list-unstyled">
+        {% for comment in product.comments.all|only_active_comments|dictsortreversed:"datetime_created" %}
+          <li class="border rounded p-3 mb-3 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <strong>{{ comment.author.username }}</strong>
+              <small class="text-muted">{{ comment.datetime_created|to_jalali:"%Y %B %d"|translate_number }}</small>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-start">
+              <p class="mb-2">{{ comment.body }}</p>
+              <div class="ms-3 rating">
+                {% for i in "12345" %}
+                  {% if forloop.counter <= comment.stars|add:"0" %}
+                    <span style="color:#FFD700;">★</span>
+                  {% else %}
+                    <span style="color:#ccc;">★</span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">{% trans "No comments yet." %}</p>
     {% endif %}
+  </div>
+
+  <!-- Comment Form -->
+  {% if user.is_authenticated %}
+    <div class="comment-form mb-5">
+      <h5 class="mb-3">{% trans "Leave a comment" %}</h5>
+      <form action="{% url 'comment_create' product.slug %}" method="post" aria-label="{% trans 'Comment form' %}">
+        {% csrf_token %}
+        {{ comment_form|crispy }}
+        <button type="submit" class="btn btn-primary mt-2">
+          <i class="bi bi-send me-1"></i> {% trans "Submit" %}
+        </button>
+      </form>
+    </div>
+  {% else %}
+    <p class="text-muted">
+      {% trans "To write your comment please" %} <a href="{% url 'account_login' %}">{% trans "Login" %}</a>.
+    </p>
+  {% endif %}
 
 </div>
 {% endblock %}

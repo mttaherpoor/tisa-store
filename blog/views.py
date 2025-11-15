@@ -71,7 +71,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
     def test_func(self):
         post = self.get_object()
         # فقط نویسنده یا ادمین بتواند ویرایش کند
-        return self.request.user == post.author
+        return self.request.user == post.author or self.request.user.is_superuser
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
@@ -82,7 +82,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
     def test_func(self):
         post = self.get_object()
         # فقط نویسنده یا ادمین بتواند حذف کند
-        return self.request.user == post.author or self.request.user.is_staff
+        return self.request.user == post.author or self.request.user.is_superuser
     
 
 # class CommentCreateView(generic.CreateView):

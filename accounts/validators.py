@@ -33,3 +33,8 @@ def validator(message_param):
 
 username_validator = validator('نام کاربری')
 email_validator = validator('ایمیل')
+
+def validate_file_size(file):
+    max_size_mb = 5
+    if file.size > max_size_mb * 1024 * 1024:
+        raise ValidationError(f"حجم فایل نباید بیشتر از {max_size_mb} مگابایت باشد.")
