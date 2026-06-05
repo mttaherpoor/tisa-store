@@ -33,7 +33,9 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "django-app","tisavista.ir","www.tisavista.ir","https://tisavista.ir"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost","tisavista.ir","www.tisavista.ir","tisa-store-django-1",]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_TRUSTED_ORIGINS = [
     "https://tisavista.ir",
@@ -158,8 +160,8 @@ AUTHENTICATION_BACKENDS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-# LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = "fa"
+LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = "fa"
 
 LANGUAGES = (
     ("en", "English"),

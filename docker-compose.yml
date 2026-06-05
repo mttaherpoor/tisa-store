@@ -1,10 +1,11 @@
 services:
-  web:
+  django:
     build:
       context: .
-    container_name: django-app
     # command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
-    command: python /code/manage.py runserver 0.0.0.0:8000
+    # command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
+    # command: python /code/manage.py runserver 0.0.0.0:8000
+    command: sh /code/entrypoint.sh
     volumes:
       - .:/code  
       - static:/code/staticfiles
@@ -19,14 +20,14 @@ services:
       - DJANGO_POSTGRES_USER=${DOCKER_COMPOSE_DJANGO_POSTGRES_USER}
       - DJANGO_POSTGRES_NAME=${DOCKER_COMPOSE_DJANGO_POSTGRES_NAME}
       - DJANGO_POSTGRES_PASSWORD=${DOCKER_COMPOSE_DJANGO_POSTGRES_PASSWORD}
-      - DJANGO_EMAIL_HOST_USER=${DOCKER_COMPOSE_DJANGO_DJANGO_EMAIL_HOST_USER}
+      - DJANGO_EMAIL_HOST_USER=${DOCKER_COMPOSE_DJANGO_EMAIL_HOST_USER}
       - DJANGO_EMAIL_HOST_PASSWORD=${DOCKER_COMPOSE_DJANGO_EMAIL_HOST_PASSWORD}
     depends_on:
       - db
     expose:
       - 8000
     networks:
-      - tisa_bridge
+      - tisa_network
 
   db:
     image: postgres:16
@@ -39,29 +40,46 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - tisa_bridge
+      - tisa_network
 
   nginx:
     image: nginx:latest
-    container_name: nginx
+    container_name: nginx_tisa
     restart: always
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - static:/code/staticfiles:ro
       - ./media:/var/www/media:ro
       - protected_videos:/var/protected_videos:ro
+
+      - certbot_www:/var/www/certbot
+      - certbot_certs:/etc/letsencrypt
     depends_on:
-      - web
+      - django
     networks:
-      - tisa_bridge
+      - tisa_network
+
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot_www:/var/www/certbot
+      - certbot_certs:/etc/letsencrypt
+    networks:
+      - tisa_network
 
 volumes:
   postgres_data:
   static:
   protected_videos:
 
+  certbot_www:
+  certbot_certs:
+
 networks:
-  tisa_bridge:
+  tisa_network:
     driver: bridge
