@@ -16,6 +16,8 @@ from pathlib import Path
 from environs import Env
 import os
 
+import config.ckeditor as ckeditor
+
 # for environment variables
 env = Env()
 env.read_env()
@@ -236,5 +238,18 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
 }
+
+# ckeditor 5
+customColorPalette =ckeditor.customColorPalette
+
+CKEDITOR_5_FILE_STORAGE = ckeditor.CKEDITOR_5_FILE_STORAGE
+CKEDITOR_5_UPLOAD_PATH = ckeditor.CKEDITOR_5_UPLOAD_PATH
+CKEDITOR_5_ALLOW_FILE_TYPES = ckeditor.CKEDITOR_5_ALLOW_FILE_TYPES
+CKEDITOR_5_UPLOAD_FILE_TYPES = ckeditor.CKEDITOR_5_UPLOAD_FILE_TYPES
+
+CKEDITOR_5_CONFIGS = ckeditor.CKEDITOR_5_CONFIGS
+
+# Define a constant in settings.py to specify file upload permissions
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = ckeditor.CKEDITOR_5_FILE_UPLOAD_PERMISSION
 
 ZARINPAL_MERCHANT_ID = env("DJANGO_ZARINPAL_MERCHANT_ID")
