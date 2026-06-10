@@ -2,9 +2,7 @@ services:
   django:
     build:
       context: .
-    # command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     # command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
-    # command: python /code/manage.py runserver 0.0.0.0:8000
     command: sh /code/entrypoint.sh
     volumes:
       - .:/code  
@@ -22,6 +20,8 @@ services:
       - DJANGO_POSTGRES_PASSWORD=${DOCKER_COMPOSE_DJANGO_POSTGRES_PASSWORD}
       - DJANGO_EMAIL_HOST_USER=${DOCKER_COMPOSE_DJANGO_EMAIL_HOST_USER}
       - DJANGO_EMAIL_HOST_PASSWORD=${DOCKER_COMPOSE_DJANGO_EMAIL_HOST_PASSWORD}
+      - DJANGO_ALLOWED_HOSTS=${DOCKER_COMPOSE_DJANGO_ALLOWED_HOSTS}
+      - DJANGO_CSRF_TRUSTED_ORIGINS=${DOCKER_COMPOSE_DJANGO_CSRF_TRUSTED_ORIGINS}
     depends_on:
       - db
     expose:
@@ -31,7 +31,7 @@ services:
 
   db:
     image: postgres:16
-    container_name: postgres-db
+    container_name: tisa-db
     restart: always
     environment:
       POSTGRES_USER: ${DOCKER_COMPOSE_DJANGO_POSTGRES_USER}
@@ -55,7 +55,8 @@ services:
       - ./media:/var/www/media:ro
       - protected_videos:/var/protected_videos:ro
 
-      - certbot_www:/var/www/certbot
+      # - certbot_www:/var/www/certbot
+      - ./certbot-webroot:/var/www/certbot
       - certbot_certs:/etc/letsencrypt
     depends_on:
       - django
@@ -67,7 +68,8 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - certbot_www:/var/www/certbot
+      - ./certbot-webroot:/var/www/certbot
+      # - certbot_www:/var/www/certbot
       - certbot_certs:/etc/letsencrypt
     networks:
       - tisa_network
@@ -77,7 +79,7 @@ volumes:
   static:
   protected_videos:
 
-  certbot_www:
+  # certbot_www:
   certbot_certs:
 
 networks:
