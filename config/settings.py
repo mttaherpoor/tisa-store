@@ -23,7 +23,6 @@ env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -33,15 +32,13 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost","tisavista.ir","www.tisavista.ir","tisa-store-django-1",]
+# ALLOWED_HOSTS = ["127.0.0.1", "localhost","tisavista.ir","www.tisavista.ir","tisa-store-django-1",'79.76.127.13']
+ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(",")
 
+print(ALLOWED_HOSTS)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://tisavista.ir",
-    "https://www.tisavista.ir",
-    # "https://87.248.130.21",  # اگر از IP مستقیم استفاده می‌کنید
-]
+CSRF_TRUSTED_ORIGINS = env("DJANGO_CSRF_TRUSTED_ORIGINS").split(",")
 
 # Application definition
 
@@ -51,8 +48,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sites",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    
     # 3rd party apps
     "crispy_forms",
     "crispy_bootstrap5",
@@ -62,6 +61,7 @@ INSTALLED_APPS = [
     "jalali_date",
     "django_ckeditor_5",
     # "django_cleanup.apps.CleanupConfig",
+
     # local apps
     "accounts",
     "pages",
@@ -73,17 +73,19 @@ INSTALLED_APPS = [
     "blog",
 ]
 
-SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    # language
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Add the account middleware:
+    "django.contrib.sites.middleware.CurrentSiteMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
 
@@ -160,8 +162,8 @@ AUTHENTICATION_BACKENDS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-# LANGUAGE_CODE = "fa"
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "fa"
 
 LANGUAGES = (
     ("en", "English"),
@@ -201,8 +203,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.CustomUser"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
+LOGIN_URL = "account_login"
+
 
 # all auth settings
+SITE_ID = 1
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Tisavista] "
 ACCOUNT_SESSION_REMEMBER = False
 # ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_USERNAME_REQUIRED = True
@@ -210,6 +216,7 @@ ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 # crispy from setting
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -229,168 +236,5 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
 }
-
-# ckeditor 5
-customColorPalette = [
-    {"color": "hsl(4, 90%, 58%)", "label": "Red"},
-    {"color": "hsl(340, 82%, 52%)", "label": "Pink"},
-    {"color": "hsl(291, 64%, 42%)", "label": "Purple"},
-    {"color": "hsl(262, 52%, 47%)", "label": "Deep Purple"},
-    {"color": "hsl(231, 48%, 48%)", "label": "Indigo"},
-    {"color": "hsl(207, 90%, 54%)", "label": "Blue"},
-]
-CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
-CKEDITOR_5_UPLOAD_PATH = "uploads/"
-CKEDITOR_5_ALLOW_FILE_TYPES = True
-CKEDITOR_5_UPLOAD_FILE_TYPES = ['jpeg', 'pdf', 'png', 'webp']
-
-CKEDITOR_5_CONFIGS = {
-    "default": {
-        "language": "fa",
-        "direction": "rtl",
-        "toolbar": {
-            "items": [
-                "heading",
-                "|",
-                "bold",
-                "italic",
-                "link",
-                "bulletedList",
-                "numberedList",
-                "blockQuote",
-                "imageUpload",
-            ],
-        },
-    },
-    "extends": {
-        "language": "fa",
-        "direction": "rtl",
-        "blockToolbar": [
-            "paragraph",
-            "heading1",
-            "heading2",
-            "heading3",
-            "|",
-            "bulletedList",
-            "numberedList",
-            "|",
-            "blockQuote",
-        ],
-        "toolbar": {
-            "items": [
-                "heading",
-                "|",
-                "outdent",
-                "indent",
-                "|",
-                "bold",
-                "italic",
-                "link",
-                "underline",
-                "strikethrough",
-                "code",
-                "subscript",
-                "superscript",
-                "highlight",
-                "|",
-                "codeBlock",
-                "sourceEditing",
-                "insertImage",
-                "bulletedList",
-                "numberedList",
-                "todoList",
-                "|",
-                "blockQuote",
-                "uploadFile",  # ✅ این خط را اضافه کنید
-                "|",
-                "fontSize",
-                "fontFamily",
-                "fontColor",
-                "fontBackgroundColor",
-                "mediaEmbed",
-                "removeFormat",
-                "insertTable",
-                "mediaEmbed",
-            ],
-            "shouldNotGroupWhenFull": True,
-        },
-
-        "image": {
-            "toolbar": [
-                "imageTextAlternative",
-                "|",
-                "imageStyle:alignLeft",
-                "imageStyle:alignRight",
-                "imageStyle:alignCenter",
-                "imageStyle:side",
-                "|",
-            ],
-            "styles": [
-                "full",
-                "side",
-                "alignLeft",
-                "alignRight",
-                "alignCenter",
-            ],
-        },
-        "table": {
-            "contentToolbar": [
-                "tableColumn",
-                "tableRow",
-                "mergeTableCells",
-                "tableProperties",
-                "tableCellProperties",
-            ],
-            "tableProperties": {
-                "borderColors": customColorPalette,
-                "backgroundColors": customColorPalette,
-            },
-            "tableCellProperties": {
-                "borderColors": customColorPalette,
-                "backgroundColors": customColorPalette,
-            },
-        },
-        "heading": {
-            "options": [
-                {
-                    "model": "paragraph",
-                    "title": "Paragraph",
-                    "class": "ck-heading_paragraph",
-                },
-                {
-                    "model": "heading1",
-                    "view": "h1",
-                    "title": "Heading 1",
-                    "class": "ck-heading_heading1",
-                },
-                {
-                    "model": "heading2",
-                    "view": "h2",
-                    "title": "Heading 2",
-                    "class": "ck-heading_heading2",
-                },
-                {
-                    "model": "heading3",
-                    "view": "h3",
-                    "title": "Heading 3",
-                    "class": "ck-heading_heading3",
-                },
-            ]
-        },
-    },
-    "list": {
-        "properties": {
-            "styles": "true",
-            "startIndex": "true",
-            "reversed": "true",
-        }
-    },
-}
-
-# Define a constant in settings.py to specify file upload permissions
-CKEDITOR_5_FILE_UPLOAD_PERMISSION = (
-    "staff"  # Possible values: "staff", "authenticated", "any"
-)
-
 
 ZARINPAL_MERCHANT_ID = env("DJANGO_ZARINPAL_MERCHANT_ID")
