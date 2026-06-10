@@ -20,7 +20,6 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class ProfileForm(forms.ModelForm):
-    # اضافه کردن محدودیت حجم فایل به فیلد avatar / profile_image
     profile_image = forms.ImageField(required=False, validators=[validate_file_size])
 
     class Meta:
