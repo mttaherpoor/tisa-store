@@ -15,17 +15,48 @@
           </div>
 
           <div class="card-body">
-            <form method="post" novalidate>
+          <form method="post">
               {% csrf_token %}
-              {{ form|crispy }}
 
-              <div class="d-grid gap-2 mt-3">
-                <button type="submit" class="btn btn-success">
-                  <i class="bi bi-box-arrow-in-right me-1"></i> {% trans "Login" %}
-                </button>
+              <!-- Login -->
+              <div class="mb-3">
+                  <label for="{{ form.login.id_for_label }}" class="form-label">
+                      {{ form.login.label }}
+                  </label>
+                  {{ form.login }}
               </div>
-            </form>
 
+              <!-- Password with eye icon -->
+              <div class="password-wrapper" style="position:relative;">
+                  <input type="password" autocomplete="current-password" class="form-control" />
+
+                  <span class="toggle-password" style="
+                      position:absolute;
+                      right:10px;
+                      top:50%;
+                      transform:translateY(-50%);
+                      cursor:pointer;
+                      user-select:none;
+                  ">
+                      👁
+                  </span>
+              </div>
+              <!-- Remember me -->
+              {% if form.remember %}
+              <div class="form-check mb-3">
+                  {{ form.remember }}
+                  <label class="form-check-label" for="{{ form.remember.id_for_label }}">
+                      {{ form.remember.label }}
+                  </label>
+              </div>
+              {% endif %}
+
+              <!-- Submit -->
+              <button class="btn btn-success w-100" type="submit">
+                  Login
+              </button>
+          </form>
+          
             <div class="d-flex justify-content-between align-items-center mt-3">
             <div class="w-100 text-center">
                 <small class="text-muted">
@@ -55,4 +86,26 @@
     </div>
   </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById("id_login").classList.add("form-control");
+    document.getElementById("id_password").classList.add("form-control");
+</script>
+
+<script>
+document.addEventListener("click", function (e) {
+    if (!e.target.classList.contains("toggle-password")) return;
+
+    const wrapper = e.target.closest(".password-wrapper");
+    const input = wrapper.querySelector("input");
+
+    if (!input) return;
+
+    input.type = input.type === "password" ? "text" : "password";
+
+    e.target.textContent = input.type === "password" ? "👁" : "🙈";
+});
+</script>  
 {% endblock %}

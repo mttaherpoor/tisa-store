@@ -6,7 +6,7 @@
     <div class="container-fluid p-0">
       <!-- Brand / Logo -->
       <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
-        <img src="{% static 'images/logo.svg' %}" width="36" height="36" class="me-2">
+        <img src="{% static 'images/logo.png' %}" width="50" height="50" class="me-2">
       </a>
 
       <!-- Mobile toggler -->
@@ -123,6 +123,25 @@
               </a>
             </div>
           {% endif %}
+
+          {% comment %} <form action="{% url 'set_language' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+              {% get_current_language as LANGUAGE_CODE %}
+
+              {% if LANGUAGE_CODE == "fa" %}
+                  <input type="hidden" name="language" value="en">
+                  <button type="submit" class="btn btn-outline-secondary">
+                      🇬🇧 EN
+                  </button>
+              {% else %}
+                  <input type="hidden" name="language" value="fa">
+                  <button type="submit" class="btn btn-outline-secondary">
+                      🇮🇷 FA
+                  </button>
+              {% endif %}
+          </form> {% endcomment %}
 
         </div> <!-- .d-flex align-items-center -->
       </div> <!-- .collapse -->

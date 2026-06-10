@@ -22,15 +22,15 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("i18n/", include("django.conf.urls.i18n")),
+    path("accounts/", include("allauth.urls")),
     path("", include("pages.urls")),
     path("accounts/", include("accounts.urls")),
-    path("accounts/", include("allauth.urls")),
     path("products/", include("products.urls")),
     path("cart/", include("cart.urls")),
     path("order/", include("orders.urls")),
     path("payment/", include("payment.urls")),
     path("blog/", include("blog.urls")),
-    path("accounts/", include("accounts.urls")),
     # ckeditor5
     path("ckeditor5/", include("django_ckeditor_5.urls")),
     # Rosetta (i18n)

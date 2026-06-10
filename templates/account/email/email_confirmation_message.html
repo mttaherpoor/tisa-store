@@ -1,0 +1,22 @@
+{% load account i18n %}
+
+{% user_display user as user_display %}
+
+<!DOCTYPE html>
+<html>
+<body style="font-family: sans-serif;">
+  <h2>Confirm your email</h2>
+
+  <p>Hello {{ user_display }},</p>
+
+  <p>
+    Please confirm your email by clicking the link below:
+  </p>
+
+  <p>
+    <a href="{{ activate_url }}">{{ activate_url }}</a>
+  </p>
+
+  <p>If you didn’t request this, ignore this email.</p>
+</body>
+</html>
