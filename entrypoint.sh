@@ -2,6 +2,9 @@
 
 set -e
 
+# cd /code/backend
+cd /app
+
 echo "Running migrations..."
 python manage.py migrate --noinput
 

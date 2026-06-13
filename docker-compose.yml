@@ -1,15 +1,17 @@
 services:
   backend:
-    build:
-      context: .
+    build: ./backend
     container_name: tisa_backend
-    # command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
-    command: sh /code/entrypoint.sh
+    command: >
+      sh -c "python manage.py migrate &&
+            python manage.py collectstatic --noinput &&
+            gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 1200"
+
     volumes:
-      - .:/code  
-      - tisa_static:/code/staticfiles
-      - ./media:/var/www/media
-      - protected_videos:/var/www/tisa/protected
+      - ./backend:/app 
+      - tisa_static:/app/staticfiles
+      - tisa_media:/app/media
+      - tisa_protected:/var/www/tisa/protected
     env_file:
       - .env
     environment:
@@ -26,8 +28,6 @@ services:
       - DJANGO_CSRF_TRUSTED_ORIGINS=${DOCKER_COMPOSE_DJANGO_CSRF_TRUSTED_ORIGINS}
     depends_on:
       - db
-    # expose:
-    #   - 8000
     networks:
       tisa_network:
 
@@ -40,55 +40,29 @@ services:
       POSTGRES_PASSWORD: ${DOCKER_COMPOSE_DJANGO_POSTGRES_PASSWORD}
       POSTGRES_DB: ${DOCKER_COMPOSE_DJANGO_POSTGRES_DB}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - tisa_db:/var/lib/postgresql/data
     networks:
       tisa_network:
         aliases:
           - tisa-db-host
 
-  # nginx:
-  #   image: nginx:latest
-  #   container_name: nginx_tisa
-  #   restart: always
-  #   # ports:ثط
-  #   #   - "80:80"
-  #   #   - "443:443"
-  #   volumes:
-  #     - ./nginx:/etc/nginx/conf.d
-  #     - static:/code/staticfiles:ro
-  #     - ./media:/var/www/media:ro
-  #     - protected_videos:/var/protected_videos:ro
-
-  #     # - certbot_www:/var/www/certbot
-  #     - ./certbot-webroot:/var/www/certbot
-  #     - certbot_certs:/etc/letsencrypt
-  #   depends_on:
-  #     - backend
-  #   networks:
-  #     - tisa_network
-
-
-  # certbot:
-  #   image: certbot/certbot
-  #   container_name: certbot
-  #   volumes:
-  #     - ./certbot-webroot:/var/www/certbot
-  #     # - certbot_www:/var/www/certbot
-  #     - certbot_certs:/etc/letsencrypt
-  #   networks:
-  #     - tisa_network
-
 volumes:
-  postgres_data:
   tisa_static:
     external: true
     name: tisa_static
-  protected_videos:
-    external: true
-    name: protected_videos
 
-  # certbot_www:
-  # certbot_certs:
+  tisa_media:
+    external: true
+    name: tisa_media
+    
+  tisa_db:
+    external: true
+    name: tisa_db
+
+  tisa_protected:
+    external: true
+    name: tisa_protected
+
 
 networks:
   tisa_network:
