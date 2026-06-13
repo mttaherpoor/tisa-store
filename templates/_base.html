@@ -2,7 +2,7 @@
 {% load i18n %}
 
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="ltr">
 
 <head>
   <meta charset="utf-8">
@@ -38,14 +38,14 @@
     </div>
   {% endif %}
 
-  <!-- Hero Section -->
+  {% comment %} <!-- Hero Section -->
   <section class="hero-section">
     <div class="container position-relative">
       <h1>{% trans "Build the Cities of the Future with Us! 🌍" %}</h1>
       <p class="lead">{% trans "Practical GIS, AutoCAD Map, urban planning, and modern city technologies for designing smart and sustainable cities." %}</p>
       <a href="{{ free_resources_url }}" class="btn btn-light btn-lg mt-3">{% trans "See Free Resources! 🚀" %}</a>
     </div>
-  </section>
+  </section> {% endcomment %}
   
   <main id="main-content" class="container my-5">
     {% block content %}{% endblock %}

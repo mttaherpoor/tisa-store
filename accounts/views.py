@@ -112,6 +112,7 @@ def video_files_list(request, order_item_id):
    
 @login_required
 def download_video_xaccel(request, file_id):
+    print("DOWNLOAD VIEW HIT")
     vf = get_object_or_404(VideoFile, id=file_id)
 
     # ✅ بررسی اینکه کاربر واقعاً محصول را خریده باشد
@@ -130,9 +131,10 @@ def download_video_xaccel(request, file_id):
 
     # ✅ مسیر داخلی برای Nginx
     internal_path = f"/protected_videos_internal/{vf.file.name}"
-
+    print(internal_path)
     response = HttpResponse()
     response["X-Accel-Redirect"] = internal_path
     response["Content-Disposition"] = f'attachment; filename="{os.path.basename(real_path)}"'
     response["Content-Type"] = "application/octet-stream"
+    print(os.path.basename(real_path))
     return response

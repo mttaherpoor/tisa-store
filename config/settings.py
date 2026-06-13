@@ -37,7 +37,6 @@ DEBUG = env.bool("DJANGO_DEBUG")
 # ALLOWED_HOSTS = ["127.0.0.1", "localhost","tisavista.ir","www.tisavista.ir","tisa-store-django-1",'79.76.127.13']
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(",")
 
-print(ALLOWED_HOSTS)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_TRUSTED_ORIGINS = env("DJANGO_CSRF_TRUSTED_ORIGINS").split(",")
@@ -123,10 +122,10 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("DJANGO_POSTGRES_NAME"),
+        "NAME": env("DJANGO_POSTGRES_DB"),
         "USER": env("DJANGO_POSTGRES_USER"),
         "PASSWORD": env("DJANGO_POSTGRES_PASSWORD"),
-        "HOST": "db",
+        "HOST": env("DJANGO_POSTGRES_HOST"),
         "PORT": 5432,
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
@@ -193,9 +192,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Media
 MEDIA_URL = "/media/"
 MEDIA_ROOT = '/var/www/media'
-PROTECTED_VIDEO_ROOT = '/var/protected_videos'
+PROTECTED_VIDEO_ROOT = '/var/www/tisa/protected'
 PROTECTED_VIDEO_STORAGE = FileSystemStorage(location=PROTECTED_VIDEO_ROOT)
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -253,3 +251,7 @@ CKEDITOR_5_CONFIGS = ckeditor.CKEDITOR_5_CONFIGS
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = ckeditor.CKEDITOR_5_FILE_UPLOAD_PERMISSION
 
 ZARINPAL_MERCHANT_ID = env("DJANGO_ZARINPAL_MERCHANT_ID")
+
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880000  # 5GB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760 
