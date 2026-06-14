@@ -17,44 +17,9 @@
           <div class="card-body">
           <form method="post">
               {% csrf_token %}
-
-              <!-- Login -->
-              <div class="mb-3">
-                  <label for="{{ form.login.id_for_label }}" class="form-label">
-                      {{ form.login.label }}
-                  </label>
-                  {{ form.login }}
-              </div>
-
-              <!-- Password with eye icon -->
-              <div class="password-wrapper" style="position:relative;">
-                  <input type="password" autocomplete="current-password" class="form-control" />
-
-                  <span class="toggle-password" style="
-                      position:absolute;
-                      right:10px;
-                      top:50%;
-                      transform:translateY(-50%);
-                      cursor:pointer;
-                      user-select:none;
-                  ">
-                      👁
-                  </span>
-              </div>
-              <!-- Remember me -->
-              {% if form.remember %}
-              <div class="form-check mb-3">
-                  {{ form.remember }}
-                  <label class="form-check-label" for="{{ form.remember.id_for_label }}">
-                      {{ form.remember.label }}
-                  </label>
-              </div>
-              {% endif %}
-
+              {{form | crispy}}
               <!-- Submit -->
-              <button class="btn btn-success w-100" type="submit">
-                  Login
-              </button>
+              <button class="btn btn-success w-100" type="submit">{% trans "Login" %} </button>
           </form>
           
             <div class="d-flex justify-content-between align-items-center mt-3">
@@ -88,7 +53,7 @@
 </section>
 {% endblock %}
 
-{% block extra_js %}
+{% comment %} {% block extra_js %}
 <script>
     document.getElementById("id_login").classList.add("form-control");
     document.getElementById("id_password").classList.add("form-control");
@@ -108,4 +73,4 @@ document.addEventListener("click", function (e) {
     e.target.textContent = input.type === "password" ? "👁" : "🙈";
 });
 </script>  
-{% endblock %}
+{% endblock %} {% endcomment %}
