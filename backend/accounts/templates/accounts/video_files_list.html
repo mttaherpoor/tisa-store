@@ -23,7 +23,7 @@
                 <i class="bi bi-play-circle text-primary fs-5 me-2"></i>
                 <span>{{ file.filename|default:file.file.name }}</span>
               </div>
-              <a href="{% url 'download_video' file.id %}" class="btn btn-sm btn-outline-primary">
+              <button class="btn btn-sm btn-outline-primary" onclick="downloadFile({{ file.id }})"> {% trans "Download" %} </button>
                 <i class="bi bi-download"></i> {% trans "Download" %}
               </a>
             </li>
@@ -37,4 +37,19 @@
     </div>
   </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+async function downloadFile(fileId) {
+    const res = await fetch(`/api/video/${fileId}/download/`);
+    const data = await res.json();
+
+    if (data.download_url) {
+        window.location.href = data.download_url;
+    } else {
+        alert("Download failed");
+    }
+}
+</script>
 {% endblock %}

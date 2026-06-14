@@ -17,6 +17,8 @@ from environs import Env
 import os
 
 import config.ckeditor as ckeditor
+import config.minio as minio
+from config.storage import VideoStorage
 
 # for environment variables
 env = Env()
@@ -74,6 +76,9 @@ INSTALLED_APPS = [
     "blog",
 ]
 
+INSTALLED_APPS += [
+    "storages",
+]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -96,7 +101,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(BASE_DIR.joinpath("templates"))],
+        "DIRS": [str(BASE_DIR / "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -184,16 +189,18 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    BASE_DIR / "static",
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media
 MEDIA_URL = "/media/"
 MEDIA_ROOT = '/var/www/media'
 PROTECTED_VIDEO_ROOT = '/var/www/tisa/protected'
-PROTECTED_VIDEO_STORAGE = FileSystemStorage(location=PROTECTED_VIDEO_ROOT)
+PROTECTED_VIDEO_STORAGE = VideoStorage()
+# PROTECTED_VIDEO_STORAGE = FileSystemStorage(location=PROTECTED_VIDEO_ROOT)
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -252,6 +259,21 @@ CKEDITOR_5_FILE_UPLOAD_PERMISSION = ckeditor.CKEDITOR_5_FILE_UPLOAD_PERMISSION
 
 ZARINPAL_MERCHANT_ID = env("DJANGO_ZARINPAL_MERCHANT_ID")
 
-
+#minio
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880000  # 5GB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760 
+
+AWS_ACCESS_KEY_ID = minio.AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY = minio.AWS_SECRET_ACCESS_KEY
+
+AWS_STORAGE_BUCKET_NAME = minio.AWS_STORAGE_BUCKET_NAME
+AWS_S3_REGION_NAME = minio.AWS_S3_REGION_NAME
+
+AWS_S3_ENDPOINT_URL = minio.AWS_S3_ENDPOINT_URL
+
+AWS_S3_SIGNATURE_VERSION = minio.AWS_S3_SIGNATURE_VERSION
+
+AWS_S3_FILE_OVERWRITE = minio.AWS_S3_FILE_OVERWRITE
+AWS_DEFAULT_ACL = minio.AWS_DEFAULT_ACL
+
+AWS_QUERYSTRING_AUTH = minio.AWS_QUERYSTRING_AUTH

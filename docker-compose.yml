@@ -46,6 +46,23 @@ services:
         aliases:
           - tisa-db-host
 
+  minio:
+    image: minio/minio
+    container_name: tisa_minio
+    command: server /data --console-address ":9001"
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${DOCKER_COMPOSE_MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${DOCKER_COMPOSE_MINIO_ROOT_PASSWORD}
+    volumes:
+      - tisa_minio:/data
+    networks:
+      - tisa_network
+
+
 volumes:
   tisa_static:
     external: true
@@ -62,6 +79,8 @@ volumes:
   tisa_protected:
     external: true
     name: tisa_protected
+
+  tisa_minio:
 
 
 networks:

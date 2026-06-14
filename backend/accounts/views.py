@@ -5,11 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Prefetch
-from django.http import HttpResponse, Http404,HttpResponseForbidden
+from django.http import HttpResponse, Http404, HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404,render
 from django.views.generic import TemplateView
 
+
+import boto3
 import os
+from datetime import timedelta
 
 from .forms import ProfileForm,TicketForm
 from orders.models import Order,OrderItem
@@ -110,28 +113,100 @@ def video_files_list(request, order_item_id):
     )
 
    
-@login_required
-def download_video_xaccel(request, file_id):
-    vf = get_object_or_404(VideoFile, id=file_id)
+# @login_required
+# def download_video_xaccel(request, file_id):
+#     vf = get_object_or_404(VideoFile, id=file_id)
 
-    # ✅ بررسی اینکه کاربر واقعاً محصول را خریده باشد
-    has_access = OrderItem.objects.filter(
-        product=vf.video.product,
+#     # ✅ بررسی اینکه کاربر واقعاً محصول را خریده باشد
+#     has_access = OrderItem.objects.filter(
+#         product=vf.video.product,
+#         order__user=request.user,
+#         order__is_paid=True
+#     ).exists()
+
+#     if not has_access:
+#         return HttpResponseForbidden("دسترسی ندارید.")
+
+#     real_path = vf.file.path
+#     if not os.path.exists(real_path):
+#         raise Http404("فایل پیدا نشد.")
+
+#     # ✅ مسیر داخلی برای Nginx
+#     internal_path = f"/protected_videos_internal/{vf.file.name}"    
+#     response = HttpResponse()
+#     response["X-Accel-Redirect"] = internal_path
+#     response["Content-Disposition"] = f'attachment; filename="{os.path.basename(real_path)}"'
+#     response["Content-Type"] = "application/octet-stream"
+#     return response
+
+# @login_required
+# def get_video_stream_url(request, file_id):
+
+#     vf = VideoFile.objects.get(id=file_id)
+
+#     # 🔐 access check
+#     has_access = vf.video.product.orderitem_set.filter(
+#         order__user=request.user,
+#         order__is_paid=True
+#     ).exists()
+
+#     if not has_access:
+#         return HttpResponseForbidden("No access")
+
+#     s3 = boto3.client(
+#         "s3",
+#         endpoint_url=settings.AWS_S3_ENDPOINT_URL,
+#         aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+#         aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+#         region_name=settings.AWS_S3_REGION_NAME,
+#     )
+
+#     url = s3.generate_presigned_url(
+#         ClientMethod="get_object",
+#         Params={
+#             "Bucket": settings.AWS_STORAGE_BUCKET_NAME,
+#             "Key": vf.file.name,
+#             "ResponseContentType": "video/mp4",
+#             "ResponseContentDisposition": "inline",
+#         },
+#         ExpiresIn=1200,  # 10 minutes
+#     )
+
+#     return JsonResponse({
+#         "stream_url": url
+#     })
+
+@login_required
+def get_video_download_url(request, file_id):
+    vf = VideoFile.objects.get(id=file_id)
+
+    # 🔐 access check (same logic you already use)
+    has_access = vf.video.product.orderitem_set.filter(
         order__user=request.user,
         order__is_paid=True
     ).exists()
 
     if not has_access:
-        return HttpResponseForbidden("دسترسی ندارید.")
+        return HttpResponseForbidden("No access")
 
-    real_path = vf.file.path
-    if not os.path.exists(real_path):
-        raise Http404("فایل پیدا نشد.")
+    s3 = boto3.client(
+        "s3",
+        endpoint_url=settings.AWS_S3_ENDPOINT_URL,
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        region_name=settings.AWS_S3_REGION_NAME,
+    )
 
-    # ✅ مسیر داخلی برای Nginx
-    internal_path = f"/protected_videos_internal/{vf.file.name}"    
-    response = HttpResponse()
-    response["X-Accel-Redirect"] = internal_path
-    response["Content-Disposition"] = f'attachment; filename="{os.path.basename(real_path)}"'
-    response["Content-Type"] = "application/octet-stream"
-    return response
+    url = s3.generate_presigned_url(
+        ClientMethod="get_object",
+        Params={
+            "Bucket": settings.AWS_STORAGE_BUCKET_NAME,
+            "Key": vf.file.name,
+            "ResponseContentDisposition": f'attachment; filename="{vf.filename or vf.file.name}"'
+        },
+        ExpiresIn=600,  # 10 min valid
+    )
+
+    return JsonResponse({
+        "download_url": url
+    })
