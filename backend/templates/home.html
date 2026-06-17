@@ -2,276 +2,216 @@
 {% load static %}
 {% load i18n %}
 {% load humanize %}
-{% load persian_translation_tags %}
-{% load jalali_tags %}
 
-{% block page_title %}{% trans "Home" %}{% endblock %}
+{% block page_title %}TisaVista | Spatial Intelligence for Planning & Decision Support{% endblock %}
 
 {% block extra_css %}
 <style>
   :root{
-    --primary: #4CAF50;
-    --accent: #FFC107;
-    --bg: #F6F7F9;
-    --text: #212529;
+    --tv-green: #4CAF50;
+    --tv-blue: #2C4A9A;
+    --dark: #0F172A;
   }
-
-  /* HERO with background image + overlay */
-  .hero-image {
-    position: relative;   static/images/home.jpg
-    background-image: url("{% static 'images/home.jpg' %}"); /* put your image at static/images/home-hero.jpg */
+  .hero {
+    background-image: url("{% static 'images/hero.png' %}");
     background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    min-height: 64vh;
+    background-position: center;
+    min-height: 85vh;
+    position: relative;
     display: flex;
     align-items: center;
-    color: #fff;
   }
-  .hero-image::before {
+  .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    /* dark overlay for text contrast */
-    background: linear-gradient(180deg, rgba(4,20,10,0.55), rgba(4,20,10,0.65));
-    z-index: 0;
+    background: linear-gradient(90deg, rgba(15,23,42,0.92) 55%, rgba(15,23,42,0.65) 100%);
   }
-  .hero-inner {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    padding: 4rem 1rem;
-  }
-  .hero-inner .display-5 { font-weight: 700; }
-  .hero-sub { opacity: 0.95; }
-
-  .hero-cta .btn-primary {
-    background: #ffffff;
-    color: var(--text);
-    border: none;
-  }
-  .hero-cta .btn-accent {
-    background: var(--accent);
-    color: #111;
-    border: none;
-  }
-
-  /* Soft background sections */
-  section.bg-soft { background: var(--bg); }
-
-  /* Product card */
-  .card.product-card img { object-fit: cover; height: 200px; }
-
-  /* Blog card */
-  .card.blog-card img { object-fit: cover; height: 160px; }
-
-  /* CTA section */
-  .cta-section { background: var(--primary); color: #fff; }
-
-  /* FAQ / accordion tweaks (if used later) */
-  .accordion-button { background: #fff; }
-
-  /* Responsive */
-  @media (max-width: 767px) {
-    .hero-image { min-height: 48vh; background-position: center 30%; }
-    .hero-inner { padding: 2.5rem 1rem; }
-    .hero-inner .display-5 { font-size: 1.6rem; }
-  }
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
+  .hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.15; }
+  .roadmap-step { transition: all 0.3s ease; }
+  .roadmap-step:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 </style>
 {% endblock %}
 
 {% block content %}
 
-<!-- HERO: image background with overlay, title and CTAs on top -->
-<section class="hero-section" role="img" aria-label="{% trans 'Hero: building smart cities' %}">
-  <div class="container hero-inner text-center">
-    <h1 class="display-5 fw-bold mb-3">
-      {% trans "Learn, Create, and Build Smart Cities Together!" %}
-    </h1>
-    <p class="lead hero-sub mb-4">
-      {% trans "Practical training in GIS, Python, Machine Learning, and Smart Urban Planning — designed for city makers of the future." %}
-    </p>
-
-    <div class="d-flex justify-content-center gap-2 hero-cta flex-wrap">
-      <a href="{% url 'product_list' %}" class="btn btn-light btn-lg me-2 mb-2">
-        {% trans "Start Learning" %}
-      </a>
-      <a href="{{ free_resources_url }}" class="btn btn-accent btn-lg mb-2">
-        {% trans "Get Free Resources" %}
-      </a>
-    </div>
-
-    <!-- optional small note under CTAs -->
-    <div class="mt-3 text-white-50 small">
-      {% trans "Join our community — hands-on courses, project-based learning and real urban datasets." %}
-    </div>
-  </div>
-</section>
-
-<!-- Features -->
-<section class="py-5 bg-soft text-center">
+<!-- HERO -->
+<section class="hero text-white">
   <div class="container">
-    <h2 class="fw-bold mb-4">{% trans "What We Offer" %}</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm h-100 p-4">
-          <i class="bi bi-map feature-icon fs-1 mb-3" style="color:var(--primary)"></i>
-          <h5>{% trans "GIS & Urban Analytics" %}</h5>
-          <p class="text-muted">{% trans "Learn spatial analysis, mapping, and data visualization with QGIS, ArcGIS, and Python." %}</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm h-100 p-4">
-          <i class="bi bi-cpu feature-icon fs-1 mb-3" style="color:var(--primary)"></i>
-          <h5>{% trans "Machine Learning for Cities" %}</h5>
-          <p class="text-muted">{% trans "Use AI and ML to predict urban heat, optimize transport, and design smarter infrastructure." %}</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm h-100 p-4">
-          <i class="bi bi-globe2 feature-icon fs-1 mb-3" style="color:var(--primary)"></i>
-          <h5>{% trans "Smart & Sustainable Cities" %}</h5>
-          <p class="text-muted">{% trans "Explore digital twins and eco-city models — create data-driven, greener futures." %}</p>
-        </div>
+    <div class="hero-content">
+      <h1 class="mb-4">Spatial Intelligence for Urban Planning,<br>GIS &amp; Better Decision Making</h1>
+      <p class="lead fs-3 mb-4">
+        Master GIS, Spatial Analysis, Python for GIS and Spatial Decision Support through real-world urban projects, professional workflows and practical datasets.
+      </p>
+      <div class="d-flex gap-3 flex-wrap">
+        <a href="{% url 'product_list' %}" class="btn btn-light btn-lg px-5 py-3">{% trans "Explore Academy" %}</a>
+        <a href="{% url 'free_resources' %}" class="btn btn-outline-light btn-lg px-5 py-3">{% trans "Start with Free Resources" %}</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Popular Courses (show first 3 products if available) -->
+<!-- Story -->
+<section class="story-section py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h2 class="display-6 fw-bold mb-4">From University Classrooms to Real Urban Projects</h2>
+        <p class="lead text-muted">
+          TisaVista was founded by urban planners and GIS specialists with over 20 years of combined experience in research, university teaching, large-scale urban regeneration projects (including URBiNAT - Horizon 2020), and spatial decision-making. 
+          We bridge the gap between technical GIS training and the real skills needed for practical urban planning.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<section class="py-4" style="background:#f8fafc; border-bottom:1px solid #e2e8f0;">
+  <div class="container">
+    <div class="row text-center text-dark fw-medium">
+      <div class="col-6 col-md-3 mb-3 mb-md-0"><h4 class="text-primary">20+ Years</h4><p class="mb-0">Urban Planning & GIS</p></div>
+      <div class="col-6 col-md-3 mb-3 mb-md-0"><h4 class="text-primary">19+</h4><p class="mb-0">Free Resources</p></div>
+      <div class="col-6 col-md-3 mb-3 mb-md-0"><h4 class="text-primary">7</h4><p class="mb-0">Professional Courses</p></div>
+      <div class="col-6 col-md-3"><h4 class="text-primary">Project-Based</h4><p class="mb-0">Learning Approach</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Meet the Founders -->
 <section class="py-5">
-  <div class="container text-center">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class="fw-bold mb-0">{% trans "Popular Courses" %}</h2>
-      <a href="{% url 'product_list' %}" class="btn btn-link">{% trans "See all" %}</a>
-    </div>
-
-    <div class="row g-4 justify-content-center">
-      {% for product in products|slice:":3" %}
-      <div class="col-md-4">
-        <div class="card product-card shadow-sm border-0 h-100">
-          {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="card-img-top">
-          {% else %}
-            <div class="bg-light d-flex align-items-center justify-content-center" style="height:200px;">
-              <span class="text-muted">{% trans "No image" %}</span>
-            </div>
-          {% endif %}
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">{{ product.title }}</h5>
-            <p class="text-muted small mb-3 flex-grow-1">{{ product.short_description|default_if_none:'' }}</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="fw-bold">{{ product.price|intcomma:False|translate_number }} {% trans "$" %}</div>
-              <a href="{{ product.get_absolute_url }}" class="btn btn-outline-secondary btn-sm">{% trans "View" %}</a>
-            </div>
-          </div>
-        </div>
+  <div class="container">
+    <h2 class="text-center display-5 fw-bold mb-5">Meet the Founders</h2>
+    <div class="row g-5 justify-content-center">
+      <div class="col-md-5 text-center">
+        <img src="{% static 'images/team/nahid.jpg' %}" class="rounded-circle mb-4" width="180" height="180" style="object-fit:cover;" alt="Dr. Nahid Nematikutenaee">
+        <h5>Dr. Nahid Nematikutenaee</h5>
+        <p class="text-muted">Urban Planner, GIS Specialist, Researcher &amp; Educator</p>
+        <p class="small text-muted">20+ years in urban regeneration, spatial analysis and academic teaching.</p>
       </div>
-      {% empty %}
-      <div class="col-12">
-        <div class="alert alert-info">{% trans "No courses available yet — stay tuned!" %}</div>
+      <div class="col-md-5 text-center">
+        <img src="{% static 'images/team/taher.jpg' %}" class="rounded-circle mb-4" width="180" height="180" style="object-fit:cover;" alt="Mohamad Taher Taherpour">
+        <h5>Mohamad Taher Taherpour</h5>
+        <p class="text-muted">Backend Developer &amp; Geospatial Systems Engineer</p>
+        <p class="small text-muted">Expert in Django, PostGIS, spatial databases and building practical geospatial tools.</p>
       </div>
-      {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- Blog preview (recent 3 posts) -->
-<section class="py-5 bg-soft">
+<!-- Why TisaVista -->
+<section class="py-5">
   <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class="fw-bold mb-0">{% trans "Latest from the Blog" %}</h2>
-      <a href="{% url 'post-list' %}" class="btn btn-link">{% trans "Read all posts" %}</a>
+    <h2 class="text-center display-5 fw-bold mb-5">Why TisaVista Exists</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="bg-light p-5 rounded-4 text-center">
+          <p class="lead">
+            Most GIS courses only teach software tools.<br>
+            <strong>We teach how to use GIS, spatial analysis, and decision-support methods to solve real urban and environmental problems.</strong>
+          </p>
+          <p class="mt-3 text-muted">
+            Learn the tools, the thinking process, and the professional workflows used by planners, researchers and spatial analysts.
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
+<!-- Learning Journey -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center display-5 fw-bold mb-5">Your Learning Journey</h2>
+    <div class="row g-4 text-center">
+      <div class="col-md-4 col-lg roadmap-step"><div class="bg-white p-4 rounded-3 shadow-sm h-100"><strong>Step 1</strong><br>GIS Fundamentals</div></div>
+      <div class="col-md-4 col-lg roadmap-step"><div class="bg-white p-4 rounded-3 shadow-sm h-100"><strong>Step 2</strong><br>Applied GIS</div></div>
+      <div class="col-md-4 col-lg roadmap-step"><div class="bg-white p-4 rounded-3 shadow-sm h-100"><strong>Step 3</strong><br>Urban Spatial Analysis</div></div>
+      <div class="col-md-4 col-lg roadmap-step"><div class="bg-white p-4 rounded-3 shadow-sm h-100"><strong>Step 4</strong><br>Advanced GIS Projects</div></div>
+      <div class="col-md-4 col-lg roadmap-step"><div class="bg-white p-4 rounded-3 shadow-sm h-100"><strong>Step 5</strong><br>Spatial Decision Support Systems</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Learning Paths -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center display-5 fw-bold mb-5">Featured Learning Paths</h2>
     <div class="row g-4">
-      {% for post in posts|slice:":3" %}
       <div class="col-md-4">
-        <div class="card blog-card shadow-sm border-0 h-100">
-          {% if post.image %}
-            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="card-img-top">
-          {% endif %}
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <div class="small text-muted mb-2">{{ post.datetime_created|to_jalali:"%Y %B %d"|translate_number }}</div>
-            <p class="text-muted mb-3 flex-grow-1">{{ post.text|striptags|truncatechars:120 }}</p>
-            <a href="{{ post.get_absolute_url }}" class="btn btn-outline-secondary btn-sm mt-auto">{% trans "Read more" %}</a>
+        <a href="{% url 'product_list' %}" class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="{% static 'images/default-picture.webp' %}" class="card-img-top" style="height:180px; object-fit:cover;" alt="ArcGIS">
+            <div class="card-body">
+              <h5>ArcGIS Professional Track</h5>
+              <p class="text-muted">From beginner to advanced spatial analysis and site selection through real planning projects.</p>
+            </div>
           </div>
+        </a>
+      </div>
+      <div class="col-md-4">
+        <a href="{% url 'product_list' %}" class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="{% static 'images/default-picture.webp' %}" class="card-img-top" style="height:180px; object-fit:cover;" alt="Strategic Planning">
+            <div class="card-body">
+              <h5>Strategic Planning & Decision Support</h5>
+              <p class="text-muted">Master AHP, ANP, DEMATEL, TOPSIS, SWARA and other methods used in real planning practice.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4">
+        <a href="{% url 'product_list' %}" class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="{% static 'images/default-picture.webp' %}" class="card-img-top" style="height:180px; object-fit:cover;" alt="AutoCAD Map 3D">
+            <div class="card-body">
+              <h5>AutoCAD Map 3D</h5>
+              <p class="text-muted">Professional GIS tools for urban planners and infrastructure projects.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Free Resources -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="display-5 fw-bold mb-4">Explore 19+ Free GIS Resources</h2>
+    <p class="lead mb-5">Start learning today — no payment required</p>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 p-4 text-start">
+          <h6>QGIS Beginner Guide</h6>
+          <small class="text-muted">Free PDF + Exercises</small>
         </div>
       </div>
-      {% empty %}
-      <div class="col-12">
-        <div class="alert alert-info">{% trans "No blog posts yet." %}</div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="py-5 cta-section text-center">
-  <div class="container">
-    <h2 class="fw-bold mb-3">{% trans "Ready to Build the Future?" %}</h2>
-    <p class="mb-4">{% trans "Join thousands of learners shaping smart and sustainable cities with practical projects." %}</p>
-    <div class="d-flex justify-content-center gap-2 flex-wrap">
-      <a href="{% url 'aboutus' %}" class="btn btn-light btn-lg me-2">{% trans "Meet the Team" %}</a>
-      <a href="{% url 'contactus' %}" class="btn btn-outline-light btn-lg">{% trans "Contact Us" %}</a>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="py-5" style="background-color: #F8F9FA;">
-  <div class="container">
-    <h2 class="fw-bold text-center mb-5">{% trans "Frequently Asked Questions" %}</h2>
-    <div class="accordion" id="faqAccordion">
-      {% for faq in faqs %}
-      <div class="accordion-item mb-3 shadow-sm border-0">
-        <h2 class="accordion-header" id="faq{{ forloop.counter }}">
-          <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" 
-                  type="button" 
-                  data-bs-toggle="collapse" 
-                  data-bs-target="#collapse{{ forloop.counter }}" 
-                  aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" 
-                  aria-controls="collapse{{ forloop.counter }}"
-                  style="background-color: #F8F9FA; color: {% if forloop.first %}#2F55D4{% else %}#212529{% endif %}; font-weight: 600;">
-            {{ faq.question }}
-          </button>
-        </h2>
-        <div id="collapse{{ forloop.counter }}" 
-             class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" 
-             aria-labelledby="faq{{ forloop.counter }}" 
-             data-bs-parent="#faqAccordion">
-          <div class="accordion-body" style="color: #8492A6;">
-            {{ faq.answer }}
-          </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 p-4 text-start">
+          <h6>Python Fundamentals for GIS</h6>
+          <small class="text-muted">Free Jupyter Notebooks</small>
         </div>
       </div>
-      {% endfor %}
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 p-4 text-start">
+          <h6>GeoPandas &amp; Spatial Data Science</h6>
+          <small class="text-muted">Free Datasets &amp; Tutorials</small>
+        </div>
+      </div>
     </div>
+    <a href="{% url 'free_resources' %}" class="btn btn-primary btn-lg mt-5">Browse All Free Resources</a>
   </div>
 </section>
 
-{% endblock %}
+<!-- Final CTA -->
+<section class="py-5 text-center text-white" style="background:#0F172A;">
+  <div class="container">
+    <h2 class="display-5 fw-bold mb-3">Start Building Professional GIS Skills Today</h2>
+    <p class="lead mb-4">Learn GIS, Spatial Analysis, Python for GIS and Spatial Decision Support through practical projects.</p>
+    <a href="{% url 'product_list' %}" class="btn btn-success btn-lg px-5 py-3">{% trans "Explore the Academy" %}</a>
+  </div>
+</section>
 
-
-{% block extra_js %}
-<script>
-  // Change colors dynamically when accordion items open/close
-  document.addEventListener('DOMContentLoaded', function () {
-    const buttons = document.querySelectorAll('.accordion-button');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', function () {
-        // Reset all to default color
-        buttons.forEach(b => b.style.color = '#212529');
-        // Set active one
-        if (!btn.classList.contains('collapsed')) {
-          btn.style.color = '#2F55D4';
-        } else {
-          btn.style.color = '#212529';
-        }
-      });
-    });
-  });
-</script>
 {% endblock %}
