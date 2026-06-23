@@ -2,20 +2,24 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 
-{% block page_title %}{% trans "Add New Post" %}{% endblock %}
+{% block page_title %}نوشتن مقاله جدید{% endblock %}
 
 {% block content %}
+
 <section class="py-5">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-9">
-        <div class="card card-rounded shadow-sm p-4">
+        <div class="card border-0 shadow-sm p-5">
+
           <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="h5 fw-bold mb-0">
-              <i class="bi bi-journal-plus me-2"></i> {% trans "Add New Post" %}
-            </h3>
+            <div>
+              <h3 class="h4 fw-bold mb-1">نوشتن مقاله جدید</h3>
+              <small class="text-muted">محتوای شما پس از انتشار در بخش وبلاگ سایت نمایش داده خواهد شد.</small>
+            </div>
             <a href="{% url 'category-create' %}" class="btn btn-outline-secondary btn-sm">
-              <i class="bi bi-folder-plus me-1"></i> {% trans "Add Category" %}
+              <i class="bi bi-folder-plus me-1"></i>
+              ایجاد دسته‌بندی
             </a>
           </div>
 
@@ -23,12 +27,14 @@
             {% csrf_token %}
             {{ form|crispy }}
 
-            <div class="d-flex justify-content-end mt-3">
-              <button type="submit" class="btn btn-primary">
-                <i class="bi bi-check-circle me-1"></i> {% trans "Publish Post" %}
+            <div class="d-flex justify-content-end mt-4">
+              <button type="submit" class="btn btn-success btn-lg px-5">
+                <i class="bi bi-check-circle me-2"></i>
+                انتشار مقاله
               </button>
             </div>
           </form>
+
         </div>
       </div>
     </div>
@@ -36,4 +42,5 @@
 </section>
 
 {{ form.media }}
+
 {% endblock %}

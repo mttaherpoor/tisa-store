@@ -15,12 +15,10 @@
           <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
               <h3 class="h4 fw-bold mb-1">ویرایش مقاله</h3>
-              <small class="text-muted">تغییرات شما پس از ذخیره، بلافاصله در سایت اعمال خواهد شد.</small>
+              <small class="text-muted">
+                تغییرات موردنظر خود را اعمال کرده و نسخه جدید مقاله را ذخیره کنید.
+              </small>
             </div>
-            <a href="{% url 'post-list' %}" class="btn btn-outline-secondary btn-sm">
-              <i class="bi bi-arrow-left me-1"></i>
-              بازگشت به لیست مقالات
-            </a>
           </div>
 
           <form method="post" enctype="multipart/form-data" novalidate>
@@ -33,6 +31,13 @@
                 ذخیره تغییرات
               </button>
             </div>
+
+            <div class="text-center mt-3">
+              <a href="{% url 'post-list' %}" class="text-muted small text-decoration-none">
+                بازگشت به لیست مقالات
+              </a>
+            </div>
+
           </form>
 
         </div>
@@ -40,7 +45,5 @@
     </div>
   </div>
 </section>
-
-{{ form.media }}
 
 {% endblock %}
