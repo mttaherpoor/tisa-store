@@ -2,53 +2,77 @@
 {% load static %}
 {% load i18n %}
 
-{% block page_title %}{{ product.title }} - {% trans "Videos" %}{% endblock %}
+{% block page_title %}فایل‌های آموزشی {{ product.title }}{% endblock %}
 
 {% block content %}
-<section class="py-4">
+
+<!-- Hero -->
+<section class="py-5 text-center text-white" style="background: linear-gradient(135deg,#2C4A9A,#4CAF50);">
   <div class="container">
-    <div class="card card-rounded shadow-sm p-4">
-      <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-        <h5 class="section-title mb-2">🎬 {% trans "Product Videos" %}: <span class="fw-bold">{{ product.title }}</span></h5>
-        <a href="{% url 'product_detail' product.slug %}" class="btn btn-sm btn-outline-secondary">
-          <i class="bi bi-arrow-right"></i> {% trans "Back to Product" %}
+    <h1 class="fw-bold">مرکز دانلود فایل‌های آموزشی</h1>
+    <p class="lead mb-0">
+      تمام فایل‌ها و ویدئوهای مربوط به دوره «{{ product.title }}» در این صفحه در دسترس شما قرار دارند.
+    </p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="card shadow-sm p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+        <h4 class="fw-bold mb-2">
+          فایل‌های آموزشی دوره «{{ product.title }}»
+        </h4>
+        <a href="{% url 'product_detail' product.slug %}" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-arrow-right"></i> بازگشت به صفحه دوره
         </a>
       </div>
+
+      <p class="text-muted mb-4">
+        در این بخش می‌توانید ویدئوها، فایل‌های آموزشی و سایر منابع مرتبط با این دوره را دانلود کنید. هر فایل تنها برای کاربران دارای دسترسی نمایش داده می‌شود.
+      </p>
 
       {% if video_files %}
         <ul class="list-group list-group-flush">
           {% for file in video_files %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <li class="list-group-item d-flex justify-content-between align-items-center py-3">
               <div class="d-flex align-items-center">
-                <i class="bi bi-play-circle text-primary fs-5 me-2"></i>
-                <span>{{ file.filename|default:file.file.name }}</span>
+                <i class="bi bi-play-circle text-primary fs-4 me-3"></i>
+                <div>
+                  <div class="fw-semibold">{{ file.filename|default:file.file.name }}</div>
+                  <small class="text-muted">فایل آموزشی</small>
+                </div>
               </div>
-              <button class="btn btn-sm btn-outline-primary" onclick="downloadFile({{ file.id }})"> {% trans "Download" %} </button>
-                <i class="bi bi-download"></i> {% trans "Download" %}
-              </a>
+              <button class="btn btn-success btn-sm" onclick="downloadFile({{ file.id }})">
+                <i class="bi bi-download me-1"></i> دانلود فایل
+              </button>
             </li>
           {% endfor %}
         </ul>
       {% else %}
-        <div class="alert alert-warning mt-3 mb-0 text-center">
-          <i class="bi bi-info-circle me-1"></i> {% trans "No videos are available for this product." %}
+        <div class="alert alert-warning text-center py-4">
+          <i class="bi bi-info-circle me-1"></i> هنوز فایل آموزشی برای این دوره منتشر نشده است.
         </div>
       {% endif %}
     </div>
   </div>
 </section>
+
 {% endblock %}
 
 {% block extra_js %}
 <script>
 async function downloadFile(fileId) {
-    const res = await fetch(`/api/video/${fileId}/download/`);
-    const data = await res.json();
-
-    if (data.download_url) {
-        window.location.href = data.download_url;
-    } else {
-        alert("Download failed");
+    try {
+        const res = await fetch(`/api/video/${fileId}/download/`);
+        const data = await res.json();
+        if (data.download_url) {
+            window.location.href = data.download_url;
+        } else {
+            alert("دانلود فایل با خطا مواجه شد.");
+        }
+    } catch (e) {
+        alert("خطا در ارتباط با سرور.");
     }
 }
 </script>
