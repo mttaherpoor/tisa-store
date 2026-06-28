@@ -4,130 +4,129 @@
 {% load humanize %}
 {% load persian_translation_tags %}
 
-{% block page_title %}{% trans "Cart" %}{% endblock %}
+{% block page_title %}سبد خرید{% endblock %}
 
 {% block content %}
-{% translate "Cart" as header_name %}
-{% include 'topheader.html' with header_name=header_name %}
 
-<div class="main-content-wrapper py-5">
+<!-- Hero -->
+<section class="py-5 text-center text-white" style="background: linear-gradient(135deg,#2C4A9A,#4CAF50);">
   <div class="container">
-    <div class="row">
+    <h1 class="fw-bold">سبد خرید</h1>
+    <p class="lead mb-0">
+      دوره‌های انتخاب‌شده خود را بررسی کنید و برای نهایی‌سازی ثبت‌نام، فرایند پرداخت را ادامه دهید.
+    </p>
+  </div>
+</section>
 
-      <!-- Cart Items -->
-      <div class="col-lg-8 mb-4 mb-lg-0">
-        {% if cart %}
-          <div class="card shadow-sm border-0">
-            <div class="card-header bg-light">
-              <h4 class="mb-0">{% trans "Your Cart" %}</h4>
-            </div>
-
-            <div class="card-body p-0">
-              <div class="table-responsive">
-                <table class="table table-hover text-center mb-0 align-middle">
-                  <thead class="table-light">
-                    <tr>
-                      <th scope="col">&nbsp;</th>
-                      <th scope="col">{% trans "Image" %}</th>
-                      <th scope="col">{% trans "Product" %}</th>
-                      <th scope="col">{% trans "Price" %}</th>
-                      <th scope="col">{% trans "Qty" %}</th>
-                      <th scope="col">{% trans "Total" %}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for item in cart %}
-                      <tr>
-                        <!-- Remove button -->
-                        <td class="align-middle">
-                          <form action="{% url 'cart:cart_remove' item.product_obj.id %}" method="post" class="d-inline">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-link text-danger p-0" aria-label="{% trans 'Remove item' %}">
-                              <i class="bi bi-x-lg"></i>
-                            </button>
-                          </form>
-                        </td>
-
-                        <!-- Product image -->
-                        <td class="align-middle">
-                          {% if item.product_obj.image %}
-                            <img src="{{ item.product_obj.image.url }}" class="img-fluid rounded" style="width:80px; height:80px; object-fit:cover;" alt="{{ item.product_obj.title }}">
-                          {% else %}
-                            <img src="{% static 'images/placeholder-80.png' %}" class="img-fluid rounded" style="width:80px; height:80px; object-fit:cover;" alt="{% trans 'No image' %}">
-                          {% endif %}
-                        </td>
-
-                        <!-- Product title -->
-                        <td class="align-middle text-start">
-                          <a href="{{ item.product_obj.get_absolute_url }}" class="text-decoration-none">
-                            {{ item.product_obj.title }}
-                          </a>
-                        </td>
-
-                        <!-- Price -->
-                        <td class="align-middle">
-                          {{ item.product_obj.price|intcomma:False|translate_number | default:"0" }} {% trans "$" %}
-                        </td>
-
-                        <!-- Quantity (fixed = 1) -->
-                        <td class="align-middle">
-                          <span class="d-inline-block px-2 py-1 border rounded text-center" style="width:50px;">
-                            1
-                          </span>
-                        </td>
-
-                        <!-- Total price -->
-                        <td class="align-middle">
-                          {{ item.total_price|intcomma:False| translate_number| default:"0" }} {% trans "$" %}
-                        </td>
-                      </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Clear cart button -->
-            {% if not cart.is_empty %}
-              <div class="card-footer text-end bg-white">
-                <form action="{% url 'cart:cart_clear' %}" method="post" class="d-inline">
-                  {% csrf_token %}
-                  <button class="btn btn-outline-danger btn-sm">{% trans "Clear Cart" %}</button>
-                </form>
-              </div>
-            {% endif %}
-          </div>
-        {% else %}
-          <div class="text-center py-5">
-            <h5 class="mb-2">{% trans "Your cart is empty" %}</h5>
-            <p class="text-muted mb-3">{% trans "Please add products to your cart." %}</p>
-            <a href="{% url 'product_list' %}" class="btn btn-primary btn-sm">{% trans "Browse Products" %}</a>
-          </div>
-        {% endif %}
-      </div>
-
-      <!-- Cart Summary -->
-      <div class="col-lg-4">
+<div class="container py-5">
+  <div class="row">
+    <!-- Cart Items -->
+    <div class="col-lg-8 mb-4 mb-lg-0">
+      {% if cart %}
         <div class="card shadow-sm border-0">
           <div class="card-header bg-light">
-            <h5 class="mb-0">{% trans "Summary" %}</h5>
+            <h4 class="mb-2">دوره‌های انتخاب‌شده</h4>
+            <p class="text-muted small mb-0">پس از تکمیل پرداخت، دسترسی شما به فایل‌های آموزشی و ویدئوهای دوره به‌صورت خودکار فعال خواهد شد.</p>
           </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between mb-3">
-              <span>{% trans "Subtotal" %}:</span>
-              <span>{{ cart.get_total_price|intcomma:False|translate_number| default:"0" }} {% trans "$" %}</span>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover text-center mb-0 align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th></th>
+                    <th>تصویر</th>
+                    <th>دوره آموزشی</th>
+                    <th>شهریه</th>
+                    <th>تعداد</th>
+                    <th>جمع</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in cart %}
+                    <tr>
+                      <td class="align-middle">
+                        <form action="{% url 'cart:cart_remove' item.product_obj.id %}" method="post" class="d-inline">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-link text-danger p-0" aria-label="حذف">
+                            <i class="bi bi-x-lg"></i>
+                          </button>
+                        </form>
+                      </td>
+                      <td class="align-middle">
+                        {% if item.product_obj.image %}
+                          <img src="{{ item.product_obj.image.url }}" class="img-fluid rounded" style="width:80px; height:80px; object-fit:cover;" alt="{{ item.product_obj.title }}">
+                        {% else %}
+                          <img src="{% static 'images/default picture.webp' %}" class="img-fluid rounded" style="width:80px; height:80px; object-fit:cover;" alt="بدون تصویر">
+                        {% endif %}
+                      </td>
+                      <td class="align-middle text-start">
+                        <a href="{{ item.product_obj.get_absolute_url }}" class="text-decoration-none fw-semibold text-dark">
+                          {{ item.product_obj.title }}
+                        </a>
+                      </td>
+                      <td class="align-middle">
+                        {{ item.product_obj.price|intcomma:False|translate_number }} تومان
+                      </td>
+                      <td class="align-middle">
+                        <span class="d-inline-block px-2 py-1 border rounded text-center" style="width:50px;">
+                          {{ item.quantity|translate_number }}
+                        </span>
+                      </td>
+                      <td class="align-middle">
+                        {{ item.total_price|intcomma:False|translate_number }} تومان
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
+          </div>
+          {% if not cart.is_empty %}
+            <div class="card-footer text-end bg-white">
+              <form action="{% url 'cart:cart_clear' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button class="btn btn-outline-danger btn-sm">خالی کردن سبد خرید</button>
+              </form>
+            </div>
+          {% endif %}
+        </div>
+      {% else %}
+        <div class="text-center py-5">
+          <h4 class="fw-bold mb-3">سبد خرید شما خالی است.</h4>
+          <p class="text-muted mb-4">هنوز هیچ دوره آموزشی به سبد خرید اضافه نکرده‌اید.</p>
+          <a href="{% url 'product_list' %}" class="btn btn-success">مشاهده دوره‌های آموزشی</a>
+        </div>
+      {% endif %}
+    </div>
 
-            <div class="d-grid">
-              <a href="{% url 'order_create' %}" class="btn btn-danger w-100">
-                {% trans "Proceed to Checkout" %}
-              </a>
-            </div>
+    <!-- Cart Summary -->
+    <div class="col-lg-4">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">خلاصه سفارش</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-2">
+            <span>تعداد دوره‌ها:</span>
+            <span>{{ cart|length|translate_number }}</span>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between mb-3">
+            <span>مبلغ قابل پرداخت:</span>
+            <span class="fw-bold">{{ cart.get_total_price|intcomma:False|translate_number }} تومان</span>
+          </div>
+          <p class="small text-muted mt-3 mb-0">
+            پس از پرداخت، دسترسی شما به فایل‌های آموزشی و ویدئوهای دوره از طریق پنل کاربری فعال خواهد شد.
+          </p>
+          <div class="d-grid mt-3">
+            <a href="{% url 'order_create' %}" class="btn btn-success btn-lg">
+              ادامه فرایند ثبت‌نام
+            </a>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
+
 {% endblock %}
