@@ -1,76 +1,65 @@
 {% extends "_base.html" %}
+
 {% load crispy_forms_tags %}
 {% load i18n %}
 
-{% block page_title %}{% trans "Login" %}{% endblock %}
+{% block page_title %}ورود به حساب کاربری{% endblock %}
 
 {% block content %}
+
+<!-- Hero -->
+<section class="py-5 text-center text-white" style="background: linear-gradient(135deg,#2C4A9A,#4CAF50);">
+  <div class="container">
+    <h1 class="fw-bold">ورود به حساب کاربری</h1>
+    <p class="lead mb-0">
+      برای دسترسی به دوره‌های آموزشی، فایل‌های دانلودی و پنل کاربری وارد حساب خود شوید.
+    </p>
+  </div>
+</section>
+
 <section class="py-5">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow-sm rounded">
-          <div class="card-header bg-success text-white text-center">
-            <h4 class="mb-0">{% trans "Login to your account" %}</h4>
-          </div>
+      <div class="col-md-8 col-lg-5">
+        <div class="card shadow-sm">
+          <div class="card-body p-5">
+            <h4 class="fw-bold mb-2">ورود به حساب کاربری</h4>
+            <p class="text-muted mb-4">
+              برای مشاهده دوره‌های خریداری‌شده، فایل‌های آموزشی و مدیریت حساب کاربری وارد شوید.
+            </p>
 
-          <div class="card-body">
-          <form method="post">
+            <form method="post" novalidate>
               {% csrf_token %}
-              {{form | crispy}}
-              <!-- Submit -->
-              <button class="btn btn-success w-100" type="submit">{% trans "Login" %} </button>
-          </form>
-          
-            <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="w-100 text-center">
-                <small class="text-muted">
-                {% trans "Don't have an account?" %}
-                <a href="{{ signup_url }}" class="text-success fw-semibold">{% trans "Sign up" %}</a>
-                </small>
-            </div>
-            </div>
-
-
-            {% comment %} {% if socialaccount_providers %}
-              <hr class="my-3">
-              <div class="text-center">
-                <p class="small text-muted mb-2">{% trans "Or sign in with" %}</p>
-                <div class="d-flex gap-2 justify-content-center">
-                  {% for provider in socialaccount_providers %}
-                    <a href="{% provider_login_url provider.id process='login' %}" class="btn btn-outline-secondary btn-sm">
-                      {{ provider.name }}
-                    </a>
-                  {% endfor %}
+              {% if form.errors %}
+                <div class="alert alert-danger">
+                  ایمیل یا رمز عبور صحیح نیست.
                 </div>
-              </div>
-            {% endif %} {% endcomment %}
+              {% endif %}
+
+              {{ form|crispy }}
+
+              <button type="submit" class="btn btn-success w-100 mt-3">
+                <i class="bi bi-box-arrow-in-right me-1"></i> ورود به حساب کاربری
+              </button>
+            </form>
+
+            <div class="text-center mt-4">
+              <small class="text-muted">
+                هنوز حساب کاربری ندارید؟
+                <a href="{{ signup_url }}" class="fw-semibold text-success text-decoration-none">ایجاد حساب کاربری</a>
+              </small>
+            </div>
+
+            <div class="text-center mt-3">
+              <a href="{% url 'account_reset_password' %}" class="text-decoration-none small">
+                رمز عبور خود را فراموش کرده‌اید؟
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 {% endblock %}
-
-{% comment %} {% block extra_js %}
-<script>
-    document.getElementById("id_login").classList.add("form-control");
-    document.getElementById("id_password").classList.add("form-control");
-</script>
-
-<script>
-document.addEventListener("click", function (e) {
-    if (!e.target.classList.contains("toggle-password")) return;
-
-    const wrapper = e.target.closest(".password-wrapper");
-    const input = wrapper.querySelector("input");
-
-    if (!input) return;
-
-    input.type = input.type === "password" ? "text" : "password";
-
-    e.target.textContent = input.type === "password" ? "👁" : "🙈";
-});
-</script>  
-{% endblock %} {% endcomment %}
