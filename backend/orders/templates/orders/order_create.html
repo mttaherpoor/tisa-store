@@ -5,21 +5,31 @@
 {% load crispy_forms_tags %}
 {% load humanize %}
 
-{% block page_title %}{% trans "Checkout" %}{% endblock %}
+{% block page_title %}تکمیل ثبت‌نام{% endblock %}
 
 {% block content %}
+
+<!-- Hero -->
+<section class="py-5 text-center text-white" style="background: linear-gradient(135deg,#2C4A9A,#4CAF50);">
+  <div class="container">
+    <h1 class="fw-bold">تکمیل ثبت‌نام</h1>
+    <p class="lead mb-0">
+      اطلاعات خود را بررسی کنید و برای نهایی‌سازی ثبت‌نام، پرداخت را انجام دهید.
+    </p>
+  </div>
+</section>
+
 <section class="py-5">
   <div class="container">
-
-    {% translate 'Order Summary' as header_name %}
-    {% include 'topheader.html' with header_name=header_name %}
-
     <div class="row g-5 mt-4">
 
       <!-- Checkout Form -->
       <div class="col-lg-6">
         <div class="card shadow-sm border-0 p-4">
-          <h4 class="fw-bold mb-4">{% trans "Order Details" %}</h4>
+          <h4 class="fw-bold mb-2">اطلاعات خریدار</h4>
+          <p class="text-muted mb-4">
+            لطفاً اطلاعات خود را با دقت بررسی و تکمیل کنید. پس از تأیید پرداخت، دسترسی شما به فایل‌ها و ویدئوهای آموزشی دوره به‌صورت خودکار در پنل کاربری فعال خواهد شد.
+          </p>
 
           <form method="post" novalidate>
             {% csrf_token %}
@@ -31,8 +41,8 @@
 
             {{ form|crispy }}
 
-            <button type="submit" class="btn btn-primary mt-3 w-100">
-              <i class="bi bi-check-circle me-1"></i> {% trans "Place Order" %}
+            <button type="submit" class="btn btn-success mt-3 w-100">
+              <i class="bi bi-credit-card me-1"></i> ادامه فرایند پرداخت
             </button>
           </form>
         </div>
@@ -41,14 +51,14 @@
       <!-- Order Summary -->
       <div class="col-lg-6 col-xl-5 offset-xl-1">
         <div class="card shadow-sm border-0 p-4">
-          <h4 class="fw-bold mb-4">{% trans "Your Order" %}</h4>
+          <h4 class="fw-bold mb-4">خلاصه ثبت‌نام</h4>
 
           <div class="table-responsive">
             <table class="table align-middle">
               <thead class="table-light">
                 <tr>
-                  <th>{% trans "Product" %}</th>
-                  <th class="text-end">{% trans "Price" %}</th>
+                  <th>دوره آموزشی</th>
+                  <th class="text-end">شهریه</th>
                 </tr>
               </thead>
               <tbody>
@@ -56,19 +66,19 @@
                   <tr>
                     <td>
                       {{ item.product_obj.title }}
-                      <strong class="text-muted"> × {{ item.quantity |translate_number }}</strong>
+                      <span class="text-muted">× {{ item.quantity|translate_number }}</span>
                     </td>
                     <td class="text-end">
-                      {{ item.product_obj.price|intcomma:False|translate_number }} {% trans "$" %}
+                      {{ item.product_obj.price|intcomma:False|translate_number }} تومان
                     </td>
                   </tr>
                 {% endfor %}
               </tbody>
               <tfoot>
                 <tr class="fw-bold border-top">
-                  <td>{% trans "Total" %}</td>
+                  <td>مبلغ قابل پرداخت</td>
                   <td class="text-end">
-                    {{ cart.get_total_price|intcomma:False|translate_number }} {% trans "$" %}
+                    {{ cart.get_total_price|intcomma:False|translate_number }} تومان
                   </td>
                 </tr>
               </tfoot>
@@ -77,13 +87,18 @@
 
           <!-- Payment Method -->
           <div class="mt-4">
-            <h5 class="fw-bold mb-3">{% trans "Payment Method" %}</h5>
+            <h5 class="fw-bold mb-3">روش پرداخت</h5>
             <div class="form-check">
               <input type="radio" class="form-check-input" id="zarinpal" name="payment-method" value="zarinpal" checked>
               <label class="form-check-label" for="zarinpal">
-                {% trans "Online Gateway (Zarinpal)" %}
+                پرداخت آنلاین از طریق درگاه امن زرین‌پال
               </label>
             </div>
+          </div>
+
+          <div class="alert alert-info mt-4 mb-0">
+            <i class="bi bi-shield-check me-2"></i>
+            پرداخت شما از طریق درگاه امن زرین‌پال انجام می‌شود. پس از تأیید تراکنش، سفارش شما ثبت شده و دسترسی به فایل‌ها و ویدئوهای آموزشی از طریق پنل کاربری در اختیار شما قرار خواهد گرفت.
           </div>
         </div>
       </div>
@@ -91,4 +106,5 @@
     </div>
   </div>
 </section>
+
 {% endblock %}
