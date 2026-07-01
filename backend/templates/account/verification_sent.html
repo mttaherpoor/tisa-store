@@ -1,47 +1,53 @@
 {% extends "_base.html" %}
-{% load i18n account %}
 
-{% block page_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+{% load i18n %}
+
+{% block page_title %}ایمیل تأیید ارسال شد{% endblock %}
 
 {% block content %}
+
+<!-- Hero -->
+<section class="py-5 text-center text-white" style="background: linear-gradient(135deg,#2C4A9A,#4CAF50);">
+  <div class="container">
+    <h1 class="fw-bold">ایمیل تأیید ارسال شد</h1>
+    <p class="lead mb-0">
+      برای فعال‌سازی حساب کاربری، لطفاً ایمیل خود را بررسی کرده و روی لینک تأیید کلیک کنید.
+    </p>
+  </div>
+</section>
+
 <section class="py-5">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="card shadow-sm p-4">
-          <h1 class="h4 mb-3">{% trans "Confirm E-mail Address" %}</h1>
-          {% if confirmation %}
-            {% user_display confirmation.email_address.user as user_display %}
-            <p class="mb-3">
-              {% blocktrans with email=confirmation.email_address.email user=user_display %}
-                Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user }}.
-              {% endblocktrans %}
+      <div class="col-md-8 col-lg-5">
+        <div class="card shadow-sm">
+          <div class="card-body p-5">
+            <h4 class="fw-bold mb-3">لطفاً ایمیل خود را بررسی کنید</h4>
+
+            <p class="text-muted mb-4">
+              یک ایمیل حاوی لینک فعال‌سازی حساب برای شما ارسال شده است. لطفاً صندوق ورودی ایمیل خود را بررسی کنید و روی لینک موجود در آن کلیک نمایید.
             </p>
 
-            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-              {% csrf_token %}
-              <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary">
-                  {% trans "Confirm" %}
-                </button>
-                <a href="{% url 'account_email' %}" class="btn btn-outline-secondary">
-                  {% trans "Manage e-mail addresses" %}
-                </a>
-              </div>
-            </form>
-
-          {% else %}
-            {% url 'account_email' as email_url %}
-            <div class="alert alert-warning">
-              {% blocktrans %}
-                This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.
-              {% endblocktrans %}
+            <div class="alert alert-success">
+              <i class="bi bi-envelope-check me-2"></i>
+              اگر ایمیل را در صندوق ورودی مشاهده نکردید، پوشه Spam یا Junk را نیز بررسی کنید.
             </div>
-          {% endif %}
 
+            <div class="d-grid gap-2 mt-4">
+              <a href="{% url 'account_login' %}" class="btn btn-success">
+                <i class="bi bi-box-arrow-in-right me-1"></i> بازگشت به صفحه ورود
+              </a>
+            </div>
+
+            <div class="alert alert-info mt-4 mb-0">
+              <i class="bi bi-info-circle me-2"></i>
+              تا زمان تأیید آدرس ایمیل، ممکن است برخی امکانات حساب کاربری برای شما فعال نباشد.
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 {% endblock %}
