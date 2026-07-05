@@ -58,7 +58,7 @@
     </div>
   {% endif %}
 
-  <main id="main-content" class="container my-5">
+  <main id="main-content">
     {% block content %}{% endblock %}
   </main>
 
@@ -67,16 +67,6 @@
     <div class="container text-center">
       <h2 class="h3 mb-3">{% trans "Stay Ahead with GIS, Spatial Analysis & Smarter Spatial Decisions" %}</h2>
       <p class="text-muted mb-4">{% trans "Free GIS resources, spatial analysis tutorials, Python workflows, and real-world planning case studies delivered to your inbox." %}</p>
-
-      {% comment %}
-      <form class="d-flex justify-content-center mt-4" style="max-width: 500px; margin: 0 auto;" method="post" action="{% url 'newsletter_subscribe' %}">
-        {% csrf_token %}
-        <input name="email" type="email" class="form-control me-2" 
-               placeholder="{% trans 'Enter your email address' %}" 
-               aria-label="Email">
-        <button class="btn btn-primary" type="submit">{% trans 'Subscribe' %}</button>
-      </form>
-      {% endcomment %}
 
       <div class="mt-4">
         <p class="mb-2">{% trans "Follow us" %}</p>
