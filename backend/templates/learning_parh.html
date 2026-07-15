@@ -1,0 +1,115 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}Learning Paths | TisaVista{% endblock %}
+
+{% block extra_css %}
+<style>
+  .learning-card {
+    transition: all 0.35s ease;
+    border-radius: 18px;
+  }
+  .learning-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12) !important;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="text-center text-white d-flex align-items-center" style="min-height:60vh; background: linear-gradient(rgba(15,23,42,0.75),rgba(15,23,42,0.75)), url('{% static "images/hero-learning.jpg" %}'); background-size:cover; background-position:center;">
+  <div class="container">
+    <h1 class="fw-bold display-4">Learning Paths</h1>
+    <p class="lead mb-0">
+      Structured Roadmaps to Become a Professional<br>
+      <strong>GIS & Spatial Intelligence Expert</strong>
+    </p>
+    <a href="{% url 'product_list' %}" class="btn btn-success btn-lg mt-4">
+      Explore Learning Paths
+    </a>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Why Learning Paths?</h2>
+      <p class="lead text-muted mx-auto" style="max-width:700px;">
+        Professional GIS careers are built through structured learning — not random tutorials.<br>
+        Each Learning Path is carefully designed to help you progress from fundamentals to real-world projects using industry-standard workflows.
+      </p>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- ArcGIS Professional -->
+      <div class="col-lg-4">
+        <div class="card learning-card h-100 shadow-sm border-0">
+          <div class="card-body p-4 text-center">
+            <i class="bi bi-map display-4 text-primary mb-3"></i>
+            <h4 class="fw-bold">ArcGIS Professional</h4>
+            <p class="text-muted">From Beginner to Advanced Urban GIS Specialist</p>
+            <ul class="list-unstyled mt-4 text-start">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>ArcGIS Pro & ArcMap</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Spatial Analysis</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Cartography & Visualization</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Real Urban Projects</li>
+            </ul>
+            <a href="{% url 'product_list' %}" class="btn btn-outline-primary w-100 mt-3">View Full Path</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Python for GIS -->
+      <div class="col-lg-4">
+        <div class="card learning-card h-100 shadow-sm border-0">
+          <div class="card-body p-4 text-center">
+            <i class="bi bi-code-slash display-4 text-success mb-3"></i>
+            <h4 class="fw-bold">Python for GIS</h4>
+            <p class="text-muted">From Scripting to Spatial Data Science</p>
+            <ul class="list-unstyled mt-4 text-start">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Python Basics for GIS</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>GeoPandas & Rasterio</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Automation & Batch Processing</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Spatial Data Science</li>
+            </ul>
+            <a href="{% url 'product_list' %}" class="btn btn-outline-primary w-100 mt-3">View Full Path</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spatial Decision Support -->
+      <div class="col-lg-4">
+        <div class="card learning-card h-100 shadow-sm border-0">
+          <div class="card-body p-4 text-center">
+            <i class="bi bi-diagram-3 display-4 text-info mb-3"></i>
+            <h4 class="fw-bold">Spatial Decision Support</h4>
+            <p class="text-muted">From Theory to Real-World Urban Decision Making</p>
+            <ul class="list-unstyled mt-4 text-start">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Decision Theory & MCDA</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>AHP, ANP, TOPSIS</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Spatial Multicriteria Analysis</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Urban Planning Case Studies</li>
+            </ul>
+            <a href="{% url 'product_list' %}" class="btn btn-outline-primary w-100 mt-3">View Full Path</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5 text-center text-white" style="background:#0F172A;">
+  <div class="container">
+    <h2 class="fw-bold">Ready to Start Your Journey?</h2>
+    <p class="lead text-light mb-4">Choose your first Learning Path and build real-world GIS skills.</p>
+    <a href="{% url 'product_list' %}" class="btn btn-success btn-lg px-5">Explore Learning Paths</a>
+  </div>
+</section>
+
+{% endblock %}
