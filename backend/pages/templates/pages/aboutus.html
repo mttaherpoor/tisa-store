@@ -2,145 +2,126 @@
 {% load static %}
 {% load i18n %}
 
-{% block page_title %}{% trans "درباره ما" %}{% endblock %}
+{% block page_title %}{% trans "About Us" %}{% endblock %}
 
 {% block content %}
-{% translate "درباره ما" as header_name %}
+{% translate "About Us" as header_name %}
 {% include 'topheader.html' with header_name=header_name %}
 
-<!-- 1. TisaVista چیست؟ -->
+<!-- Our Story -->
 <section class="py-5 bg-light">
   <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-7">
-        <h2 class="fw-bold mb-4">{% trans "TisaVista چیست؟" %}</h2>
-        <p class="lead">
-          {% trans "TisaVista یک پلتفرم تخصصی Spatial Intelligence، GIS و آموزش حرفه‌ای شهرسازی است که بر تلفیق برنامه‌ریزی شهری، تحلیل مکانی و تصمیم‌گیری مبتنی بر داده تمرکز دارد." %}
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <h2 class="fw-bold">{% trans "Our Story" %}</h2>
+        <p class="text-muted">
+          {% trans "We are Tisa and Taher — two companions in the world of urban planning who met in an enthusiastic group called GIS Talk. A question about machine learning turned into a collaboration full of ideas. We combine urban planning with technology to create not only beautiful cities but smart, green and meaningful places." %}
         </p>
-        <p>
-          {% trans "هدف ما پر کردن شکاف بین آموزش دانشگاهی، پروژه‌های واقعی شهری و فناوری‌های نوین مکانی است." %}
+        <p class="text-muted">
+          {% trans "With notes, practical videos and step-by-step courses, we help learners around the world draw the map of the cities of the future." %}
         </p>
-      </div>
-      <div class="col-lg-5">
-        <img src="{% static 'images/hero.png' %}" class="img-fluid rounded shadow" alt="TisaVista">
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- 2. چرا TisaVista را ساختیم؟ -->
-<section class="py-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10 text-center">
-        <h2 class="fw-bold mb-4">{% trans "چرا TisaVista را ساختیم؟" %}</h2>
-        <p class="lead text-muted">
-          {% trans "در بسیاری از دوره‌های GIS فقط نرم‌افزار آموزش داده می‌شود، اما در دنیای واقعی شهرسازی، مسئله اصلی «تصمیم‌گیری آگاهانه» است.<br><br>ما TisaVista را ساختیم تا این فاصله را پر کنیم و آموزش‌هایی کاربردی، پروژه‌محور و مبتنی بر Spatial Decision Support ارائه دهیم." %}
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- فلسفه TisaVista -->
-<section class="py-5 bg-light">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <h2 class="fw-bold text-center mb-4">{% trans "فلسفه TisaVista" %}</h2>
-        <p class="lead text-center">
-          {% trans "در TisaVista ما باور داریم که نقشه‌ها پاسخ نیستند؛ آن‌ها نقطه شروع پرسش‌های بهتر هستند." %}
-        </p>
-        <p class="lead text-center">
-          {% trans "نام TisaVista بازتاب همین نگاه است. «Vista» به معنای چشم‌انداز و دید وسیع است و برای ما نمادی از نگاه فراتر از داده‌ها و نقشه‌هاست؛ نگاهی که به درک بهتر فضا، شهر و تصمیم‌گیری منجر می‌شود." %}
-        </p>
-        <p class="lead text-center">
-          {% trans "ماموریت ما فراتر از آموزش ابزارهاست. ما تلاش می‌کنیم به برنامه‌ریزان، پژوهشگران و متخصصان کمک کنیم فضا را بهتر درک کنند، الگوها را کشف کنند و تصمیم‌های آگاهانه‌تری بگیرند." %}
-        </p>
-        <div class="text-center mt-5">
-          <blockquote class="fs-3 fw-bold text-primary">
-            {% trans "«ارزش واقعی GIS در تولید نقشه نیست؛ در ایجاد بینش برای تصمیم‌گیری بهتر است.»" %}
-          </blockquote>
+        <div class="mt-3">
+          <a href="{{ free_resources_url }}" class="btn btn-outline-primary me-2">{% trans "See Free Resources" %}</a>
+          <a href="{% url 'contactus' %}" class="btn btn-outline-secondary">{% trans "Get in Touch" %}</a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- نقطه تلاقی شهرسازی و فناوری -->
-<section class="py-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <div class="bg-light p-5 rounded-3 text-center">
-          <h3 class="fw-bold mb-4">{% trans "نقطه تلاقی شهرسازی و فناوری" %}</h3>
-          <p class="lead">
-            {% trans "TisaVista حاصل همکاری دو مسیر حرفه‌ای است؛ تجربه سال‌ها فعالیت در برنامه‌ریزی شهری، GIS، تحلیل مکانی و تصمیم‌گیری از یک سو، و توسعه سامانه‌های مکانی، پایگاه‌های داده، Web GIS و فناوری‌های نوین از سوی دیگر.<br><br>این ترکیب باعث شده بتوانیم آموزش‌هایی ارائه کنیم که تنها بر یادگیری ابزارها تمرکز ندارند، بلکه نحوه استفاده از آن‌ها برای حل مسائل واقعی را آموزش می‌دهند." %}
-          </p>
-        </div>
+      <div class="col-lg-6">
+        <blockquote class="blockquote p-4 rounded shadow-sm bg-white">
+          <p class="mb-2 fst-italic">{% trans "“We started our dreams in Tehran, and this is only the beginning — we want to bring practical urban education to more cities.”" %}</p>
+          <footer class="blockquote-footer">{% trans "Tisa & Taher" %}</footer>
+        </blockquote>
       </div>
     </div>
   </div>
 </section>
 
-<!-- آنچه در TisaVista آموزش می‌دهیم -->
-<section class="py-5 bg-light">
+<!-- Team -->
+<section class="py-5">
   <div class="container">
-    <h2 class="text-center fw-bold mb-5">{% trans "آنچه در TisaVista آموزش می‌دهیم" %}</h2>
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">{% trans "Meet Our Team" %}</h2>
+      <p class="text-muted">{% trans "A small team with a big passion for smart and sustainable cities." %}</p>
+    </div>
+
     <div class="row g-4">
-      <div class="col-md-3">
-        <div class="card h-100 shadow-sm text-center p-4">
-          <i class="bi bi-globe2 text-primary fs-1 mb-3"></i>
-          <h5>GIS & Spatial Analysis</h5>
+      <!-- Tisa -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="row g-0 align-items-center">
+            <div class="col-4 text-center p-3">
+              <img src="{% static 'images/team/tisa.webp' %}" alt="Tisa" class="rounded-circle shadow-sm" style="width:110px; height:110px; object-fit:cover;">
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title mb-1">Tisa</h5>
+                <p class="small text-muted mb-2">{% trans "Geography & Urban Planning Specialist | Lover of Smart Cities" %}</p>
+                <p class="mb-0 text-muted">
+                  {% trans "Tisa taught at university for eight years and educated over 2,500 students. She creates video lessons and practical content on GIS, Python and machine learning." %}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="card h-100 shadow-sm text-center p-4">
-          <i class="bi bi-diagram-3 text-primary fs-1 mb-3"></i>
-          <h5>Spatial Decision Support</h5>
+
+      <!-- Taher -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="row g-0 align-items-center">
+            <div class="col-4 text-center p-3">
+              <img src="{% static 'images/team/taher.webp' %}" alt="Taher" class="rounded-circle shadow-sm" style="width:110px; height:110px; object-fit:cover;">
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title mb-1">Taher</h5>
+                <p class="small text-muted mb-2">{% trans "Urban Management Specialist | Data & Technology Wizard" %}</p>
+                <p class="mb-0 text-muted">
+                  {% trans "Taher focuses on data analysis, platform development and educational content production. He supports the technical backend and data workflows." %}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="card h-100 shadow-sm text-center p-4">
-          <i class="bi bi-code-square text-primary fs-1 mb-3"></i>
-          <h5>Python & Automation for GIS</h5>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card h-100 shadow-sm text-center p-4">
-          <i class="bi bi-map text-primary fs-1 mb-3"></i>
-          <h5>Urban Planning & Regeneration</h5>
-        </div>
-      </div>
+    </div>
+
+    <!-- CTA below team -->
+    <div class="text-center mt-4">
+      <a href="{% url 'product_list' %}" class="btn btn-lg btn-success me-2">
+        {% trans "Would you like to join us? Click here!" %}
+      </a>
+      <a href="https://t.me/tisavista" target="_blank" class="btn btn-outline-primary">
+        <i class="bi bi-telegram me-1"></i> {% trans "Message us on Telegram" %}
+      </a>
     </div>
   </div>
 </section>
 
-<!-- داستان شروع -->
-<section class="py-5">
+<!-- Vision & Why Us -->
+<section class="py-5 bg-light">
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="bg-light p-5 rounded-3">
-          <h4 class="fw-bold text-center mb-4">{% trans "چگونه TisaVista شروع شد؟" %}</h4>
-          <p class="text-center lead">
-            {% trans "داستان TisaVista از یک گفتگوی ساده درباره یادگیری ماشین در گروه GIS Talk آغاز شد. آن سؤال به همکاری تبدیل شد، سپس به تولید محتوا و در نهایت به شکل‌گیری این پلتفرم آموزشی رسید." %}
-          </p>
-        </div>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <h3 class="fw-bold">{% trans "Our Vision" %}</h3>
+        <p class="text-muted">
+          {% trans "We started our dreams in Tehran but this is just the beginning. We want to expand our teaching to other cities and the world so anyone passionate about urban planning can design a smart, green city." %}
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <h3 class="fw-bold">{% trans "Why Us?" %}</h3>
+        <p class="text-muted">
+          {% trans "We don't just teach — we practice what we teach. With Tisa's teaching experience and Taher's data-driven approach, our materials are practical, up-to-date and built to help you succeed." %}
+        </p>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>{% trans "Practical, hands-on lessons" %}</li>
+          <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>{% trans "Clear explanations and examples" %}</li>
+          <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>{% trans "Support & community" %}</li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- چشم‌انداز + CTA -->
-<section class="py-5 bg-light text-center">
-  <div class="container">
-    <h2 class="fw-bold mb-4">{% trans "چشم‌انداز ما" %}</h2>
-    <p class="lead mb-5">
-      {% trans "هدف ما تبدیل شدن به یکی از معتبرترین مراجع آموزش Spatial Intelligence، GIS و تصمیم‌گیری مکانی در جهان فارسی‌زبان است." %}
-    </p>
-    <a href="{% url 'product_list' %}" class="btn btn-lg btn-primary me-3">{% trans "ورود به آکادمی" %}</a>
-    <a href="{{ free_resources_url }}" class="btn btn-lg btn-outline-primary">{% trans "منابع رایگان" %}</a>
   </div>
 </section>
 
