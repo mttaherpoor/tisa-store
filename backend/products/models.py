@@ -3,11 +3,16 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.shortcuts import reverse
+from django.templatetags.static import static
 from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from django_ckeditor_5.fields import CKEditor5Field
+
+from collections import namedtuple
+
+ImageData = namedtuple("ImageData", ["url", "alt"])
 
 
 class Category(models.Model):
@@ -21,7 +26,7 @@ class Category(models.Model):
         return self.title
 
 
-class Product(models.Model):
+class Product(models.Model):    
     title = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="products")
     slug = models.SlugField()
@@ -35,6 +40,8 @@ class Product(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
 
+    DEFAULT_IMAGE = "images/defaults/default-product.jpg"
+
     def __str__(self):
         return self.title
 
@@ -45,6 +52,19 @@ class Product(models.Model):
         if not self.slug:
             self.slug = slugify(self.title, allow_unicode=True)
         super().save(*args, **kwargs)
+
+    @property
+    def image_data(self):
+        if self.image:
+            return ImageData(
+                self.image.url,
+                self.title or "product"
+            )
+
+        return ImageData(
+            static(self.DEFAULT_IMAGE),
+            "No Image"
+        )
 
 
 class ActiveCommentsManger(models.Manager):

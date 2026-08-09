@@ -46,7 +46,7 @@
       </p>
       <div class="d-flex gap-3 flex-wrap">
         <a href="{% url 'product_list' %}" class="btn btn-light btn-lg px-5 py-3">{% trans "Explore Academy" %}</a>
-        <a href="{% url 'free_resources' %}" class="btn btn-outline-light btn-lg px-5 py-3">{% trans "Start with Free Resources" %}</a>
+        <a href="{{'free_resources'}} class="btn btn-outline-light btn-lg px-5 py-3">{% trans "Start with Free Resources" %}</a>
       </div>
     </div>
   </div>
@@ -139,39 +139,19 @@
   <div class="container">
     <h2 class="text-center display-5 fw-bold mb-5">Featured Learning Paths</h2>
     <div class="row g-4">
-      <div class="col-md-4">
-        <a href="{% url 'product_list' %}" class="text-decoration-none text-dark">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="{% static 'images/default-picture.webp' %}" class="card-img-top" style="height:180px; object-fit:cover;" alt="ArcGIS">
-            <div class="card-body">
-              <h5>ArcGIS Professional Track</h5>
-              <p class="text-muted">From beginner to advanced spatial analysis and site selection through real planning projects.</p>
+      {% for product in products %}
+        <div class="col-md-4">
+          <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-dark">
+            <div class="card h-100 shadow-sm border-0">
+              <img src="{{ product.image_data.url }}" class="card-img-top" style="height:180px; object-fit:cover;" alt="{{ product.image_data.alt }}">
+              <div class="card-body">
+                <h5>{{ product.title }}</h5>
+                <p class="text-muted">{{ product.short_description|truncatechars:110 }}</p>
+              </div>
             </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-4">
-        <a href="{% url 'product_list' %}" class="text-decoration-none text-dark">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="{% static 'images/default-picture.webp' %}" class="card-img-top" style="height:180px; object-fit:cover;" alt="Strategic Planning">
-            <div class="card-body">
-              <h5>Strategic Planning & Decision Support</h5>
-              <p class="text-muted">Master AHP, ANP, DEMATEL, TOPSIS, SWARA and other methods used in real planning practice.</p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-4">
-        <a href="{% url 'product_list' %}" class="text-decoration-none text-dark">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="{% static 'images/default-picture.webp' %}" class="card-img-top" style="height:180px; object-fit:cover;" alt="AutoCAD Map 3D">
-            <div class="card-body">
-              <h5>AutoCAD Map 3D</h5>
-              <p class="text-muted">Professional GIS tools for urban planners and infrastructure projects.</p>
-            </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -201,7 +181,7 @@
         </div>
       </div>
     </div>
-    <a href="{% url 'free_resources' %}" class="btn btn-primary btn-lg mt-5">Browse All Free Resources</a>
+    <a href="{{'free_resources' }} class="btn btn-primary btn-lg mt-5">Browse All Free Resources</a>
   </div>
 </section>
 

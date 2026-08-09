@@ -45,12 +45,7 @@
         <div class="col-lg-4 col-md-6">
           <div class="card product-card border-0 shadow-sm h-100">
             <a href="{{ product.get_absolute_url }}" class="d-block">
-              {% if product.image %}
-                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}" style="object-fit: cover; height: 240px;">
-              {% else %}
-                <div class="bg-light border rounded text-center d-flex align-items-center justify-content-center" style="height:240px;">
-                  <span class="text-muted">تصویر در دسترس نیست</span>
-                </div>
+                <img src="{{ product.image_data.url }}" class="card-img-top" alt="{{ product.image_data.alt }}" style="object-fit: cover; height: 240px;">
               {% endif %}
             </a>
 

@@ -36,11 +36,7 @@
         </p>
       </div>
       <div class="col-lg-5 text-center">
-        {% if product.image %}
-          <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid rounded shadow" style="max-height:340px; object-fit:cover;">
-        {% else %}
-          <img src="{% static 'images/default picture.webp' %}" class="img-fluid rounded shadow" style="max-height:340px; object-fit:cover;">
-        {% endif %}
+          <img src="{{ product.image_data.url }}" alt="{{ product.image_data.alt }}" class="img-fluid rounded shadow" style="max-height:340px; object-fit:cover;">
       </div>
     </div>
   </div>
