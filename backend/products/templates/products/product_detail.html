@@ -48,19 +48,19 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="card shadow border-0 p-5 text-center">
-          <p class="small text-uppercase text-muted mb-2">دوره آموزشی آنلاین</p>
-          <h3 class="fw-bold mb-2">ثبت‌نام در دوره</h3>
-          <p class="text-muted mb-4">پس از ثبت‌نام، دسترسی شما به محتوای آموزشی دوره فعال خواهد شد.</p>
+          <p class="small text-uppercase text-muted mb-2">{% trans "Online Course" %}</p>
+          <h3 class="fw-bold mb-2">{% trans "Enroll in the Course" %}</h3>
+          <p class="text-muted mb-4">{% trans "After enrollment, you will gain access to the course content." %}</p>
           
           <h2 class="display-5 fw-bold text-primary mb-4">
-            {{ product.price|intcomma:False|translate_number }} تومان
+            {{ product.price|intcomma:False|translate_number| default:"0" }} {% trans "$" %}
           </h2>
           
           <form action="{% url 'cart:cart_add' product.id %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="quantity" value="1">
             <button type="submit" class="btn btn-success btn-lg px-5 w-100">
-              <i class="bi bi-cart-plus me-2"></i> ثبت‌نام در دوره
+              <i class="bi bi-cart-plus me-2"></i> {% trans "Enroll in the Course" %}
             </button>
           </form>
         </div>
@@ -75,10 +75,10 @@
     <div class="card border-0 bg-white">
       <div class="card-body">
         <div class="d-flex align-items-center">
-          <img src="{% static 'images/team/tisa.webp' %}" class="rounded-circle me-4" style="width:75px;height:75px;object-fit:cover;" alt="تیسا">
+          <img src="{% static 'images/team/tisa.webp' %}" class="rounded-circle me-4" style="width:75px;height:75px;object-fit:cover;" alt="{{product.teacher.name}}">
           <div>
-            <h5 class="mb-1">دکتر ناهید نعمتی کوتنائی (تیسا)</h5>
-            <p class="text-muted mb-0">شهرساز، پژوهشگر GIS و سیستم‌های پشتیبانی تصمیم‌گیری مکانی (SDSS)</p>
+            <h5 class="mb-1">{{product.teacher}}</h5>
+            <p class="text-muted mb-0">{{product.teacher_description}}</p>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
 <!-- درباره این دوره -->
 <section class="py-5">
   <div class="container">
-    <h3 class="fw-bold mb-4">درباره این دوره</h3>
+    <h3 class="fw-bold mb-4">{% trans "About This Course" %}</h3>
     <div class="product-description card shadow-sm">
       <div class="card-body">
         {{ product.description|safe }}
@@ -101,7 +101,7 @@
 <!-- نظرات و تجربیات شرکت‌کنندگان -->
 <section class="py-5 bg-light">
   <div class="container">
-    <h3 class="fw-bold mb-4">نظرات و تجربیات شرکت‌کنندگان</h3>
+    <h3 class="fw-bold mb-4">{% trans "Comments" %}</h3>
     
     {% if product.comments.all|only_active_comments %}
       <ul class="list-unstyled">
@@ -127,20 +127,20 @@
         {% endfor %}
       </ul>
     {% else %}
-      <p class="text-muted">هنوز دیدگاهی برای این دوره ثبت نشده است.</p>
+      <p class="text-muted">{% trans "No comments yet." %}</p>
     {% endif %}
 
     {% if user.is_authenticated %}
       <div class="mt-5">
-        <h5 class="fw-bold mb-3">دیدگاه خود را ثبت کنید</h5>
+        <h5 class="fw-bold mb-3">{% trans "Leave a comment" %}</h5>
         <form action="{% url 'comment_create' product.slug %}" method="post">
           {% csrf_token %}
           {{ comment_form|crispy }}
-          <button type="submit" class="btn btn-primary mt-3">ارسال نظر</button>
+          <button type="submit" class="btn btn-primary mt-3">{% trans "Submit" %}</button>
         </form>
       </div>
     {% else %}
-      <p class="text-muted">برای ثبت نظر لطفاً <a href="{% url 'account_login' %}">وارد شوید</a>.</p>
+      <p class="text-muted">{% trans "To write your comment please" %}<a href="{% url 'account_login' %}">{% trans "Login" %}</a>.</p>
     {% endif %}
   </div>
 </section>
