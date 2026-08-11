@@ -12,9 +12,9 @@ urlpatterns = [
     rp(
     r"comment/(?P<slug>[-\w\u0600-\u06FF]+)/$",
     views.CommentCreateView.as_view(),
-    name="comment_create",
+    name="comment-create",
     ),
-    # path("comment/<int:product_id>/", CommentCreateView.as_view(), name="comment_create"),
+    # path("comment/<int:product_id>/", CommentCreateView.as_view(), name="comment-create"),
 ]
 #urls.py
 urlpatterns += [
