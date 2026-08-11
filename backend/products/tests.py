@@ -72,11 +72,11 @@ class ProductTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_product_list_url_by_name(self):
-        response = self.client.get(reverse("product_list"))
+        response = self.client.get(reverse("product-list"))
         self.assertEqual(response.status_code, 200)
 
     def test_page_title_on_product_list_page(self):
-        response = self.client.get(reverse("product_list"))
+        response = self.client.get(reverse("product-list"))
         self.assertContains(response, self.product1.title)
 
     def test_product_detail_url(self):
@@ -84,7 +84,7 @@ class ProductTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_product_detail_url_by_name(self):
-        response = self.client.get(reverse("product_detail", args=[self.product1.id]))
+        response = self.client.get(reverse("product-detail", args=[self.product1.id]))
         self.assertEqual(response.status_code, 200)
 
     def test_product_details_on_product_detail_page(self):
@@ -93,10 +93,10 @@ class ProductTest(TestCase):
         self.assertContains(response, self.product1.title)
 
     def test_status_404_if_product_id_not_exist(self):
-        response = self.client.get(reverse("product_detail", args=[999]))
+        response = self.client.get(reverse("product-detail", args=[999]))
         self.assertEqual(response.status_code, 404)
 
     def test_draft_product_not_show_in_products_list(self):
-        response = self.client.get(reverse("product_list"))
+        response = self.client.get(reverse("product-list"))
         self.assertContains(response, self.product1.title)
         self.assertNotContains(response, self.product2.title)

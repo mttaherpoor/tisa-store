@@ -38,7 +38,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link{% if request.resolver_match.url_name == 'product_list' %} active{% endif %}" href="{% url 'product_list' %}">
+            <a class="nav-link{% if request.resolver_match.url_name == 'product-list' %} active{% endif %}" href="{% url 'product-list' %}">
               <i class="bi bi-book me-1"></i>{% trans "Academy" %}
             </a>
           </li>
@@ -48,7 +48,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'product_list' %}">
+            <a class="nav-link" href="{% url 'product-list' %}">
               <i class="bi bi-map me-1"></i>{% trans "Learning Paths" %}
             </a>
           </li>
@@ -71,7 +71,7 @@
 
         <div class="d-flex align-items-center gap-3">
           <!-- Search -->
-          <a href="{% url 'product_list' %}" class="btn btn-link text-dark p-2" aria-label="{% trans 'Search' %}">
+          <a href="{% url 'product-list' %}" class="btn btn-link text-dark p-2" aria-label="{% trans 'Search' %}">
             <i class="bi bi-search fs-5"></i>
           </a>
 

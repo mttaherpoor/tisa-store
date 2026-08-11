@@ -46,7 +46,7 @@ class Product(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("product_detail", args=[self.slug])
+        return reverse("product-detail", args=[self.slug])
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -97,7 +97,6 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return self.product.get_absolute_url()
-        return reverse("product_detail", args=[self.product.get_absolute_url()])
 
 
 def video_upload_path(instance, filename):

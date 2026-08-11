@@ -3,11 +3,11 @@ from django.urls import path, re_path as rp
 from . import views
 
 urlpatterns = [
-    path("", views.ProductListView.as_view(), name="product_list"),
+    path("", views.ProductListView.as_view(), name="product-list"),
     rp(
         r"^(?P<slug>[-\w\u0600-\u06FF]+)/$",
         views.ProductDetailView.as_view(),
-        name="product_detail",
+        name="product-detail",
     ),
     rp(
     r"comment/(?P<slug>[-\w\u0600-\u06FF]+)/$",

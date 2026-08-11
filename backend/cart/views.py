@@ -34,7 +34,7 @@ def add_to_cart_view(request, product_id):
         cart.add(product, quantity, replace_current_quantity=cleaned_data['inplace'])
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
-    return redirect('product_list')
+    return redirect('product-list')
     return redirect('cart:cart_detail')
 
 def remove_from_cart(request, product_id):
@@ -56,4 +56,4 @@ def clear_cart(request):
     else:
         messages.warning(request, _('Your cart is already empty'))
 
-    return redirect('product_list')
+    return redirect('product-list')
