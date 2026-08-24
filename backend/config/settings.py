@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     # "django_cleanup.apps.CleanupConfig",
 
     # local apps
-    "accounts",
+    "core",
     "pages",
     "products",
     "cart",
@@ -155,7 +155,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     #local validators
         {
-        'NAME': 'accounts.validators.PasswordCharValidator',
+        'NAME': 'core.validators.PasswordCharValidator',
     },
 ]
 
@@ -207,7 +207,7 @@ PROTECTED_VIDEO_STORAGE = VideoStorage()
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # accounts config
-AUTH_USER_MODEL = "accounts.CustomUser"
+AUTH_USER_MODEL = "core.CustomUser"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 LOGIN_URL = "account_login"

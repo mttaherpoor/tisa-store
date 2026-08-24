@@ -20,7 +20,7 @@ from products.models import Video, VideoFile
 from .models import Ticket
 
 class ProfileDetailView(LoginRequiredMixin, TemplateView):
-    template_name = "accounts/profile.html"
+    template_name = "core/profile.html"
 
     def get_context_data(self, **kwargs):
         user = self.request.user
@@ -105,7 +105,7 @@ def video_files_list(request, order_item_id):
     # بازگرداندن به قالب
     return render(
         request,
-        "accounts/video_files_list.html",
+        "core/video_files_list.html",
         {
             "product": order_item.product,
             "video_files": video_files,

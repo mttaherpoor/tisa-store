@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0004_customuser_profile_image'),
+        ('core', '0004_customuser_profile_image'),
     ]
 
     operations = [
