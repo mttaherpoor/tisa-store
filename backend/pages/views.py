@@ -1,17 +1,20 @@
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 
+from products.models import Product
+from blog.models import Post
+
 from .models import FAQ
 from .forms import ContactForm 
-from products.models import Product
-from  blog.models import Post
 
 
 class HomePageView(TemplateView):
-    template_name = "home.html"
+    template_name = "pages/home.html"
 
     def get_context_data(self, **kwargs):
         products = Product.objects.all()[:3]
@@ -43,10 +46,6 @@ class ContactUsPageView(FormView):
         context['signup_url'] = reverse_lazy('account_signup')  # example
         return context
 
-
-from django.core.mail import send_mail
-from django.http import HttpResponse
-from django.shortcuts import render
 
 def send_email(request):
     subject = 'موضوع ایمیل'
