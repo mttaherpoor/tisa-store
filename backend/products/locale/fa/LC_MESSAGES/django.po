@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-16 02:38+0330\n"
+"POT-Creation-Date: 2026-08-30 21:39+0330\n"
 "PO-Revision-Date: 2022-06-13 06:30+0430\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,180 +19,173 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\models.py:28
+#: .\backend\products\models.py:33
 #, fuzzy
 #| msgid "Product Description"
 msgid "Product description"
 msgstr "توضیحات محصول"
 
-#: .\models.py:32
+#: .\backend\products\models.py:37
 msgid "Product Image"
 msgstr ""
 
-#: .\models.py:57
+#: .\backend\products\models.py:77
 msgid "Very Bad"
 msgstr "خیلی بدددددددددد"
 
-#: .\models.py:58
+#: .\backend\products\models.py:78
 msgid "Bad"
 msgstr "بد"
 
-#: .\models.py:59
+#: .\backend\products\models.py:79
 msgid "Normal"
 msgstr "معمولی"
 
-#: .\models.py:60
+#: .\backend\products\models.py:80
 msgid "Good"
 msgstr "خوب"
 
-#: .\models.py:61
+#: .\backend\products\models.py:81
 msgid "Perfect"
 msgstr "عالی"
 
-#: .\models.py:66
+#: .\backend\products\models.py:86
 msgid "Comment Text"
 msgstr "متن دیدگاه"
 
-#: .\models.py:67
+#: .\backend\products\models.py:87
 msgid "What is your score?"
 msgstr "امتیاز شما به این محصول کدام است؟"
 
-#: .\templates\products\product_detail.html:21
-msgid "Back to All Products"
+#: .\backend\products\templates\products\product_detail.html:51
+msgid "Online Course"
 msgstr ""
 
-#: .\templates\products\product_detail.html:45
-#, fuzzy
-#| msgid "Product Description"
-msgid "Short description"
-msgstr "توضیحات محصول"
-
-#: .\templates\products\product_detail.html:50
-msgid "Price"
+#: .\backend\products\templates\products\product_detail.html:52
+#: .\backend\products\templates\products\product_detail.html:63
+msgid "Enroll in the Course"
 msgstr ""
 
-#: .\templates\products\product_detail.html:51
-#: .\templates\products\product_list.html:57
+#: .\backend\products\templates\products\product_detail.html:53
+msgid "After enrollment, you will gain access to the course content."
+msgstr ""
+
+#: .\backend\products\templates\products\product_detail.html:56
+#: .\backend\products\templates\products\product_list.html:53
 msgid "$"
 msgstr "تومان"
 
-#: .\templates\products\product_detail.html:54
-#, fuzzy
-#| msgid "Add to Cart"
-msgid "Add to cart form"
-msgstr "اضافه به سبد خرید"
-
-#: .\templates\products\product_detail.html:58
-#: .\templates\products\product_list.html:63
-msgid "Add to Cart"
-msgstr "اضافه به سبد خرید"
-
-#: .\templates\products\product_detail.html:66
-msgid "Remove from wishlist"
+#: .\backend\products\templates\products\product_detail.html:92
+msgid "About This Course"
 msgstr ""
 
-#: .\templates\products\product_detail.html:68
-#, fuzzy
-#| msgid "Add to Cart"
-msgid "Add to wishlist"
-msgstr "اضافه به سبد خرید"
-
-#: .\templates\products\product_detail.html:71
-#: .\templates\products\product_list.html:82
-msgid "Login to add"
-msgstr ""
-
-#: .\templates\products\product_detail.html:82
-#, fuzzy
-#| msgid "Product Description"
-msgid "Detailed description"
-msgstr "توضیحات محصول"
-
-#: .\templates\products\product_detail.html:90
+#: .\backend\products\templates\products\product_detail.html:104
 #, fuzzy
 #| msgid "Comment Text"
 msgid "Comments"
 msgstr "متن دیدگاه"
 
-#: .\templates\products\product_detail.html:117
+#: .\backend\products\templates\products\product_detail.html:130
 #, fuzzy
 #| msgid "Comment Text"
 msgid "No comments yet."
 msgstr "متن دیدگاه"
 
-#: .\templates\products\product_detail.html:124
+#: .\backend\products\templates\products\product_detail.html:135
 #, fuzzy
 #| msgid "Write your comment"
 msgid "Leave a comment"
 msgstr "نظر خود را بنویسید"
 
-#: .\templates\products\product_detail.html:125
-#, fuzzy
-#| msgid "Comment Text"
-msgid "Comment form"
-msgstr "متن دیدگاه"
-
-#: .\templates\products\product_detail.html:129
+#: .\backend\products\templates\products\product_detail.html:139
 msgid "Submit"
 msgstr "ارسال"
 
-#: .\templates\products\product_detail.html:135
+#: .\backend\products\templates\products\product_detail.html:143
 #, fuzzy
 #| msgid "Write your comment"
 msgid "To write your comment please"
 msgstr "نظر خود را بنویسید"
 
-#: .\templates\products\product_detail.html:135
+#: .\backend\products\templates\products\product_detail.html:143
 msgid "Login"
 msgstr ""
 
-#: .\templates\products\product_list.html:8
+#: .\backend\products\templates\products\product_list.html:8
 #, fuzzy
 #| msgid "Product details of"
 msgid "Products"
 msgstr "توضیحات محصول"
 
-#: .\templates\products\product_list.html:15
+#: .\backend\products\templates\products\product_list.html:15
 #, fuzzy
 #| msgid "Categories"
 msgid "Product Categories"
 msgstr "دسته بندی ها"
 
-#: .\templates\products\product_list.html:24
+#: .\backend\products\templates\products\product_list.html:24
 msgid "All"
 msgstr ""
 
-#: .\templates\products\product_list.html:42
-msgid "No image available"
+#: .\backend\products\templates\products\product_list.html:59
+msgid "View Course"
 msgstr ""
 
-#: .\templates\products\product_list.html:73
-msgid "Remove from Wishlist"
-msgstr ""
-
-#: .\templates\products\product_list.html:77
-#, fuzzy
-#| msgid "Add to Cart"
-msgid "Add to Wishlist"
+#: .\backend\products\templates\products\product_list.html:65
+msgid "Add to Cart"
 msgstr "اضافه به سبد خرید"
 
-#: .\templates\products\product_list.html:92
+#: .\backend\products\templates\products\product_list.html:71
+msgid "totur"
+msgstr ""
+
+#: .\backend\products\templates\products\product_list.html:79
 msgid "No products available yet."
 msgstr ""
 
-#: .\templates\products\product_list.html:103
-#: .\templates\products\product_list.html:104
+#: .\backend\products\templates\products\product_list.html:89
+#: .\backend\products\templates\products\product_list.html:90
 msgid "Previous"
 msgstr ""
 
-#: .\templates\products\product_list.html:115
-#: .\templates\products\product_list.html:116
+#: .\backend\products\templates\products\product_list.html:101
+#: .\backend\products\templates\products\product_list.html:102
 msgid "Next"
 msgstr ""
 
-#: .\views.py:71
+#: .\backend\products\views.py:71
 msgid "Comment successfully created"
 msgstr "نظر شما با موفقیت ثبت شد."
+
+#, fuzzy
+#~| msgid "Product Description"
+#~ msgid "Short description"
+#~ msgstr "توضیحات محصول"
+
+#, fuzzy
+#~| msgid "Add to Cart"
+#~ msgid "Add to cart form"
+#~ msgstr "اضافه به سبد خرید"
+
+#, fuzzy
+#~| msgid "Add to Cart"
+#~ msgid "Add to wishlist"
+#~ msgstr "اضافه به سبد خرید"
+
+#, fuzzy
+#~| msgid "Product Description"
+#~ msgid "Detailed description"
+#~ msgstr "توضیحات محصول"
+
+#, fuzzy
+#~| msgid "Comment Text"
+#~ msgid "Comment form"
+#~ msgstr "متن دیدگاه"
+
+#, fuzzy
+#~| msgid "Add to Cart"
+#~ msgid "Add to Wishlist"
+#~ msgstr "اضافه به سبد خرید"
 
 #~ msgid "Hello"
 #~ msgstr "سلام"

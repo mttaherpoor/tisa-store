@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-16 02:37+0330\n"
+"POT-Creation-Date: 2026-08-30 21:39+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,140 +18,100 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\models.py:25
+#: .\backend\blog\models.py:25
 msgid "Post description"
 msgstr ""
 
-#: .\models.py:58
+#: .\backend\blog\models.py:58
 msgid "Very Bad"
 msgstr ""
 
-#: .\models.py:59
+#: .\backend\blog\models.py:59
 msgid "Bad"
 msgstr ""
 
-#: .\models.py:60
+#: .\backend\blog\models.py:60
 msgid "Normal"
 msgstr ""
 
-#: .\models.py:61
+#: .\backend\blog\models.py:61
 msgid "Good"
 msgstr ""
 
-#: .\models.py:62
+#: .\backend\blog\models.py:62
 msgid "Perfect"
 msgstr ""
 
-#: .\models.py:67
+#: .\backend\blog\models.py:67
 msgid "Comment Text"
 msgstr ""
 
-#: .\models.py:68
+#: .\backend\blog\models.py:68
 msgid "What is your score?"
 msgstr ""
 
-#: .\templates\blog\category_create.html:5
-#: .\templates\blog\category_create.html:15
-msgid "Add New Category"
-msgstr ""
-
-#: .\templates\blog\category_create.html:29
-msgid "Save Category"
-msgstr ""
-
-#: .\templates\blog\post_create.html:5 .\templates\blog\post_create.html:15
-msgid "Add New Post"
-msgstr ""
-
-#: .\templates\blog\post_create.html:18
-msgid "Add Category"
-msgstr ""
-
-#: .\templates\blog\post_create.html:28
-msgid "Publish Post"
-msgstr ""
-
-#: .\templates\blog\post_delete.html:4 .\templates\blog\post_delete.html:13
-msgid "Delete Post"
-msgstr ""
-
-#: .\templates\blog\post_delete.html:16
-#, python-format
-msgid "Are you sure you want to permanently delete the post \"%(title)s\"?"
-msgstr ""
-
-#: .\templates\blog\post_delete.html:22
-msgid "Yes, Delete"
-msgstr ""
-
-#: .\templates\blog\post_delete.html:25
-msgid "Cancel"
-msgstr ""
-
-#: .\templates\blog\post_detail.html:19
-msgid "Back to All Posts"
-msgstr ""
-
-#: .\templates\blog\post_detail.html:37
+#: .\backend\blog\templates\blog\post_detail.html:59
 msgid "By"
 msgstr ""
 
-#: .\templates\blog\post_detail.html:67
+#: .\backend\blog\templates\blog\post_detail.html:85
 msgid "Comments"
 msgstr ""
 
-#: .\templates\blog\post_detail.html:97
+#: .\backend\blog\templates\blog\post_detail.html:114
 msgid "No comments yet."
 msgstr ""
 
-#: .\templates\blog\post_detail.html:108
+#: .\backend\blog\templates\blog\post_detail.html:121
 msgid "Leave a Comment"
 msgstr ""
 
-#: .\templates\blog\post_detail.html:112
+#: .\backend\blog\templates\blog\post_detail.html:127
 msgid "Submit"
 msgstr ""
 
-#: .\templates\blog\post_detail.html:116
+#: .\backend\blog\templates\blog\post_detail.html:131
 msgid "To write your comment please "
 msgstr ""
 
-#: .\templates\blog\post_detail.html:117
+#: .\backend\blog\templates\blog\post_detail.html:132
 msgid "Login"
 msgstr ""
 
-#: .\templates\blog\post_list.html:7
-msgid "Post List"
+#: .\backend\blog\templates\blog\post_list.html:6
+msgid "Posts"
 msgstr ""
 
-#: .\templates\blog\post_list.html:16
+#: .\backend\blog\templates\blog\post_list.html:16
 msgid "Create New Post"
 msgstr ""
 
-#: .\templates\blog\post_list.html:23
+#: .\backend\blog\templates\blog\post_list.html:24
 msgid "Categories"
 msgstr ""
 
-#: .\templates\blog\post_list.html:31
+#: .\backend\blog\templates\blog\post_list.html:32
 msgid "All"
 msgstr ""
 
-#: .\templates\blog\post_list.html:53
+#: .\backend\blog\templates\blog\post_list.html:57
 msgid "Read More"
 msgstr ""
 
-#: .\templates\blog\post_list.html:62
+#: .\backend\blog\templates\blog\post_list.html:66
 msgid "No posts available yet."
 msgstr ""
 
-#: .\templates\blog\post_list.html:74 .\templates\blog\post_list.html:75
+#: .\backend\blog\templates\blog\post_list.html:78
+#: .\backend\blog\templates\blog\post_list.html:79
 msgid "Previous"
 msgstr ""
 
-#: .\templates\blog\post_list.html:86 .\templates\blog\post_list.html:87
+#: .\backend\blog\templates\blog\post_list.html:90
+#: .\backend\blog\templates\blog\post_list.html:91
 msgid "Next"
 msgstr ""
 
-#: .\views.py:134
+#: .\backend\blog\views.py:134
 msgid "Comment successfully created"
 msgstr ""

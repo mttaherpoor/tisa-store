@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-16 02:39+0330\n"
+"POT-Creation-Date: 2026-08-30 21:39+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,39 +17,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: .\forms.py:10
+
+#: .\backend\pages\forms.py:10
 msgid "Your name"
 msgstr ""
 
-#: .\forms.py:12
+#: .\backend\pages\forms.py:12
 msgid "Name"
 msgstr ""
 
-#: .\forms.py:17
+#: .\backend\pages\forms.py:17
 msgid "Your email"
 msgstr ""
 
-#: .\forms.py:19 .\templates\pages\contactus.html:45
+#: .\backend\pages\forms.py:19
+#: .\backend\pages\templates\pages\contactus.html:130
 msgid "Email"
 msgstr ""
 
-#: .\forms.py:25
+#: .\backend\pages\forms.py:25
 msgid "Write your message here..."
 msgstr ""
 
-#: .\forms.py:27
+#: .\backend\pages\forms.py:27
 msgid "Message"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:5 .\templates\pages\aboutus.html:8
+#: .\backend\pages\templates\pages\aboutus.html:5
+#: .\backend\pages\templates\pages\aboutus.html:8
 msgid "About Us"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:16
+#: .\backend\pages\templates\pages\aboutus.html:16
 msgid "Our Story"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:18
+#: .\backend\pages\templates\pages\aboutus.html:18
 msgid ""
 "We are Tisa and Taher — two companions in the world of urban planning who "
 "met in an enthusiastic group called GIS Talk. A question about machine "
@@ -58,125 +61,399 @@ msgid ""
 "green and meaningful places."
 msgstr ""
 
-#: .\templates\pages\aboutus.html:21
+#: .\backend\pages\templates\pages\aboutus.html:21
 msgid ""
 "With notes, practical videos and step-by-step courses, we help learners "
 "around the world draw the map of the cities of the future."
 msgstr ""
 
-#: .\templates\pages\aboutus.html:25
+#: .\backend\pages\templates\pages\aboutus.html:25
 msgid "See Free Resources"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:26
+#: .\backend\pages\templates\pages\aboutus.html:26
 msgid "Get in Touch"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:32
+#: .\backend\pages\templates\pages\aboutus.html:32
 msgid ""
 "“We started our dreams in Tehran, and this is only the beginning — we want "
 "to bring practical urban education to more cities.”"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:33
+#: .\backend\pages\templates\pages\aboutus.html:33
 msgid "Tisa & Taher"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:44
+#: .\backend\pages\templates\pages\aboutus.html:44
 msgid "Meet Our Team"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:45
+#: .\backend\pages\templates\pages\aboutus.html:45
 msgid "A small team with a big passion for smart and sustainable cities."
 msgstr ""
 
-#: .\templates\pages\aboutus.html:59
+#: .\backend\pages\templates\pages\aboutus.html:59
 msgid "Geography & Urban Planning Specialist | Lover of Smart Cities"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:61
+#: .\backend\pages\templates\pages\aboutus.html:61
 msgid ""
 "Tisa taught at university for eight years and educated over 2,500 students. "
 "She creates video lessons and practical content on GIS, Python and machine "
 "learning."
 msgstr ""
 
-#: .\templates\pages\aboutus.html:79
+#: .\backend\pages\templates\pages\aboutus.html:79
 msgid "Urban Management Specialist | Data & Technology Wizard"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:81
+#: .\backend\pages\templates\pages\aboutus.html:81
 msgid ""
 "Taher focuses on data analysis, platform development and educational content "
 "production. He supports the technical backend and data workflows."
 msgstr ""
 
-#: .\templates\pages\aboutus.html:93
+#: .\backend\pages\templates\pages\aboutus.html:93
 msgid "Would you like to join us? Click here!"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:96
+#: .\backend\pages\templates\pages\aboutus.html:96
 msgid "Message us on Telegram"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:107
+#: .\backend\pages\templates\pages\aboutus.html:107
 msgid "Our Vision"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:109
+#: .\backend\pages\templates\pages\aboutus.html:109
 msgid ""
 "We started our dreams in Tehran but this is just the beginning. We want to "
 "expand our teaching to other cities and the world so anyone passionate about "
 "urban planning can design a smart, green city."
 msgstr ""
 
-#: .\templates\pages\aboutus.html:114
+#: .\backend\pages\templates\pages\aboutus.html:114
 msgid "Why Us?"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:116
+#: .\backend\pages\templates\pages\aboutus.html:116
 msgid ""
 "We don't just teach — we practice what we teach. With Tisa's teaching "
 "experience and Taher's data-driven approach, our materials are practical, up-"
 "to-date and built to help you succeed."
 msgstr ""
 
-#: .\templates\pages\aboutus.html:119
+#: .\backend\pages\templates\pages\aboutus.html:119
 msgid "Practical, hands-on lessons"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:120
+#: .\backend\pages\templates\pages\aboutus.html:120
 msgid "Clear explanations and examples"
 msgstr ""
 
-#: .\templates\pages\aboutus.html:121
+#: .\backend\pages\templates\pages\aboutus.html:121
 msgid "Support & community"
 msgstr ""
 
-#: .\templates\pages\contactus.html:6 .\templates\pages\contactus.html:9
+#: .\backend\pages\templates\pages\contactus.html:7
+#: .\backend\pages\templates\pages\contactus.html:11
 msgid "Contact Us"
 msgstr ""
 
-#: .\templates\pages\contactus.html:18
-msgid "Contact Form"
+#: .\backend\pages\templates\pages\contactus.html:18
+msgid "Let's Start a Conversation"
 msgstr ""
 
-#: .\templates\pages\contactus.html:26
+#: .\backend\pages\templates\pages\contactus.html:20
+msgid ""
+"If you have questions about GIS, Spatial Intelligence, urban projects, or "
+"educational and technical collaborations, we would be happy to hear from you."
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:31
+msgid ""
+"Have a question or need guidance?<br>The TisaVista team is ready to answer "
+"your questions about training, spatial analysis, and GIS-based decision-"
+"making."
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:40
+msgid "How Can We Help?"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:49
+msgid "Spatial analysis, modeling, and geographic data management"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:59
+msgid "Spatial decision support systems and multi-criteria methods"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:69
+msgid "Urban planning and regeneration projects"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:79
+msgid "Development of spatial systems and platforms"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:96
+msgid "Start a Conversation"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:99
+msgid ""
+"We will review your message as soon as possible and usually respond within 1 "
+"to 2 business days."
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:110
 msgid "Send Message"
 msgstr ""
 
-#: .\templates\pages\contactus.html:39
+#: .\backend\pages\templates\pages\contactus.html:123
 msgid "Contact Information"
 msgstr ""
 
-#: .\templates\pages\contactus.html:53
-msgid "Address"
+#: .\backend\pages\templates\pages\contactus.html:140
+msgid "Location"
 msgstr ""
 
-#: .\templates\pages\contactus.html:54
-msgid "Tehran, Iran"
+#: .\backend\pages\templates\pages\contactus.html:142
+msgid ""
+"Based in Iran, ready to collaborate with individuals and organizations "
+"worldwide"
 msgstr ""
 
-#: .\templates\pages\contactus.html:61
-msgid "Social"
+#: .\backend\pages\templates\pages\contactus.html:150
+msgid "Social Media"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:183
+msgid "Collaboration Opportunities"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:190
+msgid "We welcome collaboration in the following areas:"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:194
+msgid "GIS and Spatial Intelligence education and content creation"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:195
+msgid "Urban planning projects and spatial analysis"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:196
+msgid "Web GIS and spatial system development"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:197
+msgid "Research and spatial decision-making (SDSS)"
+msgstr ""
+
+#: .\backend\pages\templates\pages\contactus.html:210
+msgid ""
+"“A map is not the end of the journey; it is the beginning of a better "
+"understanding of space.”"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:7
+msgid "TisaVista | Spatial Intelligence for Planning & Decision Support"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:65
+msgid "Spatial Intelligence for Urban Planning,"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:66
+msgid "GIS & Better Decision Making"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:69
+msgid ""
+"Master GIS, Spatial Analysis, Python for GIS and Spatial Decision Support "
+"through real-world urban projects, professional workflows and practical "
+"datasets."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:73
+msgid "Explore Academy"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:76
+msgid "Start with Free Resources"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:88
+msgid "From University Classrooms to Real Urban Projects"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:90
+msgid ""
+"TisaVista was founded by urban planners and GIS specialists with over 20 "
+"years of combined experience in research, university teaching, large-scale "
+"urban regeneration projects (including URBiNAT - Horizon 2020), and spatial "
+"decision-making."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:91
+msgid ""
+"We bridge the gap between technical GIS training and the real skills needed "
+"for practical urban planning."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:102
+msgid "Years"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:103
+msgid "Urban Planning & GIS"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:107
+msgid "Free Resources"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:110
+msgid "Professional Courses"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:112
+msgid "Project-Based"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:113
+msgid "Learning Approach"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:123
+msgid "Meet the Founders"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:134
+msgid "Urban Planner, GIS Specialist, Researcher & Educator"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:137
+msgid ""
+"20+ years in urban regeneration, spatial analysis and academic teaching."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:150
+msgid "Backend Developer & Geospatial Systems Engineer"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:153
+msgid ""
+"Expert in Django, PostGIS, spatial databases and building practical "
+"geospatial tools."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:163
+msgid "Why TisaVista Exists"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:168
+msgid "Most GIS courses only teach software tools."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:171
+msgid ""
+"We teach how to use GIS, spatial analysis, and decision-support methods to "
+"solve real urban and environmental problems."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:175
+msgid ""
+"Learn the tools, the thinking process, and the professional workflows used "
+"by planners, researchers and spatial analysts."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:187
+msgid "Your Learning Journey"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:192
+msgid "Step 1"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:194
+msgid "GIS Fundamentals"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:200
+msgid "Step 2"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:202
+msgid "Applied GIS"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:208
+msgid "Step 3"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:210
+msgid "Urban Spatial Analysis"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:216
+msgid "Step 4"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:218
+msgid "Advanced GIS Projects"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:224
+msgid "Step 5"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:226
+msgid "Spatial Decision Support Systems"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:237
+msgid "Featured Learning Paths"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:257
+msgid "No products available yet."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:268
+msgid "Explore 19+ Free GIS Resources"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:269
+msgid "Start learning today — no payment required"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:287
+msgid "Read More"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:296
+msgid "No posts available yet."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:303
+msgid "Browse All Free Resources"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:313
+msgid "Start Building Professional GIS Skills Today"
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:316
+msgid ""
+"Learn GIS, Spatial Analysis, Python for GIS and Spatial Decision Support "
+"through practical projects."
+msgstr ""
+
+#: .\backend\pages\templates\pages\home.html:319
+msgid "Explore the Academy"
 msgstr ""

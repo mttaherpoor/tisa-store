@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-16 02:38+0330\n"
+"POT-Creation-Date: 2026-08-30 21:39+0330\n"
 "PO-Revision-Date: 2022-06-15 17:24+0430\n"
 "Last-Translator: bbbb cccc <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,98 +19,119 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\models.py:7
+#: .\backend\orders\models.py:7
 msgid "User"
 msgstr "کاربر"
 
-#: .\models.py:8
+#: .\backend\orders\models.py:8
 msgid "Is Paid?"
 msgstr "پرداخت شده؟"
 
-#: .\models.py:10
+#: .\backend\orders\models.py:10
 msgid "First Name"
 msgstr "نام"
 
-#: .\models.py:11
+#: .\backend\orders\models.py:11
 msgid "Last Name"
 msgstr "نام خانوادگی"
 
-#: .\models.py:12
+#: .\backend\orders\models.py:12
 msgid "Phone Number"
 msgstr "شماره موبایل"
 
-#: .\models.py:13
+#: .\backend\orders\models.py:13
 msgid "Address"
 msgstr "آدرس کامل"
 
-#: .\models.py:15
+#: .\backend\orders\models.py:15
 msgid "Order Notes"
 msgstr "یادداشت سفارش"
 
-#: .\models.py:21
+#: .\backend\orders\models.py:21
 msgid "Created"
 msgstr "تاریخ ایجاد"
 
-#: .\models.py:22
+#: .\backend\orders\models.py:22
 msgid "Modified"
 msgstr "تاریخ تغییر"
 
-#: .\templates\orders\order_create.html:8
+#: .\backend\orders\templates\orders\order_create.html:8
+#: .\backend\orders\templates\orders\order_create.html:15
 msgid "Checkout"
 msgstr ""
 
-#: .\templates\orders\order_create.html:14
-msgid "Order Summary"
+#: .\backend\orders\templates\orders\order_create.html:17
+msgid ""
+"Review your information and complete the payment to finalize your "
+"registration."
 msgstr ""
 
-#: .\templates\orders\order_create.html:22
-#, fuzzy
-#| msgid "Order Notes"
-msgid "Order Details"
-msgstr "یادداشت سفارش"
+#: .\backend\orders\templates\orders\order_create.html:29
+msgid "Buyer Information"
+msgstr ""
 
-#: .\templates\orders\order_create.html:35
+#: .\backend\orders\templates\orders\order_create.html:31
+msgid ""
+"Please carefully review and complete your information. After the payment is "
+"confirmed, your access to the course files and educational videos will be "
+"automatically activated in your user panel."
+msgstr ""
+
+#: .\backend\orders\templates\orders\order_create.html:45
 #, fuzzy
 #| msgid "Order"
 msgid "Place Order"
 msgstr "ثبت سفارش"
 
-#: .\templates\orders\order_create.html:44
+#: .\backend\orders\templates\orders\order_create.html:54
 #, fuzzy
 #| msgid "Order"
 msgid "Your Order"
 msgstr "ثبت سفارش"
 
-#: .\templates\orders\order_create.html:50
-msgid "Product"
+#: .\backend\orders\templates\orders\order_create.html:60
+msgid "Course"
 msgstr ""
 
-#: .\templates\orders\order_create.html:51
-msgid "Price"
+#: .\backend\orders\templates\orders\order_create.html:61
+msgid "Tuition Fee"
 msgstr ""
 
-#: .\templates\orders\order_create.html:62
-#: .\templates\orders\order_create.html:71
+#: .\backend\orders\templates\orders\order_create.html:75
+#: .\backend\orders\templates\orders\order_create.html:85
 msgid "$"
 msgstr "تومان"
 
-#: .\templates\orders\order_create.html:69
-msgid "Total"
+#: .\backend\orders\templates\orders\order_create.html:82
+msgid "Amount Due"
 msgstr ""
 
-#: .\templates\orders\order_create.html:80
+#: .\backend\orders\templates\orders\order_create.html:94
 msgid "Payment Method"
 msgstr ""
 
-#: .\templates\orders\order_create.html:84
+#: .\backend\orders\templates\orders\order_create.html:98
 msgid "Online Gateway (Zarinpal)"
 msgstr ""
 
-#: .\views.py:16
+#: .\backend\orders\templates\orders\order_create.html:105
+msgid ""
+"Your payment will be processed through the secure Zarinpal gateway. After "
+"the transaction is confirmed, your order will be registered and access to "
+"the course files and educational videos will be available through your user "
+"panel."
+msgstr ""
+
+#: .\backend\orders\views.py:16
 msgid "You can not proceed to checkout page because your cart is empty."
 msgstr ""
 "شما نمی‌توانید به صفحه سفارش بروید چون سبد خرید شما خالی است. ابتدا محصولی را "
 "به سبد خرید اضافه کنید."
+
+#, fuzzy
+#~| msgid "Order Notes"
+#~ msgid "Order Details"
+#~ msgstr "یادداشت سفارش"
 
 #~ msgid "Submit"
 #~ msgstr "ارسال"

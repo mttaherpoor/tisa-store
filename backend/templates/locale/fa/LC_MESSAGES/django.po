@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-16 02:39+0330\n"
+"POT-Creation-Date: 2026-08-30 21:39+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,33 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\_base.html:29
+#: .\backend\templates\_base.html:51
 msgid "Skip to content"
 msgstr ""
 
-#: .\_base.html:44
-msgid "Build the Cities of the Future with Us! 🌍"
+#: .\backend\templates\_base.html:67
+msgid "Specialized GIS Courses and Training"
 msgstr ""
 
-#: .\_base.html:45
+#: .\backend\templates\_base.html:69
 msgid ""
-"Practical GIS, AutoCAD Map, urban planning, and modern city technologies for "
-"designing smart and sustainable cities."
+"Professional training in GIS, spatial analysis, SDSS, and urban planning for "
+"students, researchers, and specialists who want to master spatial analysis "
+"and decision-making."
 msgstr ""
 
-#: .\_base.html:46
-msgid "See Free Resources! 🚀"
+#: .\backend\templates\_base.html:82
+msgid "Stay Ahead with GIS, Spatial Analysis & Smarter Spatial Decisions"
 msgstr ""
 
-#: .\_base.html:57
-msgid "Stay Updated with the Latest Urban Planning Tutorials!"
+#: .\backend\templates\_base.html:83
+msgid ""
+"Free GIS resources, spatial analysis tutorials, Python workflows, and real-"
+"world planning case studies delivered to your inbox."
 msgstr ""
 
-#: .\_base.html:75
-msgid "Follow us!"
+#: .\backend\templates\_base.html:86
+msgid "Follow us"
 msgstr ""
 
-#: .\account\email\email_confirmation_message.txt:5
+#: .\backend\templates\account\email\email_confirmation_message.txt:5
 #, python-format
 msgid ""
 "\n"
@@ -56,332 +59,401 @@ msgid ""
 "\n"
 msgstr ""
 
-#: .\account\email\email_confirmation_subject.txt:3
+#: .\backend\templates\account\email\email_confirmation_subject.txt:3
 msgid "Please confirm email"
 msgstr ""
 
-#: .\account\email_confirm.html:4 .\account\email_confirm.html:12
-msgid "Confirm E-mail Address"
+#: .\backend\templates\account\email_confirm.html:5
+#: .\backend\templates\account\email_confirm.html:12
+#: .\backend\templates\account\email_confirm.html:23
+msgid "Email Address Confirmation"
 msgstr ""
 
-#: .\account\email_confirm.html:17
-#, python-format
+#: .\backend\templates\account\email_confirm.html:13
+msgid "Please confirm your email address to fully activate your account."
+msgstr ""
+
+#: .\backend\templates\account\email_confirm.html:24
 msgid ""
-"\n"
-"                Please confirm that <a href=\"mailto:%(email)s\">%(email)s</"
-"a> is an e-mail address for user %(user)s.\n"
-"              "
+"To complete registration and improve account security, please confirm your "
+"email address."
 msgstr ""
 
-#: .\account\email_confirm.html:26
-msgid "Confirm"
+#: .\backend\templates\account\email_confirm.html:30
+msgid "Please confirm that the email address"
 msgstr ""
 
-#: .\account\email_confirm.html:29
-msgid "Manage e-mail addresses"
+#: .\backend\templates\account\email_confirm.html:32
+msgid "belongs to the account"
 msgstr ""
 
-#: .\account\email_confirm.html:37
-#, python-format
+#: .\backend\templates\account\email_confirm.html:40
+msgid "Confirm Email"
+msgstr ""
+
+#: .\backend\templates\account\email_confirm.html:42
+msgid "Manage Email Addresses"
+msgstr ""
+
+#: .\backend\templates\account\email_confirm.html:48
 msgid ""
-"\n"
-"                This e-mail confirmation link expired or is invalid. Please "
-"<a href=\"%(email_url)s\">issue a new e-mail confirmation request</a>.\n"
-"              "
+"After confirming your email, your account will be fully activated and you "
+"will be able to use all website features."
 msgstr ""
 
-#: .\account\login.html:5 .\account\login.html:24 .\header.html:117
-#: .\header.html:119
-msgid "Login"
+#: .\backend\templates\account\email_confirm.html:55
+msgid "The email confirmation link is invalid or has expired."
 msgstr ""
 
-#: .\account\login.html:14
-msgid "Login to your account"
+#: .\backend\templates\account\email_confirm.html:59
+msgid "Request a New Confirmation Link"
 msgstr ""
 
-#: .\account\login.html:32
-msgid "Don't have an account?"
+#: .\backend\templates\account\login.html:6
+#: .\backend\templates\account\login.html:13
+#: .\backend\templates\account\login.html:26
+#: .\backend\templates\account\login.html:42
+#: .\backend\templates\account\password_reset_from_key_done.html:31
+msgid "Login to Your Account"
 msgstr ""
 
-#: .\account\login.html:33 .\header.html:121 .\header.html:123
-msgid "Sign up"
+#: .\backend\templates\account\login.html:15
+msgid "Sign in to access your courses, downloadable files, and user dashboard."
 msgstr ""
 
-#: .\account\logout.html:4 .\account\logout.html:14 .\header.html:110
-msgid "Logout"
-msgstr ""
-
-#: .\account\logout.html:19
-msgid "Are you sure you want to log out?"
-msgstr ""
-
-#: .\account\logout.html:23
-msgid "Yes, log out"
-msgstr ""
-
-#: .\account\logout.html:30
-msgid "Return to Home"
-msgstr ""
-
-#: .\account\password_reset.html:7 .\account\password_reset.html:12
-msgid "Password Reset"
-msgstr ""
-
-#: .\account\password_reset.html:20
+#: .\backend\templates\account\login.html:28
 msgid ""
-"If you forgot your password, enter your email address. Instructions to reset "
-"your password will be sent to you via email."
+"Sign in to view your purchased courses, educational files, and manage your "
+"account."
 msgstr ""
 
-#: .\account\password_reset.html:36 .\account\password_reset_done.html:25
-msgid "Back to Login"
+#: .\backend\templates\account\login.html:35
+msgid "Invalid email or password."
 msgstr ""
 
-#: .\account\password_reset.html:38
-msgid "Send Reset Email"
+#: .\backend\templates\account\login.html:48
+msgid "Don't have an account yet?"
 msgstr ""
 
-#: .\account\password_reset.html:44
-msgid ""
-"If you encounter any issues resetting your password, please contact support."
-msgstr ""
-
-#: .\account\password_reset_done.html:5
-msgid "Reset Email Sent"
-msgstr ""
-
-#: .\account\password_reset_done.html:10
-msgid "Password Reset Email Sent"
-msgstr ""
-
-#: .\account\password_reset_done.html:18
-msgid ""
-"\n"
-"      We have sent an email containing instructions to reset your password. "
-"Please also check your spam folder. \n"
-"      If you did not receive the email, check again after a few minutes or "
-"contact support.\n"
-"    "
-msgstr ""
-
-#: .\account\signup.html:5 .\account\signup.html:25
-msgid "Sign Up"
-msgstr ""
-
-#: .\account\signup.html:15
+#: .\backend\templates\account\login.html:49
+#: .\backend\templates\account\signup.html:6
+#: .\backend\templates\account\signup.html:13
+#: .\backend\templates\account\signup.html:26
+#: .\backend\templates\account\signup.html:42
 msgid "Create an Account"
 msgstr ""
 
-#: .\account\signup.html:33
+#: .\backend\templates\account\login.html:55
+msgid "Forgot your password?"
+msgstr ""
+
+#: .\backend\templates\account\logout.html:5
+#: .\backend\templates\account\logout.html:12
+#: .\backend\templates\account\logout.html:25
+#: .\backend\templates\account\logout.html:34
+#: .\backend\templates\header.html:97
+msgid "Logout"
+msgstr ""
+
+#: .\backend\templates\account\logout.html:14
+msgid ""
+"After logging out, you will need to sign in again to access your courses, "
+"downloadable files, and user dashboard."
+msgstr ""
+
+#: .\backend\templates\account\logout.html:27
+msgid "Are you sure you want to log out of your account?"
+msgstr ""
+
+#: .\backend\templates\account\logout.html:37
+msgid "Back to User Dashboard"
+msgstr ""
+
+#: .\backend\templates\account\logout.html:44
+msgid ""
+"Logging out will not delete your purchase information or courses. When you "
+"sign in again, you will have access to all of them."
+msgstr ""
+
+#: .\backend\templates\account\password_reset.html:6
+#: .\backend\templates\account\password_reset.html:13
+#: .\backend\templates\account\password_reset.html:26
+msgid "Password Reset"
+msgstr ""
+
+#: .\backend\templates\account\password_reset.html:15
+msgid ""
+"If you have forgotten your password, enter your account email address to "
+"receive a password reset link."
+msgstr ""
+
+#: .\backend\templates\account\password_reset.html:28
+msgid ""
+"Enter your account email address to receive instructions for changing your "
+"password."
+msgstr ""
+
+#: .\backend\templates\account\password_reset.html:39
+msgid "The entered email address is invalid. Please check it again."
+msgstr ""
+
+#: .\backend\templates\account\password_reset.html:47
+msgid "Send Reset Link"
+msgstr ""
+
+#: .\backend\templates\account\password_reset.html:50
+#: .\backend\templates\account\password_reset_done.html:41
+#: .\backend\templates\account\verification_sent.html:38
+msgid "Back to Login Page"
+msgstr ""
+
+#: .\backend\templates\account\password_reset.html:57
+msgid ""
+"If you do not receive an email, also check your Spam or Junk folder. If you "
+"still do not receive an email, make sure you have entered your email address "
+"correctly."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_done.html:5
+#: .\backend\templates\account\password_reset_done.html:12
+msgid "Password Reset Link Sent"
+msgstr ""
+
+#: .\backend\templates\account\password_reset_done.html:14
+msgid ""
+"If the entered email address is correct, a password reset link has been sent "
+"to you."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_done.html:25
+msgid "Password Reset Email Sent"
+msgstr ""
+
+#: .\backend\templates\account\password_reset_done.html:27
+msgid ""
+"If the entered email address is registered in our system, an email "
+"containing a password reset link has been sent to you."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_done.html:36
+msgid ""
+"Please check your email inbox. If you do not see the email, also check your "
+"Spam or Junk folder."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_done.html:47
+msgid ""
+"If you do not receive an email after a few minutes, make sure your email "
+"address is correct and request a password reset again."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key.html:6
+#: .\backend\templates\account\password_reset_from_key.html:13
+#: .\backend\templates\account\password_reset_from_key.html:26
+msgid "Set New Password"
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key.html:15
+msgid "For better account security, please enter your new password."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key.html:28
+msgid ""
+"Enter your new password and confirm it to update your account with the new "
+"password."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key.html:34
+msgid "The password reset link is invalid or has expired."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key.html:38
+msgid "Request a New Link"
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key.html:47
+msgid "Save New Password"
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key.html:53
+msgid ""
+"Your new password will replace your previous password once saved. You can "
+"then log in to your account using the new password."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key_done.html:5
+#: .\backend\templates\account\password_reset_from_key_done.html:12
+msgid "Password Changed"
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key_done.html:14
+msgid ""
+"Your new password has been successfully set. You can now log in to your "
+"account using your new password."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key_done.html:25
+msgid "Password Changed Successfully"
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key_done.html:27
+msgid ""
+"Your new password has been successfully saved. You can now log in to your "
+"account using your new password."
+msgstr ""
+
+#: .\backend\templates\account\password_reset_from_key_done.html:36
+msgid ""
+"To keep your account secure, use a strong and unique password and do not "
+"share it with others."
+msgstr ""
+
+#: .\backend\templates\account\signup.html:15
+msgid ""
+"By creating an account, you can enroll in courses, download educational "
+"files, and enjoy exclusive features of the TisaVista user dashboard."
+msgstr ""
+
+#: .\backend\templates\account\signup.html:28
+msgid ""
+"To enroll in courses, download educational files, and use the features of "
+"the user dashboard, first create your account."
+msgstr ""
+
+#: .\backend\templates\account\signup.html:35
+msgid "The information entered is invalid. Please check the indicated fields."
+msgstr ""
+
+#: .\backend\templates\account\signup.html:48
 msgid "Already have an account?"
 msgstr ""
 
-#: .\account\signup.html:35
-msgid "Sign in here"
+#: .\backend\templates\account\signup.html:49
+msgid "Log In"
 msgstr ""
 
-#: .\footer.html:9 .\footer.html:23 .\header.html:54
-msgid "About Us"
-msgstr ""
-
-#: .\footer.html:11
+#: .\backend\templates\account\signup.html:55
 msgid ""
-"We are a team committed to providing high-quality and practical education in "
-"urban planning and modern city technologies."
+"After registration, a confirmation email will be sent to you. Your account "
+"will be activated after you confirm your email."
 msgstr ""
 
-#: .\footer.html:17
+#: .\backend\templates\account\verification_sent.html:5
+#: .\backend\templates\account\verification_sent.html:12
+msgid "Confirmation Email Sent"
+msgstr ""
+
+#: .\backend\templates\account\verification_sent.html:14
+msgid ""
+"To activate your account, please check your email and click the confirmation "
+"link."
+msgstr ""
+
+#: .\backend\templates\account\verification_sent.html:25
+msgid "Please Check Your Email"
+msgstr ""
+
+#: .\backend\templates\account\verification_sent.html:28
+msgid ""
+"An email containing an account activation link has been sent to you. Please "
+"check your email inbox and click the link in the message."
+msgstr ""
+
+#: .\backend\templates\account\verification_sent.html:33
+msgid ""
+"If you do not see the email in your inbox, also check your Spam or Junk "
+"folder."
+msgstr ""
+
+#: .\backend\templates\account\verification_sent.html:44
+msgid ""
+"Some account features may not be available until you confirm your email "
+"address."
+msgstr ""
+
+#: .\backend\templates\footer.html:12
+msgid ""
+"Helping urban planners, researchers and GIS professionals turn spatial data "
+"into better decisions."
+msgstr ""
+
+#: .\backend\templates\footer.html:18
 msgid "Quick Links"
 msgstr ""
 
-#: .\footer.html:19 .\header.html:25 .\home.html:8 .\topheader.html:13
+#: .\backend\templates\footer.html:20 .\backend\templates\header.html:37
+#: .\backend\templates\topheader.html:18
 msgid "Home"
 msgstr ""
 
-#: .\footer.html:20 .\header.html:33
-msgid "Shop"
+#: .\backend\templates\footer.html:21 .\backend\templates\header.html:42
+msgid "Academy"
 msgstr ""
 
-#: .\footer.html:21 .\header.html:40
+#: .\backend\templates\footer.html:22 .\backend\templates\header.html:47
 msgid "Free Resources"
 msgstr ""
 
-#: .\footer.html:22 .\header.html:47
+#: .\backend\templates\footer.html:23 .\backend\templates\header.html:57
 msgid "Blog"
 msgstr ""
 
-#: .\footer.html:24 .\footer.html:30 .\header.html:61 .\home.html:218
+#: .\backend\templates\footer.html:24 .\backend\templates\header.html:62
+msgid "About Us"
+msgstr ""
+
+#: .\backend\templates\footer.html:25 .\backend\templates\header.html:67
 msgid "Contact Us"
 msgstr ""
 
-#: .\footer.html:32
-msgid "Email"
+#: .\backend\templates\footer.html:31
+msgid "Get in Touch"
 msgstr ""
 
-#: .\footer.html:55
-msgid "All rights reserved for"
+#: .\backend\templates\header.html:7
+msgid "Free GIS Resources"
 msgstr ""
 
-#: .\footer.html:55
-msgid "Future Cities"
+#: .\backend\templates\header.html:8
+msgid "ArcGIS Academy"
 msgstr ""
 
-#: .\footer.html:56
-msgid "Designed and developed with ❤️ by the"
+#: .\backend\templates\header.html:9
+msgid "Python for GIS"
 msgstr ""
 
-#: .\footer.html:56
-msgid "Tisa & Taher team"
+#: .\backend\templates\header.html:10
+msgid "PostGIS"
 msgstr ""
 
-#: .\header.html:5
-msgid "Main navigation"
+#: .\backend\templates\header.html:11
+msgid "Spatial Decision Support"
 msgstr ""
 
-#: .\header.html:14
+#: .\backend\templates\header.html:29
 msgid "Toggle navigation"
 msgstr ""
 
-#: .\header.html:71
-msgid "Search in shop"
+#: .\backend\templates\header.html:52
+msgid "Learning Paths"
 msgstr ""
 
-#: .\header.html:73
-msgid "Search products..."
-msgstr ""
-
-#: .\header.html:73 .\header.html:75
+#: .\backend\templates\header.html:74
 msgid "Search"
 msgstr ""
 
-#: .\header.html:82
-msgid "Shopping Cart"
-msgstr ""
-
-#: .\header.html:105
+#: .\backend\templates\header.html:94
 msgid "Profile"
 msgstr ""
 
-#: .\header.html:106
+#: .\backend\templates\header.html:95
 msgid "Orders"
 msgstr ""
 
-#: .\home.html:86
-msgid "Hero: building smart cities"
+#: .\backend\templates\header.html:102
+msgid "Login"
 msgstr ""
 
-#: .\home.html:89
-msgid "Learn, Create, and Build Smart Cities Together!"
-msgstr ""
-
-#: .\home.html:92
-msgid ""
-"Practical training in GIS, Python, Machine Learning, and Smart Urban "
-"Planning — designed for city makers of the future."
-msgstr ""
-
-#: .\home.html:97
-msgid "Start Learning"
-msgstr ""
-
-#: .\home.html:100
-msgid "Get Free Resources"
-msgstr ""
-
-#: .\home.html:106
-msgid ""
-"Join our community — hands-on courses, project-based learning and real urban "
-"datasets."
-msgstr ""
-
-#: .\home.html:114
-msgid "What We Offer"
-msgstr ""
-
-#: .\home.html:119
-msgid "GIS & Urban Analytics"
-msgstr ""
-
-#: .\home.html:120
-msgid ""
-"Learn spatial analysis, mapping, and data visualization with QGIS, ArcGIS, "
-"and Python."
-msgstr ""
-
-#: .\home.html:126
-msgid "Machine Learning for Cities"
-msgstr ""
-
-#: .\home.html:127
-msgid ""
-"Use AI and ML to predict urban heat, optimize transport, and design smarter "
-"infrastructure."
-msgstr ""
-
-#: .\home.html:133
-msgid "Smart & Sustainable Cities"
-msgstr ""
-
-#: .\home.html:134
-msgid ""
-"Explore digital twins and eco-city models — create data-driven, greener "
-"futures."
-msgstr ""
-
-#: .\home.html:145
-msgid "Popular Courses"
-msgstr ""
-
-#: .\home.html:146
-msgid "See all"
-msgstr ""
-
-#: .\home.html:157
-msgid "No image"
-msgstr ""
-
-#: .\home.html:164
-msgid "$"
-msgstr ""
-
-#: .\home.html:165
-msgid "View"
-msgstr ""
-
-#: .\home.html:172
-msgid "No courses available yet — stay tuned!"
-msgstr ""
-
-#: .\home.html:183
-msgid "Latest from the Blog"
-msgstr ""
-
-#: .\home.html:184
-msgid "Read all posts"
-msgstr ""
-
-#: .\home.html:198
-msgid "Read more"
-msgstr ""
-
-#: .\home.html:204
-msgid "No blog posts yet."
-msgstr ""
-
-#: .\home.html:214
-msgid "Ready to Build the Future?"
-msgstr ""
-
-#: .\home.html:215
-msgid ""
-"Join thousands of learners shaping smart and sustainable cities with "
-"practical projects."
-msgstr ""
-
-#: .\home.html:217
-msgid "Meet the Team"
-msgstr ""
-
-#: .\home.html:226
-msgid "Frequently Asked Questions"
+#: .\backend\templates\header.html:103
+msgid "Sign up"
 msgstr ""
