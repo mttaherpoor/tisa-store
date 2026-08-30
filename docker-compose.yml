@@ -1,33 +1,49 @@
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      target: production
+
     container_name: tisa_backend
+
     command: >
-      sh -c "python manage.py migrate &&
-            python manage.py collectstatic --noinput &&
-            gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 1200"
+      sh -c "
+        python manage.py migrate &&
+        python manage.py collectstatic --noinput &&
+        gunicorn config.wsgi:application
+        --bind 0.0.0.0:8000
+        --workers 4
+        --timeout 1200
+      "
 
     volumes:
-      - ./backend:/app 
+      # - ./backend:/app
       - tisa_static:/app/staticfiles
       - tisa_media:/app/media
       - tisa_protected:/var/www/tisa/protected
+
     env_file:
       - .env
+
     environment:
       - DJANGO_SECRET_KEY=${DOCKER_COMPOSE_DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=${DOCKER_COMPOSE_DJANGO_DEBUG}
       - DJANGO_ZARINPAL_MERCHANT_ID=${DOCKER_COMPOSE_DJANGO_ZARINPAL_MERCHANT_ID}
+
       - DJANGO_POSTGRES_USER=${DOCKER_COMPOSE_DJANGO_POSTGRES_USER}
       - DJANGO_POSTGRES_DB=${DOCKER_COMPOSE_DJANGO_POSTGRES_DB}
       - DJANGO_POSTGRES_PASSWORD=${DOCKER_COMPOSE_DJANGO_POSTGRES_PASSWORD}
       - DJANGO_POSTGRES_HOST=${DOCKER_COMPOSE_DJANGO_POSTGRES_HOST}
+
       - DJANGO_EMAIL_HOST_USER=${DOCKER_COMPOSE_DJANGO_EMAIL_HOST_USER}
       - DJANGO_EMAIL_HOST_PASSWORD=${DOCKER_COMPOSE_DJANGO_EMAIL_HOST_PASSWORD}
+
       - DJANGO_ALLOWED_HOSTS=${DOCKER_COMPOSE_DJANGO_ALLOWED_HOSTS}
       - DJANGO_CSRF_TRUSTED_ORIGINS=${DOCKER_COMPOSE_DJANGO_CSRF_TRUSTED_ORIGINS}
+
     depends_on:
       - db
+
     networks:
       tisa_network:
 
@@ -35,12 +51,15 @@ services:
     image: postgres:16
     container_name: tisa-db
     restart: always
+
     environment:
       POSTGRES_USER: ${DOCKER_COMPOSE_DJANGO_POSTGRES_USER}
       POSTGRES_PASSWORD: ${DOCKER_COMPOSE_DJANGO_POSTGRES_PASSWORD}
       POSTGRES_DB: ${DOCKER_COMPOSE_DJANGO_POSTGRES_DB}
+
     volumes:
       - tisa_db:/var/lib/postgresql/data
+
     networks:
       tisa_network:
         aliases:
@@ -51,14 +70,18 @@ services:
     container_name: tisa_minio
     command: server /data --console-address ":9001"
     restart: always
+
     ports:
       - "9000:9000"
       - "9001:9001"
+
     environment:
       MINIO_ROOT_USER: ${DOCKER_COMPOSE_MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${DOCKER_COMPOSE_MINIO_ROOT_PASSWORD}
+
     volumes:
       - tisa_minio:/data
+
     networks:
       - tisa_network
 
@@ -71,7 +94,7 @@ volumes:
   tisa_media:
     external: true
     name: tisa_media
-    
+
   tisa_db:
     external: true
     name: tisa_db
