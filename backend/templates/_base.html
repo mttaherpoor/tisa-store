@@ -1,5 +1,7 @@
 {% load static %}
 {% load i18n %}
+{% load url_filters %}
+
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -56,6 +58,18 @@
         <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
       {% endfor %}
     </div>
+  {% endif %}
+
+  {% if request.resolver_match.url_name|endswith:"-list" %}
+    <!-- Hero -->
+    <section class="py-5 bg-light">
+      <div class="container text-center">
+      <h1 class="fw-bold display-5 mb-3">{% trans "Specialized GIS Courses and Training" %}</h1>
+        <p class="lead text-muted mx-auto" style="max-width:700px;">
+          {% trans "Professional training in GIS, spatial analysis, SDSS, and urban planning for students, researchers, and specialists who want to master spatial analysis and decision-making." %}
+        </p>
+      </div>
+    </section>
   {% endif %}
 
   <main id="main-content">
