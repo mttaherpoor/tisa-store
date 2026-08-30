@@ -1,11 +1,21 @@
+# for execute run this:
+# docker compose --env-file .env.dev -f docker-compose-dev.yml up --build
+
+
+
 services:
-  web:
-    build: .
-    command: python /code/manage.py runserver 0.0.0.0:8000
+  backend:
+    build: ./backend
+    command: >
+      sh -c "
+        python manage.py migrate &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+
     volumes:
-      - .:/code
+      - ./backend:/app
     ports:
-      - 8000:8000
+      - 8080:8000
     depends_on:
       - db
     env_file:
@@ -13,17 +23,25 @@ services:
     environment:
       - DJANGO_SECRET_KEY=${DOCKER_COMPOSE_DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=${DOCKER_COMPOSE_DJANGO_DEBUG}
+
       - DJANGO_ZARINPAL_MERCHANT_ID=${DOCKER_COMPOSE_DJANGO_ZARINPAL_MERCHANT_ID}
+
       - DJANGO_POSTGRES_USER=${DOCKER_COMPOSE_DJANGO_POSTGRES_USER}
-      - DJANGO_POSTGRES_NAME=${DOCKER_COMPOSE_DJANGO_POSTGRES_NAME}
+      - DJANGO_POSTGRES_DB=${DOCKER_COMPOSE_DJANGO_POSTGRES_DB}
       - DJANGO_POSTGRES_PASSWORD=${DOCKER_COMPOSE_DJANGO_POSTGRES_PASSWORD}
+      - DJANGO_POSTGRES_HOST=${DOCKER_COMPOSE_DJANGO_POSTGRES_HOST}
+
+      - DJANGO_ALLOWED_HOSTS=${DOCKER_COMPOSE_DJANGO_ALLOWED_HOSTS}
+
       - DJANGO_EMAIL_HOST_USER=${DOCKER_COMPOSE_DJANGO_DJANGO_EMAIL_HOST_USER}
       - DJANGO_EMAIL_HOST_PASSWORD=${DOCKER_COMPOSE_DJANGO_EMAIL_HOST_PASSWORD}
 
   db:
     image: postgres:16
     environment:
-      - "POSTGRES_HOST_AUTH_METHOD=trust"
+      POSTGRES_DB: ${DOCKER_COMPOSE_DJANGO_POSTGRES_DB}
+      POSTGRES_USER: ${DOCKER_COMPOSE_DJANGO_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${DOCKER_COMPOSE_DJANGO_POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
