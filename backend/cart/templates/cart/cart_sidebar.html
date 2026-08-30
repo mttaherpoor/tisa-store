@@ -6,11 +6,18 @@
 <!-- Mini Cart Start -->
 <aside class="mini-cart" id="miniCart">
     <div class="mini-cart-wrapper">
-        <button type="button" class="btn-close" aria-label="بستن"><i class="bi bi-x-lg"></i></button>
+        <button type="button" class="btn-close" aria-label="{% trans 'Close' %}">
+            <i class="bi bi-x-lg"></i>
+        </button>
         
         <div class="mini-cart-inner">
-            <h3 class="mini-cart__heading mb-3 text-right">دوره‌های انتخاب‌شده</h3>
-            <p class="text-muted small mb-4">پس از پرداخت، دسترسی شما به فایل‌های آموزشی دوره‌ها فعال خواهد شد.</p>
+            <h3 class="mini-cart__heading mb-3 text-right">
+                {% trans "Selected Courses" %}
+            </h3>
+
+            <p class="text-muted small mb-4">
+                {% trans "After payment, your access to the course materials will be activated." %}
+            </p>
 
             <div class="mini-cart__content">
                 <ul class="mini-cart__list text-right">
@@ -19,47 +26,78 @@
                             <div class="mini-cart__product__image">
                                 <a href="{{ item.product_obj.get_absolute_url }}">
                                     {% if item.product_obj.image %}
-                                        <img src="{{ item.product_obj.image.url }}" alt="{{ item.product_obj.title }}">
+                                        <img
+                                            src="{{ item.product_obj.image.url }}"
+                                            alt="{{ item.product_obj.title }}">
                                     {% else %}
-                                        <img src="{% static 'images/default picture.webp' %}" alt="{{ item.product_obj.title }}">
+                                        <img
+                                            src="{% static 'images/default picture.webp' %}"
+                                            alt="{{ item.product_obj.title }}">
                                     {% endif %}
                                 </a>
                             </div>
+
                             <div class="mini-cart__product__content flex-grow-1 ms-3">
                                 <span class="mini-cart__product__title d-flex justify-content-between align-items-start gap-2">
-                                    <a href="{{ item.product_obj.get_absolute_url }}" 
-                                       class="fw-semibold text-dark text-decoration-none flex-grow-1">
+                                    <a
+                                        href="{{ item.product_obj.get_absolute_url }}"
+                                        class="fw-semibold text-dark text-decoration-none flex-grow-1">
                                         {{ item.product_obj.title }}
                                     </a>
-                                    <form action="{% url 'cart:cart_remove' item.product_obj.id %}" method="post" class="d-inline">
+
+                                    <form
+                                        action="{% url 'cart:cart_remove' item.product_obj.id %}"
+                                        method="post"
+                                        class="d-inline">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn btn-link text-danger p-0">
+                                        <button
+                                            type="submit"
+                                            class="btn btn-link text-danger p-0"
+                                            aria-label="{% trans 'Remove' %}">
                                             <i class="bi bi-x-lg"></i>
                                         </button>
                                     </form>
                                 </span>
+
                                 <span class="mini-cart__product__quantity">
-                                    {{ item.product_obj.price|intcomma:False|translate_number }} تومان 
+                                    {{ item.product_obj.price|intcomma:False|translate_number }}
+                                    {% trans "$" %}
                                     × {{ item.quantity|translate_number }}
                                 </span>
                             </div>
                         </li>
+
                     {% empty %}
                         <li class="text-center py-4 text-muted">
-                            هنوز هیچ دوره‌ای به سبد خرید اضافه نکرده‌اید.
+                            {% trans "You have not added any courses to your shopping cart yet." %}
                         </li>
                     {% endfor %}
                 </ul>
 
                 <div class="mini-cart__total">
-                    <span class="fw-semibold">مبلغ قابل پرداخت</span>
-                    <span class="ammount">{{ cart.get_total_price|intcomma:False|translate_number }} تومان</span>
+                    <span class="fw-semibold">
+                        {% trans "Amount Due" %}
+                    </span>
+
+                    <span class="ammount">
+                        {{ cart.get_total_price|intcomma:False|translate_number }}
+                        {% trans "$" %}
+                    </span>
                 </div>
 
                 <div class="mini-cart__buttons">
-                    <a href="{% url 'cart:cart_detail' %}" class="btn btn-fullwidth btn-outline-primary mb-2">مشاهده سبد خرید</a>
+                    <a
+                        href="{% url 'cart:cart_detail' %}"
+                        class="btn btn-fullwidth btn-outline-primary mb-2">
+                        {% trans "View Shopping Cart" %}
+                    </a>
+
                     {% if not cart.is_empty %}
-                        <a href="{% url 'order_create' %}" class="btn btn-fullwidth btn-success">ادامه فرایند ثبت‌نام</a>
+                        <a
+                            href="{% url 'order_create' %}"
+                            class="btn btn-fullwidth btn-success">
+                            {% trans "Continue Registration" %}
+                        </a>
                     {% endif %}
                 </div>
             </div>
