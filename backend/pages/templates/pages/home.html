@@ -3,7 +3,9 @@
 {% load i18n %}
 {% load humanize %}
 
-{% block page_title %}TisaVista | Spatial Intelligence for Planning & Decision Support{% endblock %}
+{% block page_title %}
+{% trans "TisaVista | Spatial Intelligence for Planning & Decision Support" %}
+{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -12,6 +14,7 @@
     --tv-blue: #2C4A9A;
     --dark: #0F172A;
   }
+
   .hero {
     background-image: url("{% static 'images/hero.png' %}");
     background-size: cover;
@@ -21,16 +24,34 @@
     display: flex;
     align-items: center;
   }
+
   .hero::before {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, rgba(15,23,42,0.92) 55%, rgba(15,23,42,0.65) 100%);
   }
-  .hero-content { position: relative; z-index: 2; max-width: 680px; }
-  .hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.15; }
-  .roadmap-step { transition: all 0.3s ease; }
-  .roadmap-step:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .roadmap-step {
+    transition: all 0.3s ease;
+  }
+
+  .roadmap-step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
 </style>
 {% endblock %}
 
@@ -40,13 +61,20 @@
 <section class="hero text-white">
   <div class="container">
     <div class="hero-content">
-      <h1 class="mb-4">Spatial Intelligence for Urban Planning,<br>GIS &amp; Better Decision Making</h1>
+      <h1 class="mb-4">
+        {% trans "Spatial Intelligence for Urban Planning," %}<br>
+        {% trans "GIS & Better Decision Making" %}
+      </h1>
       <p class="lead fs-3 mb-4">
-        Master GIS, Spatial Analysis, Python for GIS and Spatial Decision Support through real-world urban projects, professional workflows and practical datasets.
+        {% trans "Master GIS, Spatial Analysis, Python for GIS and Spatial Decision Support through real-world urban projects, professional workflows and practical datasets." %}
       </p>
       <div class="d-flex gap-3 flex-wrap">
-        <a href="{% url 'product-list' %}" class="btn btn-light btn-lg px-5 py-3">{% trans "Explore Academy" %}</a>
-        <a href="{{'free_resources'}} class="btn btn-outline-light btn-lg px-5 py-3">{% trans "Start with Free Resources" %}</a>
+        <a href="{% url 'product-list' %}" class="btn btn-light btn-lg px-5 py-3">
+          {% trans "Explore Academy" %}
+        </a>
+        <a href="{{ free_resources_url }}" class="btn btn-outline-light btn-lg px-5 py-3">
+          {% trans "Start with Free Resources" %}
+        </a>
       </div>
     </div>
   </div>
@@ -57,10 +85,10 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10 text-center">
-        <h2 class="display-6 fw-bold mb-4">From University Classrooms to Real Urban Projects</h2>
+        <h2 class="display-6 fw-bold mb-4"> {% trans "From University Classrooms to Real Urban Projects" %}</h2>
         <p class="lead text-muted">
-          TisaVista was founded by urban planners and GIS specialists with over 20 years of combined experience in research, university teaching, large-scale urban regeneration projects (including URBiNAT - Horizon 2020), and spatial decision-making. 
-          We bridge the gap between technical GIS training and the real skills needed for practical urban planning.
+          {% trans "TisaVista was founded by urban planners and GIS specialists with over 20 years of combined experience in research, university teaching, large-scale urban regeneration projects (including URBiNAT - Horizon 2020), and spatial decision-making." %}
+          {% trans "We bridge the gap between technical GIS training and the real skills needed for practical urban planning." %}
         </p>
       </div>
     </div>
@@ -71,30 +99,59 @@
 <section class="py-4" style="background:#f8fafc; border-bottom:1px solid #e2e8f0;">
   <div class="container">
     <div class="row text-center text-dark fw-medium">
-      <div class="col-6 col-md-3 mb-3 mb-md-0"><h4 class="text-primary">20+ Years</h4><p class="mb-0">Urban Planning & GIS</p></div>
-      <div class="col-6 col-md-3 mb-3 mb-md-0"><h4 class="text-primary">19+</h4><p class="mb-0">Free Resources</p></div>
-      <div class="col-6 col-md-3 mb-3 mb-md-0"><h4 class="text-primary">7</h4><p class="mb-0">Professional Courses</p></div>
-      <div class="col-6 col-md-3"><h4 class="text-primary">Project-Based</h4><p class="mb-0">Learning Approach</p></div>
+      <div class="col-6 col-md-3 mb-3 mb-md-0"><h4 class="text-primary">20+ {% trans "Years" %}</h4>
+        <p class="mb-0">{% trans "Urban Planning & GIS" %}</p>
+      </div>
+      <div class="col-6 col-md-3 mb-3 mb-md-0">
+        <h4 class="text-primary">19+</h4>
+        <p class="mb-0">{% trans "Free Resources" %}</p>
+      </div>
+      <div class="col-6 col-md-3 mb-3 mb-md-0">
+        <h4 class="text-primary">7</h4><p class="mb-0">{% trans "Professional Courses" %}</p>
+      </div>
+      <div class="col-6 col-md-3"><h4 class="text-primary">{% trans "Project-Based" %}</h4>
+        <p class="mb-0">{% trans "Learning Approach" %}</p>
+      </div>
     </div>
   </div>
+
 </section>
 
 <!-- Meet the Founders -->
 <section class="py-5">
   <div class="container">
-    <h2 class="text-center display-5 fw-bold mb-5">Meet the Founders</h2>
+    <h2 class="text-center display-5 fw-bold mb-5">{% trans "Meet the Founders" %}</h2>
     <div class="row g-5 justify-content-center">
       <div class="col-md-5 text-center">
-        <img src="{% static 'images/team/nahid.jpg' %}" class="rounded-circle mb-4" width="180" height="180" style="object-fit:cover;" alt="Dr. Nahid Nematikutenaee">
+        <img src="{% static 'images/team/tisa.webp' %}"
+             class="rounded-circle mb-4"
+             width="180"
+             height="180"
+             style="object-fit:cover;"
+             alt="Dr. Nahid Nematikutenaee">
         <h5>Dr. Nahid Nematikutenaee</h5>
-        <p class="text-muted">Urban Planner, GIS Specialist, Researcher &amp; Educator</p>
-        <p class="small text-muted">20+ years in urban regeneration, spatial analysis and academic teaching.</p>
+        <p class="text-muted">
+          {% trans "Urban Planner, GIS Specialist, Researcher & Educator" %}
+        </p>
+        <p class="small text-muted">
+          {% trans "20+ years in urban regeneration, spatial analysis and academic teaching." %}
+        </p>
       </div>
+
       <div class="col-md-5 text-center">
-        <img src="{% static 'images/team/taher.jpg' %}" class="rounded-circle mb-4" width="180" height="180" style="object-fit:cover;" alt="Mohamad Taher Taherpour">
+        <img src="{% static 'images/team/taher.webp' %}"
+             class="rounded-circle mb-4"
+             width="180"
+             height="180"
+             style="object-fit:cover;"
+             alt="Mohamad Taher Taherpour">
         <h5>Mohamad Taher Taherpour</h5>
-        <p class="text-muted">Backend Developer &amp; Geospatial Systems Engineer</p>
-        <p class="small text-muted">Expert in Django, PostGIS, spatial databases and building practical geospatial tools.</p>
+        <p class="text-muted">
+          {% trans "Backend Developer & Geospatial Systems Engineer" %}
+        </p>
+        <p class="small text-muted">
+          {% trans "Expert in Django, PostGIS, spatial databases and building practical geospatial tools." %}
+        </p>
       </div>
     </div>
   </div>
@@ -103,47 +160,91 @@
 <!-- Why TisaVista -->
 <section class="py-5">
   <div class="container">
-    <h2 class="text-center display-5 fw-bold mb-5">Why TisaVista Exists</h2>
+    <h2 class="text-center display-5 fw-bold mb-5">{% trans "Why TisaVista Exists" %}</h2>
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <div class="bg-light p-5 rounded-4 text-center">
           <p class="lead">
-            Most GIS courses only teach software tools.<br>
-            <strong>We teach how to use GIS, spatial analysis, and decision-support methods to solve real urban and environmental problems.</strong>
+            {% trans "Most GIS courses only teach software tools." %}
+            <br>
+            <strong>
+              {% trans "We teach how to use GIS, spatial analysis, and decision-support methods to solve real urban and environmental problems." %}
+            </strong>
           </p>
           <p class="mt-3 text-muted">
-            Learn the tools, the thinking process, and the professional workflows used by planners, researchers and spatial analysts.
+            {% trans "Learn the tools, the thinking process, and the professional workflows used by planners, researchers and spatial analysts." %}
           </p>
         </div>
       </div>
     </div>
   </div>
 </section>
-
+  
 <!-- Learning Journey -->
 <section class="py-5 bg-light">
   <div class="container">
-    <h2 class="text-center display-5 fw-bold mb-5">Your Learning Journey</h2>
-    <div class="row g-4 text-center">
-      <div class="col-md-4 col-lg roadmap-step"><div class="bg-white p-4 rounded-3 shadow-sm h-100"><strong>Step 1</strong><br>GIS Fundamentals</div></div>
-      <div class="col-md-4 col-lg roadmap-step"><div class="bg-white p-4 rounded-3 shadow-sm h-100"><strong>Step 2</strong><br>Applied GIS</div></div>
-      <div class="col-md-4 col-lg roadmap-step"><div class="bg-white p-4 rounded-3 shadow-sm h-100"><strong>Step 3</strong><br>Urban Spatial Analysis</div></div>
-      <div class="col-md-4 col-lg roadmap-step"><div class="bg-white p-4 rounded-3 shadow-sm h-100"><strong>Step 4</strong><br>Advanced GIS Projects</div></div>
-      <div class="col-md-4 col-lg roadmap-step"><div class="bg-white p-4 rounded-3 shadow-sm h-100"><strong>Step 5</strong><br>Spatial Decision Support Systems</div></div>
+    <h2 class="text-center display-5 fw-bold mb-5">
+      {% trans "Your Learning Journey" %}
+    </h2>
+    <div class="row g-4 text-center">  
+      <div class="col-md-4 col-lg roadmap-step">
+        <div class="bg-white p-4 rounded-3 shadow-sm h-100">
+          <strong>{% trans "Step 1" %}</strong>
+          <br>
+          {% trans "GIS Fundamentals" %}
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg roadmap-step">
+        <div class="bg-white p-4 rounded-3 shadow-sm h-100">
+          <strong>{% trans "Step 2" %}</strong>
+          <br>
+          {% trans "Applied GIS" %}
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg roadmap-step">
+        <div class="bg-white p-4 rounded-3 shadow-sm h-100">
+          <strong>{% trans "Step 3" %}</strong>
+          <br>
+          {% trans "Urban Spatial Analysis" %}
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg roadmap-step">
+        <div class="bg-white p-4 rounded-3 shadow-sm h-100">
+          <strong>{% trans "Step 4" %}</strong>
+          <br>
+          {% trans "Advanced GIS Projects" %}
+        </div>
+      </div>
+  
+      <div class="col-md-4 col-lg roadmap-step">
+        <div class="bg-white p-4 rounded-3 shadow-sm h-100">
+          <strong>{% trans "Step 5" %}</strong>
+          <br>
+          {% trans "Spatial Decision Support Systems" %}
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
+  
+  
 <!-- Featured Learning Paths -->
 <section class="py-5">
   <div class="container">
-    <h2 class="text-center display-5 fw-bold mb-5">Featured Learning Paths</h2>
+    <h2 class="text-center display-5 fw-bold mb-5">{% trans "Featured Learning Paths" %}</h2>
     <div class="row g-4">
       {% for product in products %}
         <div class="col-md-4">
           <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-dark">
             <div class="card h-100 shadow-sm border-0">
-              <img src="{{ product.image_data.url }}" class="card-img-top" style="height:180px; object-fit:cover;" alt="{{ product.image_data.alt }}">
+              <img src="{{ product.image_data.url }}"
+                    class="card-img-top"
+                    style="height:180px; object-fit:cover;"
+                    alt="{{ product.image_data.alt }}">
+
               <div class="card-body">
                 <h5>{{ product.title }}</h5>
                 <p class="text-muted">{{ product.short_description|truncatechars:110 }}</p>
@@ -151,47 +252,71 @@
             </div>
           </a>
         </div>
+      {% empty %}
+        <div class="col-12 text-center py-5">
+          <p class="text-muted">{% trans "No products available yet." %}</p>
+        </div>
       {% endfor %}
     </div>
   </div>
 </section>
 
 <!-- Free Resources -->
-<section class="py-5 bg-light">
-  <div class="container text-center">
-    <h2 class="display-5 fw-bold mb-4">Explore 19+ Free GIS Resources</h2>
-    <p class="lead mb-5">Start learning today — no payment required</p>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 p-4 text-start">
-          <h6>QGIS Beginner Guide</h6>
-          <small class="text-muted">Free PDF + Exercises</small>
-        </div>
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="display-5 fw-bold mb-4">{% trans "Explore 19+ Free GIS Resources" %} </h2>
+        <p class="lead mb-5">{% trans "Start learning today — no payment required" %}</p>
       </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 p-4 text-start">
-          <h6>Python Fundamentals for GIS</h6>
-          <small class="text-muted">Free Jupyter Notebooks</small>
-        </div>
+
+      <div class="row g-4">  
+        {% for post in posts %}
+          <div class="col-md-6 col-lg-4">
+            <article class="card h-100 shadow-sm border-0">
+              {% if post.image %}
+                <img
+                  src="{{ post.image.url }}"
+                  class="card-img-top img-fluid"
+                  style="height:240px; object-fit:cover;"
+                  alt="{{ post.title }}">
+              {% endif %}
+  
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-bold mb-3">{{ post.title }}</h5>
+                <div class="mt-auto">
+                <a href="{{ post.get_absolute_url }}" class="btn btn-success btn-sm"> {% trans "Read More" %} </a>
+                </div>
+              </div>
+            </article>
+          </div>
+  
+        {% empty %}
+          <div class="col-12">
+            <div class="alert alert-info text-center mb-0">
+              {% trans "No posts available yet." %}
+            </div>
+          </div>
+        {% endfor %}
       </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 p-4 text-start">
-          <h6>GeoPandas &amp; Spatial Data Science</h6>
-          <small class="text-muted">Free Datasets &amp; Tutorials</small>
-        </div>
+
+      <div class="text-center">
+        <a href="{{ free_resources_url }}"class="btn btn-primary btn-lg mt-5">{% trans "Browse All Free Resources" %} </a>
       </div>
     </div>
-    <a href="{{'free_resources' }} class="btn btn-primary btn-lg mt-5">Browse All Free Resources</a>
-  </div>
-</section>
-
+  </section>
+  
 <!-- Final CTA -->
-<section class="py-5 text-center text-white" style="background:#0F172A;">
-  <div class="container">
-    <h2 class="display-5 fw-bold mb-3">Start Building Professional GIS Skills Today</h2>
-    <p class="lead mb-4">Learn GIS, Spatial Analysis, Python for GIS and Spatial Decision Support through practical projects.</p>
-    <a href="{% url 'product-list' %}" class="btn btn-success btn-lg px-5 py-3">{% trans "Explore the Academy" %}</a>
-  </div>
-</section>
+<section class="py-5 text-center text-white"
+          style="background:#0F172A;">
 
+  <div class="container">
+    <h2 class="display-5 fw-bold mb-3">{% trans "Start Building Professional GIS Skills Today" %}</h2>
+
+    <p class="lead mb-4">
+      {% trans "Learn GIS, Spatial Analysis, Python for GIS and Spatial Decision Support through practical projects." %}
+    </p>
+  
+    <a href="{% url 'product-list' %}" class="btn btn-success btn-lg px-5 py-3"> {% trans "Explore the Academy" %} </a>
+  </div>
+</section>  
 {% endblock %}
