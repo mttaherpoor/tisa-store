@@ -52,15 +52,29 @@
             <img src="{{ post.image.url }}" class="card-img-top img-fluid rounded mb-4" alt="{{ post.title }}">
           {% endif %}
 
-          <div class="post-content">
-            {{ post.text|safe }}
+          <div class="card-body">
+          <h3 class="card-title mb-3 text-center">{{ post.title }}</h3>
+      
+          <p class="small text-muted text-center">
+              {% trans "By" %}: {{ post.author }} | {{ post.datetime_created|to_jalali:"%Y %B %d"|translate_number }}
+          </p>
+      
+          {% if user.is_staff %}
+              <div class="text-center mb-3">
+                  <a href="{% url 'post_update' post.id %}" class="btn btn-lg btn-warning me-2">Edit</a>
+                  <a href="{% url 'post_delete' post.id %}" class="btn btn-lg btn-danger">Delete</a>
+              </div>
+          {% endif %}
+      
+          <div class="card-text mt-4">
+              {{ post.text|safe }}
           </div>
 
           {% if post.pdf %}
             <div class="text-center mt-5">
               <a href="{{ post.pdf.url }}" target="_blank" class="btn btn-outline-primary btn-lg">
                 <i class="bi bi-file-earmark-pdf me-2"></i>
-                دانلود فایل پیوست
+                  {{ post.pdf_filename }}
               </a>
             </div>
           {% endif %}
@@ -68,7 +82,7 @@
 
         <!-- Comments -->
         <div class="card border-0 shadow-sm p-4 mb-5">
-          <h4 class="mb-4">دیدگاه‌ها و گفتگوها</h4>
+          <h4 class="mb-4">{% trans "Comments" %}</h4>
 
           {% if post.comments.all|only_active_comments %}
             <ul class="list-unstyled">
@@ -81,37 +95,46 @@
                     </small>
                   </div>
                   <p class="mb-2">{{ comment.body }}</p>
+                    {% if comment.stars %}
+                      <div class="rating">
+                          {% for i in "12345" %}
+                          {% if forloop.counter <= comment.stars|add:"0" %}
+                              <span style="color:#FFD700;">★</span>
+                          {% else %}
+                              <span style="color:#ccc;">★</span>
+                          {% endif %}
+                          {% endfor %}
+                      </div>
+                      {% endif %}
                 </li>
               {% endfor %}
             </ul>
           {% else %}
             <p class="text-muted text-center py-4">
-              هنوز دیدگاهی برای این مقاله ثبت نشده است. اولین دیدگاه را شما ثبت کنید.
+              {% trans "No comments yet." %}
             </p>
           {% endif %}
         </div>
 
         <!-- Comment Form -->
         <div class="card border-0 shadow-sm p-4">
-          <h5 class="mb-3">نظر شما درباره این مقاله چیست؟</h5>
+          <h5 class="mb-3">{% trans "Leave a Comment" %}</h5>
           
           {% if user.is_authenticated %}
             <form method="POST" action="{% url 'blog-comment-create' post.slug %}">
               {% csrf_token %}
               {{ comment_form|crispy }}
-              <button type="submit" class="btn btn-success mt-3">ارسال دیدگاه</button>
+              <button type="submit" class="btn btn-success mt-3">{% trans "Submit" %}</button>
             </form>
           {% else %}
             <p class="text-muted">
-              برای ثبت دیدگاه لطفاً 
-              <a href="{% url 'account_login' %}" class="text-decoration-underline">وارد حساب کاربری خود شوید</a>.
+              {% trans 'To write your comment please ' %}
+              <a href="{% url 'account_login' %}" class="text-decoration-underline">{% trans 'Login' %}</a>.
             </p>
           {% endif %}
         </div>
-
       </div>
     </div>
   </div>
 </section>
-
 {% endblock %}
