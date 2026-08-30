@@ -1,21 +1,23 @@
+```django
 {% extends "_base.html" %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 {% load static %}
 
-{% block page_title %}{% trans "تماس با ما" %}{% endblock %}
+{% block page_title %}{% trans "Contact Us" %}{% endblock %}
 
 {% block content %}
-{% translate "تماس با ما" as header_name %}
+
+{% translate "Contact Us" as header_name %}
 {% include 'topheader.html' with header_name=header_name %}
 
 <!-- Hero -->
 <section class="py-5 bg-light">
   <div class="container">
     <div class="text-center">
-      <h1 class="fw-bold display-5 mb-3">{% trans "گفتگو را آغاز کنیم" %}</h1>
+      <h1 class="fw-bold display-5 mb-3">{% trans "Let's Start a Conversation" %}</h1>
       <p class="lead text-muted mx-auto" style="max-width: 700px;">
-        {% trans "اگر درباره GIS، Spatial Intelligence، پروژه‌های شهری یا همکاری‌های آموزشی و فنی سؤالی دارید، خوشحال می‌شویم از شما بشنویم." %}
+        {% trans "If you have questions about GIS, Spatial Intelligence, urban projects, or educational and technical collaborations, we would be happy to hear from you." %}
       </p>
     </div>
   </div>
@@ -25,7 +27,9 @@
 <section class="py-3">
   <div class="container">
     <div class="alert alert-primary text-center border-0 py-4">
-      <strong>{% trans "سوالی دارید یا به راهنمایی نیاز دارید؟<br>تیم TisaVista آماده پاسخگویی درباره آموزش، تحلیل مکانی و تصمیم‌گیری مبتنی بر GIS است." %}</strong>
+      <strong>
+        {% trans "Have a question or need guidance?<br>The TisaVista team is ready to answer your questions about training, spatial analysis, and GIS-based decision-making." %}
+      </strong>
     </div>
   </div>
 </section>
@@ -33,36 +37,50 @@
 <!-- What can we help with? -->
 <section class="py-5">
   <div class="container">
-    <h2 class="text-center fw-bold mb-5">{% trans "چگونه می‌توانیم کمک کنیم؟" %}</h2>
+    <h2 class="text-center fw-bold mb-5">{% trans "How Can We Help?" %}</h2>
+
     <div class="row g-4">
+
       <div class="col-md-6 col-lg-3">
         <div class="card h-100 shadow-sm text-center p-4">
           <i class="bi bi-globe2 text-primary fs-1 mb-3"></i>
           <h5>GIS & Spatial Analysis</h5>
-          <p class="text-muted small mb-0">{% trans "تحلیل مکانی، مدل‌سازی و مدیریت داده‌های جغرافیایی" %}</p>
+          <p class="text-muted small mb-0">
+            {% trans "Spatial analysis, modeling, and geographic data management" %}
+          </p>
         </div>
       </div>
+
       <div class="col-md-6 col-lg-3">
         <div class="card h-100 shadow-sm text-center p-4">
           <i class="bi bi-diagram-3 text-primary fs-1 mb-3"></i>
           <h5>Spatial Decision Support</h5>
-          <p class="text-muted small mb-0">{% trans "سیستم‌های پشتیبانی تصمیم‌گیری مکانی و روش‌های چندمعیاره" %}</p>
+          <p class="text-muted small mb-0">
+            {% trans "Spatial decision support systems and multi-criteria methods" %}
+          </p>
         </div>
       </div>
+
       <div class="col-md-6 col-lg-3">
         <div class="card h-100 shadow-sm text-center p-4">
           <i class="bi bi-map text-primary fs-1 mb-3"></i>
           <h5>Urban Planning & Regeneration</h5>
-          <p class="text-muted small mb-0">{% trans "برنامه‌ریزی شهری و پروژه‌های بازآفرینی" %}</p>
+          <p class="text-muted small mb-0">
+            {% trans "Urban planning and regeneration projects" %}
+          </p>
         </div>
       </div>
+
       <div class="col-md-6 col-lg-3">
         <div class="card h-100 shadow-sm text-center p-4">
           <i class="bi bi-window-sidebar text-primary fs-1 mb-3"></i>
           <h5>Web GIS & Platform Development</h5>
-          <p class="text-muted small mb-0">{% trans "توسعه سامانه‌ها و پلتفرم‌های مکانی" %}</p>
+          <p class="text-muted small mb-0">
+            {% trans "Development of spatial systems and platforms" %}
+          </p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -71,60 +89,88 @@
 <section class="py-5 bg-light">
   <div class="container">
     <div class="row g-5">
+
       <!-- Form -->
       <div class="col-lg-7">
         <div class="card shadow-sm p-5">
-          <h3 class="fw-bold mb-4">{% trans "گفتگو را شروع کنیم" %}</h3>
-          <p class="text-muted mb-4">{% trans "پیام شما را در اولین فرصت بررسی می‌کنیم و معمولاً ظرف ۱ تا ۲ روز کاری پاسخ می‌دهیم." %}</p>
-          
+          <h3 class="fw-bold mb-4">{% trans "Start a Conversation" %}</h3>
+
+          <p class="text-muted mb-4">
+            {% trans "We will review your message as soon as possible and usually respond within 1 to 2 business days." %}
+          </p>
+
           {% if form %}
           <form method="post" novalidate>
             {% csrf_token %}
             {{ form|crispy }}
+
             <div class="d-grid mt-4">
               <button type="submit" class="btn btn-primary btn-lg">
-                <i class="bi bi-envelope-paper me-2"></i> {% trans "ارسال پیام" %}
+                <i class="bi bi-envelope-paper me-2"></i>
+                {% trans "Send Message" %}
               </button>
             </div>
           </form>
           {% endif %}
+
         </div>
       </div>
 
       <!-- Contact Info -->
       <div class="col-lg-5">
         <div class="card shadow-sm p-5 h-100">
-          <h3 class="fw-bold mb-4">{% trans "راه‌های ارتباط" %}</h3>
-          
+
+          <h3 class="fw-bold mb-4">{% trans "Contact Information" %}</h3>
+
           <ul class="list-unstyled">
+
             <li class="d-flex align-items-start mb-4">
               <i class="bi bi-envelope fs-4 me-3 text-primary"></i>
               <div>
-                <div class="small text-muted">{% trans "ایمیل" %}</div>
-                <a href="mailto:tisavista@gmail.com" class="text-decoration-none">tisavista@gmail.com</a>
+                <div class="small text-muted">{% trans "Email" %}</div>
+                <a href="mailto:tisavista@gmail.com" class="text-decoration-none">
+                  tisavista@gmail.com
+                </a>
               </div>
             </li>
+
             <li class="d-flex align-items-start mb-4">
               <i class="bi bi-geo-alt fs-4 me-3 text-primary"></i>
               <div>
-                <div class="small text-muted">{% trans "موقعیت" %}</div>
-                <span>{% trans "مستقر در ایران، آماده همکاری با افراد و سازمان‌ها در سراسر جهان" %}</span>
+                <div class="small text-muted">{% trans "Location" %}</div>
+                <span>
+                  {% trans "Based in Iran, ready to collaborate with individuals and organizations worldwide" %}
+                </span>
               </div>
             </li>
+
             <li class="d-flex align-items-start">
               <i class="bi bi-share fs-4 me-3 text-primary"></i>
               <div>
-                <div class="small text-muted">{% trans "شبکه‌های اجتماعی" %}</div>
+                <div class="small text-muted">{% trans "Social Media" %}</div>
+
                 <div class="mt-2">
-                  <a href="https://t.me/tisavista" class="me-3 fs-4"><i class="bi bi-telegram"></i></a>
-                  <a href="https://www.instagram.com/tisavista" class="me-3 fs-4"><i class="bi bi-instagram"></i></a>
-                  <a href="https://x.com/tisavista" class="fs-4"><i class="bi bi-twitter"></i></a>
+                  <a href="https://t.me/tisavista" class="me-3 fs-4">
+                    <i class="bi bi-telegram"></i>
+                  </a>
+
+                  <a href="https://www.instagram.com/tisavista" class="me-3 fs-4">
+                    <i class="bi bi-instagram"></i>
+                  </a>
+
+                  <a href="https://x.com/tisavista" class="fs-4">
+                    <i class="bi bi-twitter"></i>
+                  </a>
                 </div>
+
               </div>
             </li>
+
           </ul>
+
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -132,20 +178,28 @@
 <!-- Collaboration -->
 <section class="py-5">
   <div class="container">
+
     <div class="text-center mb-5">
-      <h2 class="fw-bold">{% trans "فرصت‌های همکاری" %}</h2>
+      <h2 class="fw-bold">{% trans "Collaboration Opportunities" %}</h2>
     </div>
+
     <div class="row justify-content-center">
       <div class="col-lg-9">
-        <p class="lead text-center mb-4">{% trans "ما از همکاری در زمینه‌های زیر استقبال می‌کنیم:" %}</p>
+
+        <p class="lead text-center mb-4">
+          {% trans "We welcome collaboration in the following areas:" %}
+        </p>
+
         <ul class="list-unstyled text-center lead">
-          <li>• {% trans "آموزش و تولید محتوای GIS و Spatial Intelligence" %}</li>
-          <li>• {% trans "پروژه‌های برنامه‌ریزی شهری و تحلیل مکانی" %}</li>
-          <li>• {% trans "توسعه Web GIS و سامانه‌های مکانی" %}</li>
-          <li>• {% trans "پژوهش و تصمیم‌گیری مکانی (SDSS)" %}</li>
+          <li>• {% trans "GIS and Spatial Intelligence education and content creation" %}</li>
+          <li>• {% trans "Urban planning projects and spatial analysis" %}</li>
+          <li>• {% trans "Web GIS and spatial system development" %}</li>
+          <li>• {% trans "Research and spatial decision-making (SDSS)" %}</li>
         </ul>
+
       </div>
     </div>
+
   </div>
 </section>
 
@@ -153,9 +207,10 @@
 <section class="py-5 bg-light text-center">
   <div class="container">
     <blockquote class="fs-3 fw-bold text-primary">
-      {% trans "«نقشه پایان مسیر نیست؛ آغاز فهم بهتر فضاست.»" %}
+      {% trans "“A map is not the end of the journey; it is the beginning of a better understanding of space.”" %}
     </blockquote>
   </div>
 </section>
 
 {% endblock %}
+```
