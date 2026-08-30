@@ -2,17 +2,15 @@
 
 {% load i18n account %}
 
-{% block page_title %}تأیید آدرس ایمیل{% endblock %}
+{% block page_title %}{% trans "Email Address Confirmation" %}{% endblock %}
 
 {% block content %}
 
 <!-- Hero -->
 <section class="py-5 text-center text-white" style="background: linear-gradient(135deg,#2C4A9A,#4CAF50);">
   <div class="container">
-    <h1 class="fw-bold">تأیید آدرس ایمیل</h1>
-    <p class="lead mb-0">
-      برای فعال شدن کامل حساب کاربری، لطفاً آدرس ایمیل خود را تأیید کنید.
-    </p>
+    <h1 class="fw-bold">{% trans "Email Address Confirmation" %}</h1>
+    <p class="lead mb-0">{% trans "Please confirm your email address to fully activate your account." %}</p>
   </div>
 </section>
 
@@ -22,49 +20,43 @@
       <div class="col-md-8 col-lg-5">
         <div class="card shadow-sm">
           <div class="card-body p-5">
-            <h4 class="fw-bold mb-2">تأیید آدرس ایمیل</h4>
-            <p class="text-muted mb-4">
-              برای تکمیل ثبت‌نام و افزایش امنیت حساب کاربری، لطفاً آدرس ایمیل خود را تأیید کنید.
-            </p>
+            <h4 class="fw-bold mb-2">{% trans "Email Address Confirmation" %}</h4>
+            <p class="text-muted mb-4">{% trans "To complete registration and improve account security, please confirm your email address." %}</p>
 
             {% if confirmation %}
               {% user_display confirmation.email_address.user as user_display %}
 
               <p class="text-muted mb-4">
-                لطفاً تأیید کنید که آدرس ایمیل
+                {% trans "Please confirm that the email address" %}
                 <strong>{{ confirmation.email_address.email }}</strong>
-                متعلق به حساب کاربری
-                <strong>{{ user_display }}</strong>
-                است.
+                {% trans "belongs to the account" %}
+                <strong>{{ user_display }}</strong>.
               </p>
 
               <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
                 {% csrf_token %}
                 <div class="d-grid gap-2">
                   <button type="submit" class="btn btn-success">
-                    <i class="bi bi-check-circle me-1"></i> تأیید ایمیل
+                    <i class="bi bi-check-circle me-1"></i> {% trans "Confirm Email" %}
                   </button>
-                  <a href="{% url 'account_email' %}" class="btn btn-outline-secondary">
-                    مدیریت آدرس‌های ایمیل
-                  </a>
+                  <a href="{% url 'account_email' %}" class="btn btn-outline-secondary">{% trans "Manage Email Addresses" %}</a>
                 </div>
               </form>
 
               <div class="alert alert-info mt-4 mb-0">
                 <i class="bi bi-info-circle me-2"></i>
-                پس از تأیید ایمیل، حساب کاربری شما به‌صورت کامل فعال خواهد شد و از تمامی امکانات سایت استفاده خواهید کرد.
+                {% trans "After confirming your email, your account will be fully activated and you will be able to use all website features." %}
               </div>
 
             {% else %}
 
               <div class="alert alert-danger">
                 <i class="bi bi-exclamation-triangle me-2"></i>
-                لینک تأیید ایمیل نامعتبر است یا اعتبار آن به پایان رسیده است.
+                {% trans "The email confirmation link is invalid or has expired." %}
               </div>
+
               <div class="d-grid mt-3">
-                <a href="{% url 'account_email' %}" class="btn btn-outline-danger">
-                  درخواست لینک تأیید جدید
-                </a>
+                <a href="{% url 'account_email' %}" class="btn btn-outline-danger">{% trans "Request a New Confirmation Link" %}</a>
               </div>
 
             {% endif %}

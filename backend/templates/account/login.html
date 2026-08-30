@@ -3,16 +3,16 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 
-{% block page_title %}ورود به حساب کاربری{% endblock %}
+{% block page_title %}{% trans "Login to Your Account" %}{% endblock %}
 
 {% block content %}
 
 <!-- Hero -->
 <section class="py-5 text-center text-white" style="background: linear-gradient(135deg,#2C4A9A,#4CAF50);">
   <div class="container">
-    <h1 class="fw-bold">ورود به حساب کاربری</h1>
+    <h1 class="fw-bold">{% trans "Login to Your Account" %}</h1>
     <p class="lead mb-0">
-      برای دسترسی به دوره‌های آموزشی، فایل‌های دانلودی و پنل کاربری وارد حساب خود شوید.
+      {% trans "Sign in to access your courses, downloadable files, and user dashboard." %}
     </p>
   </div>
 </section>
@@ -23,36 +23,36 @@
       <div class="col-md-8 col-lg-5">
         <div class="card shadow-sm">
           <div class="card-body p-5">
-            <h4 class="fw-bold mb-2">ورود به حساب کاربری</h4>
+            <h4 class="fw-bold mb-2">{% trans "Login to Your Account" %}</h4>
             <p class="text-muted mb-4">
-              برای مشاهده دوره‌های خریداری‌شده، فایل‌های آموزشی و مدیریت حساب کاربری وارد شوید.
+              {% trans "Sign in to view your purchased courses, educational files, and manage your account." %}
             </p>
 
             <form method="post" novalidate>
               {% csrf_token %}
               {% if form.errors %}
                 <div class="alert alert-danger">
-                  ایمیل یا رمز عبور صحیح نیست.
+                  {% trans "Invalid email or password." %}
                 </div>
               {% endif %}
 
               {{ form|crispy }}
 
               <button type="submit" class="btn btn-success w-100 mt-3">
-                <i class="bi bi-box-arrow-in-right me-1"></i> ورود به حساب کاربری
+                <i class="bi bi-box-arrow-in-right me-1"></i> {% trans "Login to Your Account" %}
               </button>
             </form>
 
             <div class="text-center mt-4">
               <small class="text-muted">
-                هنوز حساب کاربری ندارید؟
-                <a href="{{ signup_url }}" class="fw-semibold text-success text-decoration-none">ایجاد حساب کاربری</a>
+                {% trans "Don't have an account yet?" %}
+                <a href="{{ signup_url }}" class="fw-semibold text-success text-decoration-none">{% trans "Create an Account" %}</a>
               </small>
             </div>
 
             <div class="text-center mt-3">
               <a href="{% url 'account_reset_password' %}" class="text-decoration-none small">
-                رمز عبور خود را فراموش کرده‌اید؟
+                {% trans "Forgot your password?" %}
               </a>
             </div>
           </div>

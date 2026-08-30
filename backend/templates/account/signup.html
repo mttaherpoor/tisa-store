@@ -3,16 +3,16 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 
-{% block page_title %}ایجاد حساب کاربری{% endblock %}
+{% block page_title %}{% trans "Create an Account" %}{% endblock %}
 
 {% block content %}
 
 <!-- Hero -->
 <section class="py-5 text-center text-white" style="background: linear-gradient(135deg,#2C4A9A,#4CAF50);">
   <div class="container">
-    <h1 class="fw-bold">ایجاد حساب کاربری</h1>
+    <h1 class="fw-bold">{% trans "Create an Account" %}</h1>
     <p class="lead mb-0">
-      با ایجاد حساب کاربری، می‌توانید در دوره‌ها ثبت‌نام کنید، فایل‌های آموزشی را دانلود کنید و از امکانات اختصاصی پنل کاربری تیساویستا بهره‌مند شوید.
+      {% trans "By creating an account, you can enroll in courses, download educational files, and enjoy exclusive features of the TisaVista user dashboard." %}
     </p>
   </div>
 </section>
@@ -23,36 +23,36 @@
       <div class="col-md-8 col-lg-5">
         <div class="card shadow-sm">
           <div class="card-body p-5">
-            <h4 class="fw-bold mb-2">ایجاد حساب کاربری</h4>
+            <h4 class="fw-bold mb-2">{% trans "Create an Account" %}</h4>
             <p class="text-muted mb-4">
-              برای ثبت‌نام در دوره‌ها، دانلود فایل‌های آموزشی و استفاده از امکانات پنل کاربری، ابتدا حساب کاربری خود را ایجاد کنید.
+              {% trans "To enroll in courses, download educational files, and use the features of the user dashboard, first create your account." %}
             </p>
 
             <form method="post">
               {% csrf_token %}
               {% if form.errors %}
                 <div class="alert alert-danger">
-                  اطلاعات وارد شده معتبر نیست. لطفاً موارد مشخص‌شده را بررسی کنید.
+                  {% trans "The information entered is invalid. Please check the indicated fields." %}
                 </div>
               {% endif %}
 
               {{ form|crispy }}
 
               <button type="submit" class="btn btn-success w-100 mt-3">
-                <i class="bi bi-person-plus me-1"></i> ایجاد حساب کاربری
+                <i class="bi bi-person-plus me-1"></i> {% trans "Create an Account" %}
               </button>
             </form>
 
             <div class="text-center mt-4">
               <small class="text-muted">
-                قبلاً حساب کاربری ساخته‌اید؟
-                <a href="{% url 'account_login' %}" class="fw-semibold text-success text-decoration-none">وارد شوید</a>
+                {% trans "Already have an account?" %}
+                <a href="{% url 'account_login' %}" class="fw-semibold text-success text-decoration-none">{% trans "Log In" %}</a>
               </small>
             </div>
 
             <div class="alert alert-info mt-4 mb-0">
               <i class="bi bi-shield-check me-2"></i>
-              پس از ثبت‌نام، یک ایمیل تأیید برای شما ارسال می‌شود. با تأیید ایمیل، حساب کاربری شما فعال خواهد شد.
+              {% trans "After registration, a confirmation email will be sent to you. Your account will be activated after you confirm your email." %}
             </div>
           </div>
         </div>
