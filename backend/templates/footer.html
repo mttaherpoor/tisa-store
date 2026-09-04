@@ -1,14 +1,17 @@
+
 {% load static %}
 {% load i18n %}
 
 <footer class="text-white pt-5 pb-4">
   <div class="container">
     <div class="row g-5">
+
       <!-- About -->
       <div class="col-md-5">
         <h5 class="fw-bold mb-3 footer-brand">TisaVista</h5>
         <p class="small lh-lg text-light opacity-75">
-          Spatial Intelligence for Planning &amp; Decision Support<br>
+          {% trans "Spatial Intelligence for Planning & Decision Support" %}
+          <br>
           {% trans "Helping urban planners, researchers and GIS professionals turn spatial data into better decisions." %}
         </p>
       </div>
@@ -17,12 +20,36 @@
       <div class="col-md-3">
         <h5 class="fw-bold mb-3">{% trans "Quick Links" %}</h5>
         <ul class="list-unstyled small">
-          <li><a href="{% url 'home' %}" class="text-white text-decoration-none d-block py-1">{% trans "Home" %}</a></li>
-          <li><a href="{% url 'product-list' %}" class="text-white text-decoration-none d-block py-1">{% trans "Academy" %}</a></li>
-          <li><a href="{{ free_resources_url }}" class="text-white text-decoration-none d-block py-1">{% trans "Free Resources" %}</a></li>
-          <li><a href="{% url 'post-list' %}" class="text-white text-decoration-none d-block py-1">{% trans "Blog" %}</a></li>
-          <li><a href="{% url 'aboutus' %}" class="text-white text-decoration-none d-block py-1">{% trans "About Us" %}</a></li>
-          <li><a href="{% url 'contactus' %}" class="text-white text-decoration-none d-block py-1">{% trans "Contact Us" %}</a></li>
+          <li>
+            <a href="{% url 'home' %}" class="text-white text-decoration-none d-block py-1">
+              {% trans "Home" %}
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'product-list' %}" class="text-white text-decoration-none d-block py-1">
+              {% trans "Academy" %}
+            </a>
+          </li>
+          <li>
+            <a href="{{ free_resources_url }}" class="text-white text-decoration-none d-block py-1">
+              {% trans "Free Resources" %}
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'post-list' %}" class="text-white text-decoration-none d-block py-1">
+              {% trans "Blog" %}
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'aboutus' %}" class="text-white text-decoration-none d-block py-1">
+              {% trans "About Us" %}
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'contactus' %}" class="text-white text-decoration-none d-block py-1">
+              {% trans "Contact Us" %}
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -31,38 +58,83 @@
         <h5 class="fw-bold mb-3">{% trans "Get in Touch" %}</h5>
         <ul class="list-unstyled small mb-4">
           <li class="mb-2">
-            <i class="bi bi-envelope me-2"></i>
-            <a href="mailto:tisavista@gmail.com" class="text-white text-decoration-none">tisavista@gmail.com</a>
+            <i class="bi bi-envelope me-2" aria-hidden="true"></i>
+            <a href="mailto:tisavista@gmail.com" class="text-white text-decoration-none">
+              tisavista@gmail.com
+            </a>
           </li>
         </ul>
 
-        <div class="social-links">
-          <a href="https://t.me/tisavista" class="text-white me-3 fs-4" target="_blank" rel="noopener" aria-label="Telegram">
-            <i class="bi bi-telegram"></i>
+        <!-- Social Links -->
+        <div class="social-links mb-4">
+          <a href="https://t.me/tisavista"
+             class="text-white me-3 fs-4"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Telegram">
+            <i class="bi bi-telegram" aria-hidden="true"></i>
           </a>
-          <a href="https://www.instagram.com/tisavista" class="text-white me-3 fs-4" target="_blank" rel="noopener" aria-label="Instagram">
-            <i class="bi bi-instagram"></i>
+
+          <a href="https://www.instagram.com/tisavista"
+             class="text-white me-3 fs-4"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Instagram">
+            <i class="bi bi-instagram" aria-hidden="true"></i>
           </a>
-          <a href="https://www.linkedin.com/company/tisavista" class="text-white fs-4" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <i class="bi bi-linkedin"></i>
+
+          <a href="https://www.linkedin.com/company/tisavista"
+             class="text-white fs-4"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="LinkedIn">
+            <i class="bi bi-linkedin" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <!-- Enamad Trust Seal -->
+        <div class="mt-4">
+          <p class="small fw-semibold text-light mb-2">
+            {% trans "Electronic Trust Seal (Enamad)" %}
+          </p>
+
+          <a href="https://trustseal.enamad.ir/?id=681033&amp;Code=WNPcQ2KHHxeHUvKiav9DoB7wbK8QjUaW"
+             target="_blank"
+             rel="noopener noreferrer"
+             referrerpolicy="origin"
+             aria-label="{% trans 'Verify TisaVista Electronic Trust Seal' %}">
+
+            <img src="https://trustseal.enamad.ir/logo.aspx?id=681033&amp;Code=WNPcQ2KHHxeHUvKiav9DoB7wbK8QjUaW"
+                 alt="{% trans 'Enamad Electronic Trust Seal' %}"
+                 loading="lazy"
+                 decoding="async"
+                 referrerpolicy="origin"
+                 width="130"
+                 height="130"
+                 style="cursor:pointer; max-width:130px; height:auto;">
           </a>
         </div>
 
         <p class="small text-light opacity-75 mt-4 mb-0">
-          GIS • Spatial Analysis • Python for GIS • PostGIS • Spatial Decision Support
+          {% trans "GIS • Spatial Analysis • Python for GIS • PostGIS • Spatial Decision Support" %}
         </p>
       </div>
+
     </div>
 
     <hr class="border-light opacity-25 my-4">
 
+    <!-- Copyright -->
     <div class="row align-items-center small">
       <div class="col-md-6 text-center text-md-start">
-        © {% now "Y" %} TisaVista — Spatial Intelligence for Planning &amp; Decision Support
+        {% now "Y" as current_year %}
+        {% blocktrans with year=current_year %}© {{ year }} TisaVista — Spatial Intelligence for Planning & Decision Support{% endblocktrans %}
       </div>
+
       <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
-        Designed &amp; Developed by <strong>TisaVista</strong>
+        {% blocktrans %}Designed & Developed by <strong>TisaVista</strong>{% endblocktrans %}
       </div>
     </div>
+
   </div>
 </footer>
