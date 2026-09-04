@@ -4,6 +4,7 @@
 <footer class="text-white pt-5 pb-4">
   <div class="container">
     <div class="row g-5">
+
       <!-- About -->
       <div class="col-md-5">
         <h5 class="fw-bold mb-3 footer-brand">TisaVista</h5>
@@ -15,7 +16,7 @@
 
       <!-- Quick Links -->
       <div class="col-md-3">
-        <h5 class="fw-bold mb-3">{% trans "Quick Links" %}</h5>
+        <h5 class="fw-bold mb-3">{python manage.py runserver% trans "Quick Links" %}</h5>
         <ul class="list-unstyled small">
           <li><a href="{% url 'home' %}" class="text-white text-decoration-none d-block py-1">{% trans "Home" %}</a></li>
           <li><a href="{% url 'product_list' %}" class="text-white text-decoration-none d-block py-1">{% trans "Academy" %}</a></li>
@@ -36,7 +37,8 @@
           </li>
         </ul>
 
-        <div class="social-links">
+        <!-- Social Links -->
+        <div class="social-links mb-4">
           <a href="https://t.me/tisavista" class="text-white me-3 fs-4" target="_blank" rel="noopener" aria-label="Telegram">
             <i class="bi bi-telegram"></i>
           </a>
@@ -48,10 +50,23 @@
           </a>
         </div>
 
+        <!-- Enamad Logo -->
+        <div class="mt-4">
+          <p class="small fw-semibold text-light mb-2">نماد اعتماد الکترونیکی</p>
+          <a referrerpolicy='origin' target='_blank' 
+             href='https://trustseal.enamad.ir/?id=681033&Code=WNPcQ2KHHxeHUvKiav9DoB7wbK8QjUaW'>
+            <img referrerpolicy='origin' loading="lazy"
+                 src='https://trustseal.enamad.ir/logo.aspx?id=681033&Code=WNPcQ2KHHxeHUvKiav9DoB7wbK8QjUaW' 
+                 alt='نماد اعتماد الکترونیکی' 
+                 style='cursor:pointer; max-width:130px; height:auto;'>
+          </a>
+        </div>
+
         <p class="small text-light opacity-75 mt-4 mb-0">
           GIS • Spatial Analysis • Python for GIS • PostGIS • Spatial Decision Support
         </p>
       </div>
+
     </div>
 
     <hr class="border-light opacity-25 my-4">
