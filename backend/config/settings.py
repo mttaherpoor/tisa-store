@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     "orders",
     "payment",
     "blog",
+    'learning',
 ]
 
 INSTALLED_APPS += [
