@@ -1,0 +1,104 @@
+{% extends "_base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans "Learning Paths | TisaVista" %}
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+
+    <div class="text-center mb-5">
+      <h1 class="display-5 fw-bold">
+        {% trans "Learning Paths" %}
+      </h1>
+      <p class="lead text-muted">
+        {% trans "Follow structured, project-based learning journeys to develop your professional GIS skills." %}
+      </p>
+    </div>
+
+    <div class="row g-4">
+      {% for learning_path in learning_paths %}
+      <div class="col-md-6 col-lg-4">
+        <article class="card h-100 shadow-sm border-0">
+
+          {% if learning_path.image %}
+          <img
+            src="{{ learning_path.image.url }}"
+            class="card-img-top"
+            alt="{{ learning_path.title }}"
+            loading="lazy"
+            style="height:220px;object-fit:cover;">
+          {% endif %}
+
+          <div class="card-body d-flex flex-column">
+            <h2 class="h5 fw-bold">
+              {{ learning_path.title }}
+            </h2>
+
+            <p class="text-muted">
+              {{ learning_path.short_description }}
+            </p>
+
+            <div class="small text-muted mb-3">
+              <span>
+                {{ learning_path.total_steps }}
+                {% trans "Steps" %}
+              </span>
+              <span class="mx-2">•</span>
+              <span>
+                {{ learning_path.total_hours }}
+                {% trans "Hours" %}
+              </span>
+            </div>
+
+            <a
+              href="{{ learning_path.get_absolute_url }}"
+              class="btn btn-primary mt-auto">
+              {% trans "Explore Learning Path" %}
+            </a>
+          </div>
+
+        </article>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center py-5">
+        <p class="text-muted">
+          {% trans "No learning paths available yet." %}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+    <nav class="mt-5" aria-label="{% trans 'Learning path pages' %}">
+      <div class="d-flex justify-content-center gap-3">
+        {% if page_obj.has_previous %}
+        <a
+          href="?page={{ page_obj.previous_page_number }}"
+          class="btn btn-outline-primary">
+          {% trans "Previous" %}
+        </a>
+        {% endif %}
+
+        <span class="align-self-center">
+          {% blocktrans with current=page_obj.number total=page_obj.paginator.num_pages %}
+          Page {{ current }} of {{ total }}
+          {% endblocktrans %}
+        </span>
+
+        {% if page_obj.has_next %}
+        <a
+          href="?page={{ page_obj.next_page_number }}"
+          class="btn btn-outline-primary">
+          {% trans "Next" %}
+        </a>
+        {% endif %}
+      </div>
+    </nav>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

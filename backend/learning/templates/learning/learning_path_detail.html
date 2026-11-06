@@ -1,0 +1,149 @@
+{% extends "_base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{{ learning_path.title }} | TisaVista
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+
+    <nav class="mb-4" aria-label="{% trans 'Breadcrumb' %}">
+      <a href="{% url 'learning_path_list' %}">
+        {% trans "Learning Paths" %}
+      </a>
+      <span class="mx-2">/</span>
+      <span>{{ learning_path.title }}</span>
+    </nav>
+
+    <div class="row g-5">
+      <div class="col-lg-8">
+
+        <h1 class="display-5 fw-bold mb-3">
+          {{ learning_path.title }}
+        </h1>
+
+        <p class="lead text-muted">
+          {{ learning_path.short_description }}
+        </p>
+
+        {% if learning_path.image %}
+        <img
+          src="{{ learning_path.image.url }}"
+          alt="{{ learning_path.title }}"
+          class="img-fluid rounded-4 mb-4"
+          style="max-height:400px;object-fit:cover;">
+        {% endif %}
+
+        <div class="mb-5">
+          {{ learning_path.description|linebreaks }}
+        </div>
+
+        <h2 class="h3 fw-bold mb-4">
+          {% trans "Learning Journey" %}
+        </h2>
+
+        <div class="d-flex flex-column gap-3">
+          {% for step in learning_path.steps.all %}
+          <article class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+
+              <div class="d-flex justify-content-between gap-3 mb-2">
+                <h3 class="h5 fw-bold">
+                  {% trans "Step" %} {{ forloop.counter }}:
+                  {{ step.title }}
+                </h3>
+
+                {% if step.is_optional %}
+                <span class="badge bg-secondary">
+                  {% trans "Optional" %}
+                </span>
+                {% endif %}
+              </div>
+
+              <p class="text-muted">
+                {{ step.description|linebreaksbr }}
+              </p>
+
+              <div class="small text-muted mb-3">
+                {% if step.is_project %}
+                <span class="badge bg-success me-2">
+                  {% trans "Practical Project" %}
+                </span>
+                {% endif %}
+
+                <span>
+                  {{ step.estimated_hours }}
+                  {% trans "Hours" %}
+                </span>
+              </div>
+
+              {% if step.course %}
+              <a
+                href="{{ step.course.get_absolute_url }}"
+                class="btn btn-outline-primary btn-sm">
+                {% trans "View Course" %}:
+                {{ step.course.title }}
+              </a>
+              {% endif %}
+
+              {% if step.resource_url %}
+              <a
+                href="{{ step.resource_url }}"
+                class="btn btn-outline-secondary btn-sm"
+                target="_blank"
+                rel="noopener noreferrer">
+                {% trans "External Resource" %}
+              </a>
+              {% endif %}
+
+            </div>
+          </article>
+          {% empty %}
+          <p class="text-muted">
+            {% trans "No learning steps available yet." %}
+          </p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <aside class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <h2 class="h5 fw-bold mb-4">
+              {% trans "Path Overview" %}
+            </h2>
+
+            <p>
+              <strong>{% trans "Difficulty" %}:</strong>
+              {{ learning_path.get_difficulty_display }}
+            </p>
+
+            <p>
+              <strong>{% trans "Steps" %}:</strong>
+              {{ learning_path.total_steps }}
+            </p>
+
+            <p>
+              <strong>{% trans "Projects" %}:</strong>
+              {{ learning_path.total_projects }}
+            </p>
+
+            <p>
+              <strong>{% trans "Estimated Hours" %}:</strong>
+              {{ learning_path.total_hours }}
+            </p>
+
+            <a
+              href="{% url 'learning_path_list' %}"
+              class="btn btn-outline-primary w-100">
+              {% trans "All Learning Paths" %}
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}

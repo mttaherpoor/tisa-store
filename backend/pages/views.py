@@ -8,6 +8,7 @@ from django.views.generic.edit import FormView
 
 from products.models import Product
 from blog.models import Post
+from learning.models import LearningPath
 
 from .models import FAQ
 from .forms import ContactForm 
@@ -20,10 +21,14 @@ class HomePageView(TemplateView):
         products = Product.objects.all()[:3]
         posts = Post.objects.all()[:3]
         faqs = FAQ.objects.all()
+        featured_learning = LearningPath.objects.filter(is_active=True).order_by("order", "title")[:3]
+
         context = super().get_context_data(**kwargs)
         context["products"] = products
         context["posts"] = posts
         context["faqs"] =faqs
+        context["featured_learning_paths"] =featured_learning
+
         return context
 
 class AboutUsPageView(TemplateView):

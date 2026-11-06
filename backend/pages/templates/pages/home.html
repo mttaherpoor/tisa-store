@@ -231,35 +231,66 @@
 </section>
   
   
+
 <!-- Featured Learning Paths -->
 <section class="py-5">
   <div class="container">
-    <h2 class="text-center display-5 fw-bold mb-5">{% trans "Featured Learning Paths" %}</h2>
-    <div class="row g-4">
-      {% for product in products %}
-        <div class="col-md-4">
-          <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-dark">
-            <div class="card h-100 shadow-sm border-0">
-              <img src="{{ product.image_data.url }}"
-                    class="card-img-top"
-                    style="height:180px; object-fit:cover;"
-                    alt="{{ product.image_data.alt }}">
 
-              <div class="card-body">
-                <h5>{{ product.title }}</h5>
-                <p class="text-muted">{{ product.short_description|truncatechars:110 }}</p>
-              </div>
-            </div>
-          </a>
-        </div>
+    <h2 class="text-center display-5 fw-bold mb-5">
+      {% trans "Featured Learning Paths" %}
+    </h2>
+
+    <div class="row g-4">
+      {% for learning_path in featured_learning_paths %}
+      <div class="col-md-4">
+        <article class="card h-100 shadow-sm border-0">
+
+          {% if learning_path.image %}
+          <img
+            src="{{ learning_path.image.url }}"
+            class="card-img-top"
+            loading="lazy"
+            style="height:180px;object-fit:cover;"
+            alt="{{ learning_path.title }}">
+          {% endif %}
+
+          <div class="card-body d-flex flex-column">
+            <h3 class="h5 fw-bold">
+              {{ learning_path.title }}
+            </h3>
+
+            <p class="text-muted">
+              {{ learning_path.short_description|truncatechars:110 }}
+            </p>
+
+            <a
+              href="{{ learning_path.get_absolute_url }}"
+              class="btn btn-outline-primary mt-auto">
+              {% trans "Explore Learning Path" %}
+            </a>
+          </div>
+        </article>
+      </div>
       {% empty %}
-        <div class="col-12 text-center py-5">
-          <p class="text-muted">{% trans "No products available yet." %}</p>
-        </div>
+      <div class="col-12 text-center py-5">
+        <p class="text-muted">
+          {% trans "No learning paths available yet." %}
+        </p>
+      </div>
       {% endfor %}
     </div>
+
+    <div class="text-center mt-5">
+      <a
+        href="{% url 'learning_path_list' %}"
+        class="btn btn-primary btn-lg">
+        {% trans "View All Learning Paths" %}
+      </a>
+    </div>
+
   </div>
 </section>
+
 
 <!-- Free Resources -->
   <section class="py-5 bg-light">

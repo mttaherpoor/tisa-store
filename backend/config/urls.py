@@ -31,6 +31,7 @@ urlpatterns = [
     path("order/", include("orders.urls")),
     path("payment/", include("payment.urls")),
     path("blog/", include("blog.urls")),
+    path("learning/", include("learning.urls")),
     # ckeditor5
     path("ckeditor5/", include("django_ckeditor_5.urls")),
     # Rosetta (i18n)
